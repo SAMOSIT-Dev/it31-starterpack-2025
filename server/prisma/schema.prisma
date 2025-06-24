@@ -1,0 +1,64 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model courses {
+  id          Int         @id @default(autoincrement())
+  course_name String?     @db.VarChar(50)
+  schedules   schedules[]
+}
+
+model friends {
+  id                             Int    @id @default(autoincrement())
+  user_id                        Int?
+  friend_id                      Int?
+  users_friends_user_idTousers   users? @relation("friends_user_idTousers", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "friends_ibfk_1")
+  users_friends_friend_idTousers users? @relation("friends_friend_idTousers", fields: [friend_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "friends_ibfk_2")
+
+  @@index([friend_id], map: "friend_id")
+  @@index([user_id], map: "user_id")
+}
+
+model houses {
+  id         Int         @id @default(autoincrement())
+  house_name String?     @db.VarChar(30)
+  schedules  schedules[]
+  users      users[]
+}
+
+model schedules {
+  id         Int       @id @default(autoincrement())
+  course_id  Int?
+  start_time DateTime? @db.DateTime(0)
+  end_time   DateTime? @db.DateTime(0)
+  slide_url  String?   @db.Text
+  house_id   Int?
+  courses    courses?  @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "schedules_ibfk_1")
+  houses     houses?   @relation(fields: [house_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "schedules_ibfk_2")
+
+  @@index([course_id], map: "course_id")
+  @@index([house_id], map: "house_id")
+}
+
+model upcoming_events {
+  id             Int       @id @default(autoincrement())
+  event_name     String?   @db.VarChar(50)
+  event_datetime DateTime? @db.DateTime(0)
+}
+
+model users {
+  id                               Int       @id @default(autoincrement())
+  nickname                         String?   @db.VarChar(100)
+  age                              Int?
+  profile_description              String?   @db.Text
+  house_id                         Int?
+  isAuthenticated                  Boolean?
+  createdAt                        DateTime? @db.DateTime(0)
+  updatedAt                        DateTime? @db.DateTime(0)
+  friends_friends_user_idTousers   friends[] @relation("friends_user_idTousers")
+  friends_friends_friend_idTousers friends[] @relation("friends_friend_idTousers")
+  houses                           houses?   @relation(fields: [house_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_ibfk_1")
+
+  @@index([house_id], map: "house_id")
+}
