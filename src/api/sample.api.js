@@ -1,4 +1,4 @@
-import { request } from "@/libs/request";
+import { request } from "@/libs/utils/request";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const SampleApiTemplate = {
