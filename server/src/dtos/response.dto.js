@@ -11,8 +11,8 @@ class ResponseDTO {
   }
 
   setMessage(message) {
-
-    if (typeof error !== 'string') throw TypeError('Invalid type: message must be string');
+    // fix this
+    if (typeof message !== 'string') throw TypeError('Invalid type: message must be string');
     
     this.message = message
     return this
@@ -35,3 +35,5 @@ class ResponseDTO {
     }
   }
 }
+
+module.exports = ResponseDTO;
