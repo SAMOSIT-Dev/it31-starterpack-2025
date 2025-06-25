@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql-db
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - it31-network
+
+  backend:
+    container_name: backend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - it31-network
+
+volumes:
+  mysql-data:
+
+networks:
+  it31-network:
+    driver: bridge
