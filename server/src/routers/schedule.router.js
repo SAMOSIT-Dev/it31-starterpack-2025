@@ -3,23 +3,14 @@ const ScheduleController = require("../controller/schedule.controller");
 
 const ScheduleRouter = express.Router();
 
-ScheduleRouter.get("/getAllSchedules", ScheduleController.getAllSchedules);
+ScheduleRouter.get("/", ScheduleController.getAllSchedules);
 
-ScheduleRouter.get(
-  "/getSchedulesByHouseId/:id",
-  ScheduleController.getSchedulesByHouseId
-);
+ScheduleRouter.get("/:id", ScheduleController.getSchedulesByHouseId);
 
-ScheduleRouter.post("/createNewSchedule", ScheduleController.createNewSchedule);
+ScheduleRouter.post("/", ScheduleController.createNewSchedule);
 
-ScheduleRouter.put(
-  "/updateScheduleById/:id",
-  ScheduleController.updateScheduleById
-);
+ScheduleRouter.put("/:id", ScheduleController.updateScheduleById);
 
-ScheduleRouter.delete(
-  "/deleteScheduleById/:id",
-  ScheduleController.deleteScheduleById
-);
+ScheduleRouter.delete("/:id", ScheduleController.deleteScheduleById);
 
 module.exports = ScheduleRouter;
