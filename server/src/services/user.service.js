@@ -16,7 +16,6 @@ class UserService {
     params.append("username", UserLoginDTORequest.id);
     params.append("password", UserLoginDTORequest.password);
     params.append("scope", "openid profile");
-
     try {
       const responseToken = await axios.post(process.env.TOKEN_URL, params, {
         headers: {

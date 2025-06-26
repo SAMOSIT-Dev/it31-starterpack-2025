@@ -11,8 +11,8 @@ class UpcomingEventController {
       const events = await UpcomingEventService.getAllUpcomingEvents();
 
       if (events.length <= 0) {
-        response.setContent([]);
-        res.status(204).json(response.build());
+        response.setContent("No Content");
+        res.status(200).json([]);
       }
 
       const eventDto = events.map((event) => {

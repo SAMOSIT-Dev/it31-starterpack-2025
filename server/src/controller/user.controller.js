@@ -1,6 +1,8 @@
 const UserService = require("../services/user.service");
 const ResponseDTO = require("../dtos/response.dto");
 const prisma = require("../utils/prisma.utils");
+const HouseService = require("../services/house.service");
+
 const {
   UserLoginDTORequest,
   UserLoginDTOResponse,
@@ -12,11 +14,11 @@ class UserController {
   //login
   static async login(req, res) {
     const response = new ResponseDTO();
-    const { username, password } = req.body;
+    const { id, password } = req.body;
     const requestUser = new UserLoginDTORequest();
     const responseLogin = new UserLoginDTOResponse();
 
-    requestUser.setId(username);
+    requestUser.setId(id);
     requestUser.setPassword(password);
 
     const token = await UserService.login(requestUser.build());
@@ -28,7 +30,7 @@ class UserController {
       });
       response.setMessage("Invalid Credentials");
       response.setError(true);
-      return res.status(token.status).json(response.build());
+      return res.status(401).json(response.build());
     }
 
     try {
@@ -59,10 +61,11 @@ class UserController {
           id: create_user.studentId,
           nickname: create_user.nickname || "",
           profile_description: create_user.profile_description || "",
+          profile_picture_url: create_user.profile_picture_url || "",
           age: create_user.age || 0,
           house: {
             id: create_user.houses?.id || 0,
-            name: create_user.houses?.house_name || '',
+            name: create_user.houses?.house_name || "",
           },
         });
 
@@ -75,6 +78,8 @@ class UserController {
           id: user_profile.studentId,
           nickname: user_profile.nickname || "",
           profile_description: user_profile.profile_description || "",
+          profile_picture_url: user_profile.profile_picture_url || "",
+
           age: user_profile.age || 0,
           house: {
             id: user_profile.houses?.id || 0,
@@ -149,6 +154,13 @@ class UserController {
 
     let update;
     try {
+      const houseid = await HouseService.findHouseById(house_id);
+      if (!houseid) {
+        response.setError(true);
+        response.setMessage("Not have this House_id");
+        return res.status(400).json(response.build());
+      }
+
       update = new UpdateUserProfileDTORequest()
         .setAge(age)
         .setHouseId(house_id)
@@ -162,7 +174,7 @@ class UserController {
 
     try {
       const updateUser = await UserService.updateUserProfile(update);
-      responseUpdate.setNickName(updateUser.nickname)
+      responseUpdate.setNickName(updateUser.nickname || "");
       responseUpdate.setAge(updateUser.age);
       responseUpdate.setCreatedAt(updateUser.updatedAt.toLocaleString());
       responseUpdate.setProfileDescription(updateUser.profile_description);

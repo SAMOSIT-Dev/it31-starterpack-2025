@@ -26,7 +26,7 @@ class ScheduleController {
 
       const successResponse = response
         .setContent(dtoSchedule)
-        .setMessage("Success")
+        .setMessage("Succesfully retrive schedules")
         .setError(false)
         .build();
       res.status(200).json(successResponse);
