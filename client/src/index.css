@@ -1,1 +1,14 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mitr:wght@200;300;400;500;600;700&display=swap');
+
+@font-face {
+    font-family: "BodoniXT";
+    src: url("/fonts/BodoniXT.ttf") format("truetype");
+}
+
+@theme {
+    --font-inter: "Inter", "sans-serif";
+    --font-mitr: "Mitr", "sans-serif";
+    --font-abeezee: "Abeezee", "sans-serif";
+    --font-inria-serif: "Inria Serif", "sans-serif";
+}
