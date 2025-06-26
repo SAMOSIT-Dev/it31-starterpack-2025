@@ -22,6 +22,8 @@ class GetAllUpcomingEventsResponseDTO {
   setEventDateTime(event_datetime) {
     if (typeof event_datetime !== "string")
       throw TypeError("Invalid type: event_datetime must be string");
+    this.event_datetime = event_datetime;
+
     return this;
   }
 

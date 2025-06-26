@@ -186,3 +186,11 @@ class UpdateUserProfileDTOResponse {
     return this
   }
 }
+
+
+module.exports = {
+  UserLoginDTORequest,
+  UserLoginDTOResponse,
+  UpdateUserProfileDTORequest,
+  UpdateUserProfileDTOResponse,
+};

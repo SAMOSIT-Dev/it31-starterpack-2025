@@ -1,3 +1,5 @@
+const { rooms } = require("../utils/prisma.utils");
+
 class GetAllSchedulesDTO {
   constructor() {
     this.id = null;
@@ -5,6 +7,7 @@ class GetAllSchedulesDTO {
     this.start_time = "";
     this.end_time = "";
     this.slide_url = "";
+    this.room_name = "";
     this.house = {
       id: null,
       name: "",
@@ -15,6 +18,13 @@ class GetAllSchedulesDTO {
     if (typeof id !== "number")
       throw TypeError("Invalid type: id must be number");
     this.id = id;
+    return this;
+  }
+
+  setRoomname(room_name) {
+    if (typeof room_name !== "string")
+      throw TypeError("Invalid type: room_name must be string");
+    this.room_name = room_name;
     return this;
   }
 
@@ -65,6 +75,7 @@ class GetAllSchedulesDTO {
       start_time: this.start_time,
       end_time: this.end_time,
       slide_url: this.slide_url,
+      room_name: this.room_name,
       house: this.house,
     };
   }
@@ -77,6 +88,7 @@ class GetScheduleByIdDTO {
     this.start_time = "";
     this.end_time = "";
     this.slide_url = "";
+    this.room_name = "";
     this.house = {
       id: null,
       name: "",
@@ -94,6 +106,13 @@ class GetScheduleByIdDTO {
     if (typeof course_name !== "string")
       throw TypeError("Invalid type: course_name must be string");
     this.course_name = course_name;
+    return this;
+  }
+
+  setRoomname(room_name) {
+    if (typeof room_name !== "string")
+      throw TypeError("Invalid type: course_name must be string");
+    this.room_name = room_name;
     return this;
   }
 
@@ -137,6 +156,7 @@ class GetScheduleByIdDTO {
       start_time: this.start_time,
       end_time: this.end_time,
       slide_url: this.slide_url,
+      room_name: this.room_name,
       house: this.house,
     };
   }

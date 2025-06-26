@@ -3,12 +3,13 @@ const ResponseDTO = require("../dtos/response.dto");
 const GetAllHousesDTOResponse = require("../dtos/house.dto");
 
 class HouseController {
+  // GET /houses
   static async getAllHouses(req, res) {
     const response = new ResponseDTO();
     try {
-      const house = await HouseService.getAllHouses();
+      const houses = await HouseService.getAllHouses();
 
-      const dtoHouse = house.map((h) =>
+      const dtoHouse = houses.map((h) =>
         new GetAllHousesDTOResponse()
           .setId(h.id)
           .setHouseName(h.house_name)
@@ -17,7 +18,7 @@ class HouseController {
 
       const successResponse = response
         .setContent(dtoHouse)
-        .setMessage("Success")
+        .setMessage("Successfully retrive houses")
         .setError(false)
         .build();
 
@@ -31,6 +32,7 @@ class HouseController {
     }
   }
 
+  // GET /houses/:id
   static async getHouseById(req, res) {
     const id = parseInt(req.params.id);
     const response = new ResponseDTO();
@@ -54,9 +56,14 @@ class HouseController {
           );
       }
 
+      const dtoHouse = new GetAllHousesDTOResponse()
+        .setId(house.id)
+        .setHouseName(house.house_name)
+        .build();
+
       const successResponse = response
-        .setContent(house)
-        .setMessage("Success")
+        .setContent(dtoHouse)
+        .setMessage(`Successfully get house id: ${id}`)
         .setError(false)
         .build();
 
@@ -70,6 +77,7 @@ class HouseController {
     }
   }
 
+  // PUT /houses/:id
   static async updateHouseById(req, res) {
     const id = parseInt(req.params.id);
     const { houseName } = req.body;
@@ -85,6 +93,7 @@ class HouseController {
             .build()
         );
     }
+
     const house = await HouseService.findHouseById(id);
     if (!house) {
       return res
@@ -92,15 +101,22 @@ class HouseController {
         .json(
           response
             .setError(true)
-            .setMessage(`Not have this house_id in db  ${id}`)
+            .setMessage(`Not have this house_id in db ${id}`)
             .build()
         );
     }
+
     try {
       const updated = await HouseService.updateHouseById(id, houseName);
+
+      const updatedDTO = new GetAllHousesDTOResponse()
+        .setId(updated.id)
+        .setHouseName(updated.house_name)
+        .build();
+
       const successResponse = response
-        .setContent(updated)
-        .setMessage("House updated successfully")
+        .setContent(updatedDTO)
+        .setMessage(`Successfully update house id: ${id}`)
         .setError(false)
         .build();
 

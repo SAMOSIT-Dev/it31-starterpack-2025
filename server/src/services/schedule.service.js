@@ -6,6 +6,7 @@ class ScheduleService {
       include: {
         houses: true,
         courses: true,
+        rooms: true,
       },
     });
   }
@@ -16,6 +17,7 @@ class ScheduleService {
       include: {
         houses: true,
         courses: true,
+        rooms: true,
       },
     });
   }
@@ -34,6 +36,12 @@ class ScheduleService {
 
   static async createSchedule(data) {
     return prisma.schedules.create({ data });
+  }
+
+  static findidroom(id) {
+    return prisma.rooms.findUnique({
+      where: { id: id },
+    });
   }
 
   static async updateScheduleById(id, data) {

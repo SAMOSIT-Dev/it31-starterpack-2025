@@ -42,7 +42,7 @@ class CourseController {
         .setMessage("Success")
         .setError(false)
         .build();
-      res.json(course);
+      res.json(successResponse);
     } catch (error) {
       const errorResponse = response
         .setError(true)
@@ -77,6 +77,17 @@ class CourseController {
     const response = new ResponseDTO();
     const { course_name } = req.body;
     try {
+      const courseId = await CourseService.getCourseById(req.params.id);
+      if (!courseId)
+        return res
+          .status(404)
+          .json(
+            response
+              .setError(true)
+              .setMessage(`No Course in Id ${req.params.id}`)
+              .build()
+          );
+
       const course = await CourseService.updateCourse(
         req.params.id,
         course_name

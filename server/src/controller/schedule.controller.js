@@ -5,18 +5,20 @@ const {
   GetScheduleByIdDTO,
 } = require("../dtos/schedule.dto");
 
+const { formatDateTime } = require("../utils/date.utils");
+
 class ScheduleController {
   static async getAllSchedules(req, res) {
     const response = new ResponseDTO();
     try {
       const schedules = await ScheduleService.findAllSchedulesWithRelation();
-
       const dtoSchedule = schedules.map((schedule) => {
         return new GetAllSchedulesDTO()
           .setId(schedule.id)
           .setCourseName(schedule.courses?.course_name)
-          .setStartTime(schedule.start_time?.toISOString())
-          .setEndTime(schedule.end_time?.toISOString())
+          .setStartTime(formatDateTime(schedule.start_time))
+          .setEndTime(formatDateTime(schedule.end_time))
+          .setRoomname(schedule.rooms.room_name)
           .setSlideUrl(schedule.slide_url)
           .setHouse(schedule.houses?.id, schedule.houses?.house_name)
           .build();
@@ -27,7 +29,6 @@ class ScheduleController {
         .setMessage("Success")
         .setError(false)
         .build();
-
       res.status(200).json(successResponse);
     } catch (error) {
       const errorResponse = response
@@ -56,7 +57,7 @@ class ScheduleController {
       if (schedules.length <= 0) {
         const errorResponse = response
           .setError(true)
-          .setMessage("This House No Schdule")
+          .setMessage("This House No Schedule")
           .build();
         return res.status(400).json(errorResponse);
       }
@@ -64,16 +65,17 @@ class ScheduleController {
         new GetScheduleByIdDTO()
           .setId(schedule.id)
           .setCourseName(schedule.courses?.course_name)
-          .setStartTime(schedule.start_time?.toISOString())
-          .setEndTime(schedule.end_time?.toISOString())
+          .setStartTime(formatDateTime(schedule.start_time))
+          .setEndTime(formatDateTime(schedule.end_time))
           .setSlideUrl(schedule.slide_url)
+          .setRoomname(schedule.rooms.room_name)
           .setHouse(schedule.houses?.id, schedule.houses?.house_name)
           .build()
       );
 
       const successResponse = response
         .setContent(dtoScheduleById)
-        .setMessage("Success")
+        .setMessage(`Successfully retrieve schedules from house id: ${houseId}`)
         .setError(false)
         .build();
 
@@ -81,7 +83,7 @@ class ScheduleController {
     } catch (error) {
       const errorResponse = response
         .setError(true)
-        .setMessage("Cannot fetch schedules  house")
+        .setMessage("Cannot fetch schedules house")
         .build();
       return res.status(500).json(errorResponse);
     }
@@ -89,7 +91,8 @@ class ScheduleController {
 
   static async createNewSchedule(req, res) {
     const response = new ResponseDTO();
-    const { course_id, start_time, end_time, slide_url, house_id } = req.body;
+    const { course_id, start_time, end_time, slide_url, house_id, room_id } =
+      req.body;
 
     if (
       !course_id ||
@@ -97,6 +100,7 @@ class ScheduleController {
       !end_time ||
       !slide_url ||
       !house_id ||
+      !room_id ||
       slide_url.trim() === ""
     ) {
       const errorResponse = response
@@ -125,6 +129,16 @@ class ScheduleController {
       return res.status(400).json(errorResponse);
     }
 
+    const rooms = await ScheduleService.findCourseById(room_id);
+
+    if (!rooms) {
+      const errorResponse = response
+        .setError(true)
+        .setMessage(`Not have this room_id : ${room_id}`)
+        .build();
+      return res.status(400).json(errorResponse);
+    }
+
     try {
       const created = await ScheduleService.createSchedule({
         course_id,
@@ -132,6 +146,7 @@ class ScheduleController {
         end_time,
         slide_url,
         house_id,
+        room_id,
       });
 
       const successResponse = response
@@ -151,7 +166,8 @@ class ScheduleController {
   static async updateScheduleById(req, res) {
     const response = new ResponseDTO();
     const id = parseInt(req.params.id);
-    const { course_id, start_time, end_time, slide_url, house_id } = req.body;
+    const { course_id, start_time, end_time, slide_url, house_id, room_id } =
+      req.body;
 
     if (!id) {
       response.setMessage("No id on Params");
@@ -160,11 +176,12 @@ class ScheduleController {
     }
 
     if (
-      course_id == null ||
-      start_time == null ||
-      end_time == null ||
-      slide_url == null ||
-      house_id == null ||
+      !course_id ||
+      !start_time ||
+      !end_time ||
+      !slide_url ||
+      !house_id ||
+      !room_id ||
       slide_url.trim() === ""
     ) {
       response.setMessage("Have some fields in request body null");
@@ -191,6 +208,16 @@ class ScheduleController {
       return res.status(400).json(errorResponse);
     }
 
+    const rooms = await ScheduleService.findCourseById(room_id);
+
+    if (!rooms) {
+      const errorResponse = response
+        .setError(true)
+        .setMessage(`Not have this room_id : ${room_id}`)
+        .build();
+      return res.status(400).json(errorResponse);
+    }
+
     try {
       const updated = await ScheduleService.updateScheduleById(id, {
         course_id,
@@ -198,6 +225,7 @@ class ScheduleController {
         end_time,
         slide_url,
         house_id,
+        room_id,
       });
 
       const successResponse = response
