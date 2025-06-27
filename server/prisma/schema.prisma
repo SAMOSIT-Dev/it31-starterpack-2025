@@ -3,6 +3,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 model courses {
   id          Int         @id @default(autoincrement())
   course_name String?     @db.VarChar(50)
