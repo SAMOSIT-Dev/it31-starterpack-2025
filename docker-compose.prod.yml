@@ -21,8 +21,6 @@ services:
       MYSQL_DATABASE: ${PROD_MYSQL_DATABASE}
       MYSQL_USER: ${PROD_MYSQL_USER}
       MYSQL_PASSWORD: ${PROD_MYSQL_PASSWORD}
-    ports:
-      - "3306:3306"
     volumes:
       - prod_mysql-data:/var/lib/mysql
       - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
@@ -36,9 +34,8 @@ services:
       dockerfile: Dockerfile
     environment:
       DATABASE_URL: ${PROD_MYSQL_DB_URL}
+      SERVER_PORT: ${PROD_SERVER_PORT}
     restart: unless-stopped
-    ports:
-      - "8080:8080"
     depends_on:
       - prod_mysql
     networks:
