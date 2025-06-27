@@ -1,5 +1,6 @@
-import { Link } from "react-router";
 import HouseTicket from "@/components/schedule/HouseTicket";
+// import { useQuery } from "@tanstack/react-query";
+// import houseService from "@/services/houseService";
 
 const houses = [
   {
@@ -40,6 +41,12 @@ const houses = [
 ];
 
 export default function ScheduleLandingPage() {
+
+  // const {data:houses, isLoading, error} = useQuery({
+  //   queryKey: ['houses'],
+  //   queryFn: () => houseService.getHouses(),
+  // })
+
   return (
     <div className="min-h-screen text-white relative overflow-hidden bg-gradient-custom">
       {/* Content Container */}

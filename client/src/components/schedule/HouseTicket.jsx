@@ -2,9 +2,8 @@ import { Link } from "react-router";
 import React from "react";
 
 const HouseTicket = ({house}) => {
-  // Debug logging
-  console.log('HouseTicket - House data:', house);
-  
+
+
   return (
     <Link
       key={house.id}

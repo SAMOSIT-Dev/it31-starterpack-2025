@@ -5,29 +5,22 @@ import { scheduleData } from "./data";
 import ScheduleHeader from "@/components/schedule/ScheduleHeader";
 import DayScheduleDesktop from "@/components/schedule/DayScheduleDesktop";
 import DayScheduleMobile from "@/components/schedule/DayScheduleMobile";
+// import { useQuery } from "@tanstack/react-query";
+// import { scheduleService } from "@/api/schedule.service";
 
 const HouseSchedulePage = () => {
-  const { houseId: houseId } = useParams();
+  const { houseId } = useParams();
   const location = useLocation();
 
   const houseData = scheduleData[houseId];
+
+  // const { data: houseDetails, isLoading, error } = useQuery({
+  //   queryKey: ["houseDetails", houseId],
+  //   queryFn: scheduleService.getScheduleById(houseId)
+  // })
+
   const { mobileImage, desktopImage, houseName } = location.state || {};
 
-  if (!houseData) {
-    return (
-      <div className="min-h-screen bg-gradient-custom text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">House not found</h1>
-          <Link
-            to="/course/schedules"
-            className="text-blue-400 hover:underline"
-          >
-            Return to schedules
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   const displayName = houseName || houseData.name;
   const fallbackMobile = `/house-ticket/mobile/${houseId}.png`;

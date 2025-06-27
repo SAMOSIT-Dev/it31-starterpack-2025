@@ -1,4 +1,3 @@
-// components/schedule/DayScheduleMobile.jsx
 import React from 'react';
 import SessionCard from './SessionCard';
 
