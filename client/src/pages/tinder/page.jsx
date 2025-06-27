@@ -1,3 +1,3 @@
 export default function TinderGamePage () {
-    return <div>Tinder Game</div>
+    return <div className="font-inter">Tinder Game</div>
 }
