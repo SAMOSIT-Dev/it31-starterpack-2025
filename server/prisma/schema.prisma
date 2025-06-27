@@ -7,6 +7,11 @@ datasource db {
   url      = "mysql://root:root@localhost:3307/sit_starter"
 }
 
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/prisma_client"
+}
+
 model courses {
   id          Int         @id @default(autoincrement())
   course_name String?     @db.VarChar(50)

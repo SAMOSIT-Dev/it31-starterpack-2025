@@ -7,7 +7,8 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "db:pull": "npx prisma db pull",
-    "db:generate": "npx prisma generate"
+    "db:generate": "npx prisma generate",
+    "db:deploy": "npx prisma db pull && npx prisma generate"
   },
   "keywords": [],
   "author": "",
