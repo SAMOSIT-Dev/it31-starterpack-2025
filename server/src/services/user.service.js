@@ -84,37 +84,30 @@ class UserService {
     });
   }
 
-  static async createUser(studentId) {
-    return prisma.users.create({
-      data: {
-        studentId: studentId,
-        isAuthenticated: true,
-        createdAt: new Date(),
-      },
-      include: { houses: true },
-    });
-  }
-
   static async findByStudentId(studentId) {
     return prisma.users.findUnique({
       where: { studentId: studentId },
       include: { houses: true },
     });
   }
-  static updateUserProfile(updateUserDTO) {
+
+  static updateUserProfile(
+    profile_description,
+    facebook_url,
+    instagram_url,
+    imagePath,
+    id
+  ) {
     const userInfo = prisma.users.update({
-      where: { studentId: updateUserDTO.id },
+      where: { studentId: id },
       data: {
-        profile_description: updateUserDTO.profile_description,
-        age: updateUserDTO.age,
-        house_id: updateUserDTO.house_id,
-        updatedAt: new Date(),
+        profile_description: profile_description,
+        facebook_url: facebook_url,
+        instagram_url: instagram_url,
+        profile_picture_url: imagePath,
       },
     });
     return userInfo;
-  }
-  static getUserFriends() {
-    // implement here
   }
 }
 

@@ -2,6 +2,9 @@ const UserService = require("../services/user.service");
 const ResponseDTO = require("../dtos/response.dto");
 const prisma = require("../utils/prisma.utils");
 const HouseService = require("../services/house.service");
+const { resizeProfilePic } = require("../utils/image.utils");
+const fs = require("fs").promises;
+const path = require("path");
 
 const {
   UserLoginDTORequest,
@@ -15,18 +18,18 @@ class UserController {
   static async login(req, res) {
     const response = new ResponseDTO();
     const { id, password } = req.body;
-    const requestUser = new UserLoginDTORequest();
-    const responseLogin = new UserLoginDTOResponse();
 
+    const requestUser = new UserLoginDTORequest();
     requestUser.setId(id);
     requestUser.setPassword(password);
+    requestUser.build();
 
-    const token = await UserService.login(requestUser.build());
+    const tokenResult = await UserService.login(requestUser);
 
-    if (!token.success) {
+    if (!tokenResult.success) {
       response.setContent({
-        error: token.data?.error,
-        error_description: token.data?.error_description,
+        error: tokenResult.data?.error,
+        error_description: tokenResult.data?.error_description,
       });
       response.setMessage("Invalid Credentials");
       response.setError(true);
@@ -34,7 +37,7 @@ class UserController {
     }
 
     try {
-      const { access_token, expires_in, refresh_token } = token.data;
+      const { access_token, refresh_token } = tokenResult.data;
 
       res.cookie("authToken", JSON.stringify({ access_token, refresh_token }), {
         httpOnly: true,
@@ -43,74 +46,28 @@ class UserController {
         maxAge: 3600000,
       });
 
-      const studentId = await UserService.getUserInfo(access_token);
-      if (!studentId) {
-        response.setError(true);
-        response.setMessage("Cannot retrieve studentId from user info");
-        return res.status(401).json(response.build());
-      }
-
-      const user_profile = await UserService.findByStudentId(studentId);
-      if (!user_profile) {
-        const create_user = await UserService.createUser(studentId);
-
-        responseLogin.setAuthToken(access_token);
-        responseLogin.setRefreshToken(refresh_token);
-        responseLogin.setExpiresIn(String(expires_in));
-        responseLogin.setUserProfile({
-          id: create_user.studentId,
-          nickname: create_user.nickname || "",
-          profile_description: create_user.profile_description || "",
-          profile_picture_url: create_user.profile_picture_url || "",
-          age: create_user.age || 0,
-          house: {
-            id: create_user.houses?.id || 0,
-            name: create_user.houses?.house_name || "",
-          },
-        });
-
-        response.setContent(responseLogin.build());
-      } else {
-        responseLogin.setAuthToken(access_token);
-        responseLogin.setRefreshToken(refresh_token);
-        responseLogin.setExpiresIn(String(expires_in));
-        responseLogin.setUserProfile({
-          id: user_profile.studentId,
-          nickname: user_profile.nickname || "",
-          profile_description: user_profile.profile_description || "",
-          profile_picture_url: user_profile.profile_picture_url || "",
-
-          age: user_profile.age || 0,
-          house: {
-            id: user_profile.houses?.id || 0,
-            name: user_profile.houses?.house_name || "",
-          },
-        });
-
-        response.setContent(responseLogin.build());
-      }
-
-      response.setError(false);
+      response.setContent({ access_token, refresh_token });
       response.setMessage("User authenticated");
-      res.status(200).json(response.build());
+      response.setError(false);
+      return res.status(200).json(response.build());
     } catch (error) {
       console.error("Login error:", error);
-      response.setMessage("Server Have Problem");
+      response.setMessage("Server encountered an error");
       response.setError(true);
       return res.status(500).json(response.build());
     }
   }
 
-  //refresh
   static async refresh(req, res) {
     const response = new ResponseDTO();
     const { refreshToken } = req.body;
 
     if (!refreshToken) {
       response.setError(true);
-      response.setMessage("No Refresh Token in Body");
+      response.setMessage("No Refresh Token provided");
       return res.status(400).json(response.build());
     }
+
     try {
       const token = await UserService.refreshToken(refreshToken);
       const { access_token, refresh_token } = token;
@@ -123,72 +80,75 @@ class UserController {
       });
 
       response.setContent(token);
+      response.setMessage("Access token refreshed successfully");
       response.setError(false);
-      response.setMessage("Success to request access token by RefreshToken");
-      res.status(200).json(response.build());
+      return res.status(200).json(response.build());
     } catch (error) {
-      response.setMessage("Refresh Token expires || Server Have Problem");
+      console.error("Refresh error:", error);
+      response.setMessage("Refresh token expired or server error");
       response.setError(true);
-      console.log(error);
       return res.status(500).json(response.build());
     }
   }
 
   static async updateUser(req, res) {
-    const { id, profile_description, age, house_id } = req.body;
     const response = new ResponseDTO();
-    const responseUpdate = new UpdateUserProfileDTOResponse();
 
-    if (
-      typeof id !== "string" ||
-      typeof profile_description !== "string" ||
-      typeof age !== "number" ||
-      typeof house_id !== "number"
-    ) {
-      response.setError(true);
-      response.setMessage(
-        "id (string), profile_description (string), age (number), house_id (number)"
-      );
-      return res.status(400).json(response.build());
-    }
-
-    let update;
     try {
-      const houseid = await HouseService.findHouseById(house_id);
-      if (!houseid) {
+      const {
+        profile_description = null,
+        facebook_url = null,
+        instagram_url = null,
+      } = req.body || {};
+
+      const filename = req.file?.filename || null;
+      const preferred_username = req.user?.preferred_username;
+
+      if (!preferred_username) {
         response.setError(true);
-        response.setMessage("Not have this House_id");
+        response.setMessage("Missing user identifier");
         return res.status(400).json(response.build());
       }
 
-      update = new UpdateUserProfileDTORequest()
-        .setAge(age)
-        .setHouseId(house_id)
-        .setProfileDescription(profile_description)
-        .setId(id);
-    } catch (error) {
-      response.setError(true);
-      response.setMessage(error.message || "Invalid input format");
-      return res.status(400).json(response.build());
-    }
+      const user = await UserService.findByStudentId(preferred_username);
+      if (!user) {
+        response.setError(true);
+        response.setMessage("User not found");
+        return res.status(404).json(response.build());
+      }
 
-    try {
-      const updateUser = await UserService.updateUserProfile(update);
-      responseUpdate.setNickName(updateUser.nickname || "");
-      responseUpdate.setAge(updateUser.age);
-      responseUpdate.setCreatedAt(updateUser.updatedAt.toLocaleString());
-      responseUpdate.setProfileDescription(updateUser.profile_description);
-      responseUpdate.setId(updateUser.id.toString());
-      responseUpdate.setUpdatedAt(updateUser.updatedAt.toLocaleString());
-      responseUpdate.setHouseId(updateUser.house_id);
+      let imageUrl = user.profile_picture_url;
 
-      response.setContent(responseUpdate);
-      response.setMessage(`Successfully updated user Student_id: ${id}`);
-      res.status(200).json(response);
+      if (filename && req.file?.path) {
+        const file = `${preferred_username}.${filename}`;
+        const result = await resizeProfilePic(req.file.path, file);
+        imageUrl = result.url;
+
+        if (user.profile_picture_url) {
+          const oldImagePath = path.join(".", "src", user.profile_picture_url);
+
+          try {
+            await fs.access(oldImagePath);
+            await fs.unlink(oldImagePath);
+          } catch (err) {
+            console.warn("Cannot Delete Picture", oldImagePath);
+          }
+        }
+      }
+
+      const updateUser = await UserService.updateUserProfile(
+        profile_description || user.profile_description,
+        facebook_url || user.facebook_url,
+        instagram_url || user.instagram_url,
+        imageUrl,
+        preferred_username
+      );
+
+      return res.status(200).json(updateUser);
     } catch (error) {
-      console.error("Update error:", error);
-      response.setMessage("Internal Server Error");
+      console.error(error);
       response.setError(true);
+      response.setMessage("Internal server error");
       return res.status(500).json(response.build());
     }
   }
@@ -210,8 +170,44 @@ class UserController {
     });
     await UserService.logout(refreshToken);
     response.setError(false);
-    response.setMessage("Clear Cookie Success");
-    return res.status(200).json({ message: "Logged out successfully" });
+    response.setMessage("Logout successful");
+    return res.status(200).json(response.build());
+  }
+
+  static async getUserDetail(req, res) {
+    const response = new ResponseDTO();
+
+    try {
+      const userJwt = req.user;
+
+      if (!userJwt?.preferred_username) {
+        response.setError(true);
+        response.setMessage("Missing user identity");
+        return res.status(400).json(response.build());
+      }
+
+      const userData = await UserService.findByStudentId(
+        userJwt.preferred_username
+      );
+
+      if (!userData) {
+        response.setError(true);
+        response.setMessage(`User not found: ${userJwt.preferred_username}`);
+        return res.status(404).json(response.build());
+      }
+
+      response.setContent(userData);
+      response.setError(false);
+      response.setMessage(
+        `Retrieve success for student: ${userJwt.preferred_username}`
+      );
+      return res.status(200).json(response.build());
+    } catch (error) {
+      console.error("getUserDetail error:", error);
+      response.setError(true);
+      response.setMessage("Internal server error");
+      return res.status(500).json(response.build());
+    }
   }
 }
 
