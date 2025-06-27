@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  prod_frontend:
+    container_name: prod_frontend
+    build:
+      context: ./client
+      dockerfile: ./docker/Dockerfile.production
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - prod_it31-network
+
+  prod_mysql:
+    container_name: prod_mysql-db
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${PROD_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${PROD_MYSQL_DATABASE}
+      MYSQL_USER: ${PROD_MYSQL_USER}
+      MYSQL_PASSWORD: ${PROD_MYSQL_PASSWORD}
+    volumes:
+      - prod_mysql-data:/var/lib/mysql
+      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - prod_it31-network
+
+  prod_backend:
+    container_name: prod_backend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: ${PROD_MYSQL_DB_URL}
+      SERVER_PORT: ${PROD_SERVER_PORT}
+    restart: unless-stopped
+    depends_on:
+      - prod_mysql
+    networks:
+      - prod_it31-network
+
+volumes:
+  prod_mysql-data:
+
+networks:
+  prod_it31-network:
+    driver: bridge
