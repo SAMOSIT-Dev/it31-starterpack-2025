@@ -29,7 +29,7 @@ const DayScheduleDesktop = ({ daySchedule }) => {
           ))}
         </div>
       </div>
-      <hr />
+      <hr className="text-[#B3B3B3]" />
     </>
   );
 };

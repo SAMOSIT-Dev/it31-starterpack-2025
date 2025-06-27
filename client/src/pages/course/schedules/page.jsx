@@ -46,7 +46,7 @@ export default function ScheduleLandingPage() {
       <div className="container-responsive pt-20 pb-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold font-bodoni-xt mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold font-inter mb-4">
             What's your house
           </h1>
         </div>
