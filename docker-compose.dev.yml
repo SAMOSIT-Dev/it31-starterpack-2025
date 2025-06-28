@@ -9,11 +9,13 @@ services:
     restart: unless-stopped
     ports:
       - "81:80"
+    depends_on:
+      - dev_backend
     networks:
       - dev_it31-network
 
   dev_mysql:
-    container_name: dev_mysql-db
+    container_name: dev_mysql
     image: mysql:8.0
     restart: unless-stopped
     environment:

@@ -12,8 +12,11 @@ CREATE TABLE users (
   nickname VARCHAR(100),
   age INT,
   profile_description TEXT,
+  profile_picture_url TEXT,
   house_id INT,
-  isAuthenticated BOOLEAN,
+  facebook_url VARCHAR(50),
+  instagram_url VARCHAR(50),
+  discord_username VARCHAR(50),
   createdAt DATETIME,
   updatedAt DATETIME,
   FOREIGN KEY (house_id) REFERENCES houses(id)
