@@ -7,13 +7,15 @@ services:
       context: ./client
       dockerfile: ./docker/Dockerfile.production
     restart: unless-stopped
+    depends_on:
+      - prod_backend
     ports:
       - "80:80"
     networks:
       - prod_it31-network
 
   prod_mysql:
-    container_name: prod_mysql-db
+    container_name: prod_mysql
     image: mysql:8.0
     restart: unless-stopped
     environment:

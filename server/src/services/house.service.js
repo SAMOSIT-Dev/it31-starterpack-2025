@@ -1,17 +1,30 @@
-const prisma = require('../utils/prisma.utils')
+const prisma = require("../utils/prisma.utils");
 
 class HouseService {
-  static async getAllHouses(req, res) {
-    // implement here
+  static async getAllHouses() {
+    const houses = await prisma.houses.findMany();
+    return houses;
   }
-  static getHouseById() {
-    // implement here
-    
+
+  static async getHouseById(id) {
+    const house = await prisma.houses.findUnique({ where: { id } });
+    return house;
   }
-  static updateHouseById() {
-    // implement here
-    
-  } 
+
+  static async updateHouseById(id, houseName) {
+    const updated = await prisma.houses.update({
+      where: { id },
+      data: { house_name: houseName },
+    });
+    return updated;
+  }
+
+  static async findHouseById(id) {
+    const house = await prisma.houses.findUnique({
+      where: { id },
+    });
+    return house;
+  }
 }
 
-module.exports = HouseService
+module.exports = HouseService;
