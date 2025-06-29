@@ -1,42 +1,44 @@
 // components/schedule/SessionCard.jsx
-import React from 'react';
-import { Download, MapPin } from 'lucide-react';
-
+import React from "react";
+import { Download, MapPin } from "lucide-react";
 
 const SessionCard = ({ session, isMobile = false }) => {
-  const badgeWidth = isMobile ? 'w-12 md:w-16' : 'w-16';
-  const contentMargin = isMobile ? 'ml-12 md:ml-16' : 'ml-16';
+  const badgeWidth = isMobile ? "w-6 md:w-10" : "w-10";
+  const contentMargin = isMobile ? "ml-4 md:ml-12" : "ml-12";
 
   return (
-    <div className="bg-white rounded-xl p-4 relative overflow-hidden font-inter">
-      <div className={`absolute left-0 top-0 bottom-0 ${badgeWidth} ${
-        session.type === "NOW SHOWING" ? "bg-[#BB3E42]" : "bg-[#1C5297]"
-      } flex items-center justify-center`}>
-        <span className="text-white text-xs font-bold transform -rotate-90 whitespace-nowrap">
+    <div className="p-4 relative overflow-hidden font-inter bg-white rounded-xl">
+      <div
+        className={`absolute left-0 top-0 bottom-0 ${badgeWidth} ${
+          session.type === "NOW SHOWING" ? "bg-[#BB3E42]" : "bg-[#1C5297]"
+        } flex items-center justify-center`}
+      >
+        <span className="text-white text-[10px] leading-2 md:text-xs transform -rotate-90 whitespace-nowrap">
           {session.type}
         </span>
       </div>
-      
-      <div className={contentMargin}>
-        <div className="flex items-start justify-between mb-2">
-          <h3 className="text-black font-bold text-lg">
+      <div className={`${contentMargin}`}>
+        <div className="flex items-start justify-between">
+          <h3 className="text-black font-bold text-xs md:text-lg">
             {session.subject}
           </h3>
-          <button className="p-1 hover:bg-gray-100 rounded">
-            <Download className="w-4 h-4 text-gray-400" />
+          <button className="p-1 hover:bg-gray-100 rounded-[8px] border border-gray-300 flex items-center justify-center">
+            <Download className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
           </button>
         </div>
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-gray-400 text-sm"><MapPin /></span>
-          <span className="text-gray-600 text-sm">
+        <div className="flex items-center gap-1 md:gap-2 mb-2">
+          <MapPin className="w-3 h-3 md:w-4 md:h-4 text-[#969696]" />
+          <span className="text-gray-600 text-[10px] leading-2 md:text-xs">
             {session.code}
           </span>
         </div>
-        <div className={`px-3 py-1 rounded-full text-xs font-mitr border-red-400 ${
-          session.type === "NOW SHOWING" 
-            ? "bg-[#FFA7AA] text-[#BB3E42]" 
-            : "bg-[#B5ACAD] text-[#1F1C1CC3]"
-        }`}>
+        <div
+          className={`px-3 py-1 rounded-full text-[7px] md:text-xs font-mitr border-red-400 max-w-max ${
+            session.type === "NOW SHOWING"
+              ? "bg-[#FFA7AA] text-[#BB3E42]"
+              : "bg-[#B5ACAD] text-[#1F1C1CC3]"
+          }`}
+        >
           {session.time}
         </div>
       </div>
@@ -45,3 +47,4 @@ const SessionCard = ({ session, isMobile = false }) => {
 };
 
 export default SessionCard;
+

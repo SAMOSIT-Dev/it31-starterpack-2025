@@ -7,8 +7,10 @@ const baseURL =
     ? import.meta.env.VITE_API_BASE_URL_DEV
     : import.meta.env.VITE_API_BASE_URL_PROD;
 
+const actual =  "http://it31-starterpack.sit.kmutt.ac.th/samosit/it31starterpack "
+
 const axiosInstance = axios.create({
-  baseURL,
+  actual,
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

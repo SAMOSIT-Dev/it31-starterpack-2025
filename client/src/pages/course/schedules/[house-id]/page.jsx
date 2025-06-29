@@ -40,10 +40,10 @@ const HouseSchedulePage = () => {
 
 
         {/* Desktop Schedule */}
-        <div className="hidden lg:block">
+        <div className="hidden sm:block">
           <div className="backdrop-blur-[96.8px] p-8 bg-[#1E1E1E]  border-[#3D3838] rounded-3xl border-4">
             <div className="mb-6 md:mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-white/90 mb-2">
+              <h2 className="text-3xl font-bold text-white/90 mb-2">
                 2025 July
               </h2>
             </div>
@@ -56,7 +56,7 @@ const HouseSchedulePage = () => {
         </div>
 
         {/* Mobile & Tablet Schedule */}
-        <div className="lg:hidden space-y-6">
+        <div className="sm:hidden space-y-6">
           {houseData.schedule.map((daySchedule, dayIndex) => (
             <DayScheduleMobile key={dayIndex} daySchedule={daySchedule} />
           ))}
