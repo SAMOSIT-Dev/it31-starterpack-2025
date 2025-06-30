@@ -4,16 +4,16 @@ import { Download, MapPin } from "lucide-react";
 
 const SessionCard = ({ session, isMobile = false }) => {
   const badgeWidth = isMobile ? "w-6 md:w-10" : "w-10";
-  const contentMargin = isMobile ? "ml-4 md:ml-12" : "ml-12";
+  const contentMargin = isMobile ? "ml-4 md:ml-10" : "ml-10";
 
   return (
-    <div className="p-4 relative overflow-hidden font-inter bg-white rounded-xl">
+    <div className="p-3 relative overflow-hidden font-inter bg-white rounded-[12px]">
       <div
         className={`absolute left-0 top-0 bottom-0 ${badgeWidth} ${
           session.type === "NOW SHOWING" ? "bg-[#BB3E42]" : "bg-[#1C5297]"
         } flex items-center justify-center`}
       >
-        <span className="text-white text-[10px] leading-2 md:text-xs transform -rotate-90 whitespace-nowrap">
+        <span className="text-white text-[10px] leading-2 md:text-[14px] transform -rotate-90 whitespace-nowrap">
           {session.type}
         </span>
       </div>
@@ -33,7 +33,7 @@ const SessionCard = ({ session, isMobile = false }) => {
           </span>
         </div>
         <div
-          className={`px-3 py-1 rounded-full text-[7px] md:text-xs font-mitr border-red-400 max-w-max ${
+          className={`px-3 py-1 rounded-[5px] text-[7px] md:text-xs font-mitr border-red-400 max-w-max ${
             session.type === "NOW SHOWING"
               ? "bg-[#FFA7AA] text-[#BB3E42]"
               : "bg-[#B5ACAD] text-[#1F1C1CC3]"

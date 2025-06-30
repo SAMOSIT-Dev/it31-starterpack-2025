@@ -1,5 +1,6 @@
 import React from "react";
 import SessionCard from "./SessionCard";
+import Break from "./Break";
 
 const DayScheduleDesktop = ({ daySchedule }) => {
   return (
@@ -20,9 +21,7 @@ const DayScheduleDesktop = ({ daySchedule }) => {
                 <SessionCard session={session} />
               </div>
               {index < daySchedule.sessions.length - 1 && (
-                <div className="break-indicator">
-                  <span className="break-text">BREAK</span>
-                </div>
+                <Break />
               )}
             </React.Fragment>
           ))}
