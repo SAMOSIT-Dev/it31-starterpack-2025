@@ -7,7 +7,7 @@ export const Events = {
      * @param {import("@tanstack/react-query").UseQueryOptions} opts
      * @returns
      */
-    getSomething: (opts = {}) =>
+    getEvents: (opts = {}) =>
         useQuery({
             queryKey: ["events"],
             queryFn: async () => {
