@@ -14,7 +14,10 @@ const app = express();
 const path = require("path");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173', 'http://it31-starterpack.sit.kmutt.ac.th'],
+    credentials: true
+}));
 
 app.use(`${AppConfig.applicationContext}/users`, UserRouter);
 app.use(`${AppConfig.applicationContext}/houses`, HouseRouter);
