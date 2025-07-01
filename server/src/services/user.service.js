@@ -109,6 +109,27 @@ class UserService {
     });
     return userInfo;
   }
+
+  static async userFriend(student_id) {
+    const userInfo = await prisma.users.findUnique({
+      where: { studentId: student_id },
+    });
+
+    if (!userInfo) return [];
+
+    const friendRecords = await prisma.friends.findMany({
+      where: { user_id: userInfo.id },
+      include: {
+        users_friends_friend_idTousers: true,
+      },
+    });
+
+    const friends = friendRecords.map(
+      (record) => record.users_friends_friend_idTousers
+    );
+
+    return friends;
+  }
 }
 
 module.exports = UserService;
