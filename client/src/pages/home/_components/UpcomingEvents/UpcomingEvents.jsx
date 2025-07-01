@@ -29,7 +29,7 @@ export default function UpcomingEvents() {
 
     return (
         <div id='upcoming' className='lg:flex lg:justify-center'>
-            <div className="text-white font-inter lg:mt-[135px] lg:w-[820px] ">
+            <div className="text-white font-inter w-full lg:mt-[135px] lg:w-[860px] ">
                 <p className="text-[24px] font-bold text-center lg:text-[40px] lg:text-start">UPCOMING EVENTS</p>
                 <div className='mt-[30px] flex flex-col gap-[16px]'>
                     {sortedEvents.map(event => {

@@ -32,7 +32,7 @@ export default function ModalContent({ isOpen, onClose }) {
         <Modal isOpen={isOpen} onRequestClose={onClose} style={modalStyles}>
             <>
                 <div className='mb-[35px] flex justify-between '>
-                    <img className='size-[34px]' src={stpLogo} alt="" />
+                    <Link to={"/"} onClick={onClose}><img className='size-[34px]' src={stpLogo} alt="" /></Link>
                     <button onClick={onClose}>
                         <img className='size-[32px]' src={close} alt="" />
                     </button>
@@ -52,10 +52,10 @@ export default function ModalContent({ isOpen, onClose }) {
                         <p className='font-mitr text-[24px]'>เพิ่มเพื่อน</p>
                         <div className='flex flex-col gap-[10px] text-[#D5D5D5] font-mitr font-light text-[16px]'>
                             <Link to={"/tinder"} onClick={onClose}>หาเพื่อน</Link>
-                            <a href="" onClick={onClose}>วิธีการเล่น</a>
+                            <Link to={"/tinder"} onClick={onClose}>วิธีการเล่น</Link>
                             <Link to={"/profile"} onClick={onClose}>โปรไฟล์</Link>
-                            <a href="" onClick={onClose}>แก้ไขโปรไฟล์</a>
-                            <a href="" onClick={onClose}>เพื่อน</a>
+                            <Link to={"/profile"} onClick={onClose}>แก้ไขโปรไฟล์</Link>
+                            <Link to={"/tinder"} onClick={onClose}>เพื่อน</Link>
                         </div>
                     </div>
                 </div>

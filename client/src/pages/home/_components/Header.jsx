@@ -2,17 +2,17 @@ import {Link} from 'react-router'
 
 import GlowButton from '../../_components/GlowButton.jsx'
 
-import fox_mascot from '../../../../public/common/fox_mascot.png'
+import fox_mascot from '../../../../public/common/fox_mascot2.png'
 import it31 from '../../../../public/common/it31.png'
 import it31Desk from '../../../../public/common/it31-desk.png'
 
 
 export default function Header() {
     return (
-        <div className='w-full pt-[55px] flex flex-col justify-center mb-[95px]
-        lg:pt-[210px] lg:flex-row lg:gap-[50px] lg:items-center xl:gap-[150px]'>
-            <img className='w-[184px] h-[257px] mt-[30px] self-center lg:w-[353px] lg:h-[494px]  lg:m-0' src={fox_mascot} alt="fox mascot" />
-            <div className='mt-[30px] lg:m-0'>
+        <div className='w-full h-[650px] pt-[55px] flex flex-col mb-[95px]  justify-center
+        lg:pt-[210px] lg:flex-row lg:gap-[50px] lg:items-center xl:gap-[150px] xl:mb-[130px]'>
+            <img className='size-[250px] mt-[70px] mb-[30px] self-center lg:size-[300px] lg:m-0 xl:size-[450px]' src={fox_mascot} alt="fox mascot" />
+            <div className='mt-[30px] top-[360px] lg:m-0'>
                 <div className='flex flex-col items-center justify-center gap-[10px]'>
                     <p className='font-[BodoniXT] text-[35px] font-medium text-white leading-[100%] tracking-[0%] z-3 relative w-[290px] h-[55px]
                     lg:w-[500px] lg:text-[64px] lg:mb-[30px]'>
