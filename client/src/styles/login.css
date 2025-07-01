@@ -1,0 +1,13 @@
+.bg-gradient {
+    background: linear-gradient(193.54deg, #66232C -12.31%, #151515 30.37%, #000000 81.34%, #1C5297 107.95%);
+
+  }
+  
+  @media (min-width: 1024px) {
+    .bg-gradient {
+        background: linear-gradient(330.72deg, #000000 13.38%, #0D1634 70.35%, #66232C 98.85%);
+
+    }
+  }
+  
+  

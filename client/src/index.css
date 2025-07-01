@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mitr:wght@200;300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
 @font-face {
     font-family: "BodoniXT";
@@ -11,4 +11,8 @@
     --font-mitr: "Mitr", "sans-serif";
     --font-abeezee: "Abeezee", "sans-serif";
     --font-inria-serif: "Inria Serif", "sans-serif";
+    --font-bodoni-xt: "BodoniXT", "serif";
+    
+    --background-image-gradient-custom: linear-gradient(238.45deg, #66232C 2.71%, #3C181C 12.02%, #000000 50.67%, #110C0C 89.31%, #0D1634 96.3%);
 }
+
