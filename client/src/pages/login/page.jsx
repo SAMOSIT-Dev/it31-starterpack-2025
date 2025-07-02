@@ -1,19 +1,39 @@
 import { useState } from "react";
 import "@/styles/login.css";
+import { loginUser } from "@/api/auth.service";
 
 export default function LoginPage() {
+  const [studentId, setStudentId] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+  
+    if (studentId.length !== 11) {
+      console.error("Student ID must be 11 characters long");
+      return;
+    }
+  
+    try {
+      const result = await loginUser({
+        id: studentId,
+        password: password,
+      });
+  
+      if (result.success) {
+        console.log(`Welcome, ${result.user.nickname || studentId}!`);
+      } 
+    } catch (err) {
+      console.error(err);
+    }
   };
+  
 
   return (
     <div>
-      <div
-        className="bg-gradient min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-16 py-8 gap-8 text-white"
-      >
-        
+      <div className="bg-gradient min-h-screen flex flex-col md:flex-row items-center justify-center px-4 md:px-16 py-8 gap-8 text-white">
         <div className="w-full hidden md:flex md:w-1/2 justify-center">
           <img
             src="/common/login_Banner.png"
@@ -32,13 +52,19 @@ export default function LoginPage() {
           <p className="font-inter text-lg mb-2">Hello IT#31 !</p>
           <h1 className="font-inria-serif text-4xl font-semibold mb-6">Sign In</h1>
 
-          <form onSubmit={handleSubmit} className="w-full flex flex-col items-center space-y-6 text-left">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex flex-col items-center space-y-6 text-left"
+          >
             <input
               type="text"
               name="studentId"
               id="studentId"
               placeholder="Student ID"
+              value={studentId}
+              onChange={(e) => setStudentId(e.target.value)}
               className="w-[90%] font-inria-serif px-4 py-4 rounded-2xl text-black bg-white focus:outline-none"
+              required
             />
 
             <div className="relative w-[90%]">
@@ -47,7 +73,10 @@ export default function LoginPage() {
                 name="password"
                 id="password"
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full font-inria-serif px-4 py-4 rounded-2xl text-black bg-white focus:outline-none"
+                required
               />
               <button
                 type="button"
