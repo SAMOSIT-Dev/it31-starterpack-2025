@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mitr:wght@200;300;400;500;600;700&family=Passion+One:wght@400;700;900&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mitr:wght@200;300;400;500;600;700&display=swap');
 
 @font-face {
     font-family: "BodoniXT";
@@ -11,4 +11,18 @@
     --font-mitr: "Mitr", "sans-serif";
     --font-abeezee: "Abeezee", "sans-serif";
     --font-inria-serif: "Inria Serif", "sans-serif";
+    --font-passion-one: "Passion One", "sans-serif";
+
+    --color-darkblue: #0D1634;
+    --color-brown: #66232C;
+
+    --breakpoint-sm: 30rem;
 }
+
+.bg-button-gradient {
+  background: linear-gradient(180deg, #FFFFFF -7.84%, #BB3E42 8.85%, #FE8A4F 92.1%, #FFFFFF 109.8%);
+}
+
+
+
+
