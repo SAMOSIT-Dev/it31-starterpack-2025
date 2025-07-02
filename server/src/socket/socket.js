@@ -13,7 +13,7 @@ function setupWebSocket(server) {
   io.use(socketVerifyAccessToken());
 
   io.on("connection", (socket) => {
-    socket.emit("activeUserCount", LocationController.userLocations.size);
+    socket.emit("activeUser", LocationController.userLocations.size);
 
     const userId = socket.user?.preferred_username;
 
