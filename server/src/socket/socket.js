@@ -10,12 +10,7 @@ function setupWebSocket(server) {
     cors: { origin: "*" },
   });
 
-  io.use(
-    socketVerifyAccessToken(publicKey, {
-      issuer: process.env.JWT_ISSUER,
-      audience: process.env.aud,
-    })
-  );
+  io.use(socketVerifyAccessToken());
 
   io.on("connection", (socket) => {
     socket.emit("activeUserCount", LocationController.userLocations.size);
