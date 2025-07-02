@@ -37,7 +37,7 @@ function setupWebSocket(server) {
 
     socket.on("disconnect", () => {
       LocationController.handleDisconnect(socket);
-      io.emit("activeUserCount", LocationController.userLocations.size);
+      io.emit("activeUser", LocationController.userLocations.size);
     });
   });
 
