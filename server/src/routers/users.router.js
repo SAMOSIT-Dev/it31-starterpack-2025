@@ -18,5 +18,7 @@ UserRouter.put(
   UserController.updateUser
 );
 UserRouter.get("/", auth, UserController.getUserDetail);
+UserRouter.get("/friends", auth, UserController.getFriend);
+
 
 module.exports = UserRouter;

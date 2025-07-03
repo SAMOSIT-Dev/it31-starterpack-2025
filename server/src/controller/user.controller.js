@@ -209,6 +209,36 @@ class UserController {
       return res.status(500).json(response.build());
     }
   }
+
+  static async getFriend(req, res) {
+    const response = new ResponseDTO();
+    try {
+      const userJwt = req.user;
+
+      if (!userJwt?.preferred_username) {
+        response.setError(true);
+        response.setMessage("Missing user identity");
+        return res.status(400).json(response.build());
+      }
+
+      const friends_data = await UserService.userFriend(
+        userJwt.preferred_username
+      );
+
+      response.setContent(friends_data);
+      response.setError(false);
+      response.setMessage(
+        `Retrieve friends success for student: ${userJwt.preferred_username}`
+      );
+
+      return res.status(200).json(response.build());
+    } catch (error) {
+      console.error("getUserDetail error:", error);
+      response.setError(true);
+      response.setMessage("Internal server error");
+      return res.status(500).json(response.build());
+    }
+  }
 }
 
 module.exports = UserController;
