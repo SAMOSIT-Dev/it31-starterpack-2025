@@ -1,50 +1,46 @@
 import axios from 'axios';
 
 const env = import.meta.env.VITE_ENV || 'dev';
-
-const baseURL =
-  env === 'dev'
-    ? import.meta.env.VITE_API_BASE_URL_DEV
-    : import.meta.env.VITE_API_BASE_URL_PROD;
-
-const actual =  "http://it31-starterpack.sit.kmutt.ac.th/samosit/it31starterpack"
+const actual = "http://it31-starterpack.sit.kmutt.ac.th/samosit/it31starterpack";
 
 const axiosInstance = axios.create({
   baseURL: actual,
   timeout: 10000,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
 });
 
-// Request interceptor
+// Request interceptor to add token to headers
 // axiosInstance.interceptors.request.use(
 //   (config) => {
-//     if (config.authRequired !== false) {
-//       const token = localStorage.getItem('access_token');
-//       if (token) {
-//         config.headers = config.headers || {};
-//         config.headers.Authorization = `Bearer ${token}`;
-//       }
-//     }
+//     // Token will be sent via cookies automatically due to withCredentials: true
 //     return config;
 //   },
 //   (error) => Promise.reject(error)
 // );
 
-// Response interceptor
+// // Response interceptor to handle token refresh
 // axiosInstance.interceptors.response.use(
 //   (response) => response,
-//   (error) => {
-//     const status = error.response?.status;
-
-//     if (status === 401) {
-//       console.warn('Unauthorized! Redirect to login or handle it.');
-//     } else {
-//       console.error('API Error:', status, error.response?.data);
+//   async (error) => {
+//     const originalRequest = error.config;
+    
+//     if (error.response?.status === 403 && !originalRequest._retry) {
+//       originalRequest._retry = true;
+      
+//       try {
+//         await axiosInstance.post('/users/refresh', {});
+//         return axiosInstance(originalRequest);
+//       } catch (refreshError) {
+//         // Refresh failed, redirect to login
+//         window.location.href = '/login';
+//         return Promise.reject(refreshError);
+//       }
 //     }
-
+    
 //     return Promise.reject(error);
 //   }
 // );

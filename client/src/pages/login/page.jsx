@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "@/styles/login.css";
-import { loginUser } from "@/api/auth.service";
+import { getUserDetail, loginUser } from "@/api/auth.service";
+import { useNavigate } from "react-router";
 
 export default function LoginPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
   
     if (studentId.length !== 11) {
       console.error("Student ID must be 11 characters long");
@@ -22,13 +22,21 @@ export default function LoginPage() {
         password: password,
       });
   
-      if (result.success) {
-        console.log(`Welcome, ${result.user.nickname || studentId}!`);
-      } 
+    
+      const user = await getUserDetail();
+  
+      if (user?.error || !user) {
+        console.error(user?.message || "Invalid or expired token");
+        return;
+      }
+      console.log(user)
+  
+      console.log(`Welcome, ${user.nickname }!`);
     } catch (err) {
-      console.error(err);
+      console.error("Login Error:", err);
     }
   };
+  
   
 
   return (
@@ -42,7 +50,6 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* ขวา: Form */}
         <div className="w-full md:w-1/2 max-w-sm text-center">
           <img
             src="/common/fox_mascot.png"
