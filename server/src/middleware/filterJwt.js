@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
 const ResponseDTO = require("../dtos/response.dto");
+const AppConfig = require("../config/app.config");
 
 const client = jwksClient({
-  jwksUri: process.env.JWKS_URI,
+  jwksUri: AppConfig.JWKS_URI,
 });
 
 function getKey(header, callback) {
@@ -33,8 +34,8 @@ function verifyAccessToken(req, res, next) {
     getKey,
     {
       algorithms: ["RS256"],
-      issuer: process.env.JWT_ISSUER,
-      audience: process.env.JWT_AUDIENCE,
+      issuer: AppConfig.JWT_ISSUER,
+      audience: AppConfig.JWT_AUDIENCE,
     },
     (err, decoded) => {
       if (err) {
