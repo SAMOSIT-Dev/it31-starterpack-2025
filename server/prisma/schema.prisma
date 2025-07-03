@@ -1,11 +1,11 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma_client"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
-  output = "../generated/prisma_client"
 }
 
 model courses {
@@ -16,9 +16,8 @@ model courses {
 
 model friends {
   id                             Int    @id @default(autoincrement())
-  user_id                        Int? 
-  friend_id                      Int? 
-
+  user_id                        Int?
+  friend_id                      Int?
   users_friends_user_idTousers   users? @relation("friends_user_idTousers", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "friends_ibfk_1")
   users_friends_friend_idTousers users? @relation("friends_friend_idTousers", fields: [friend_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "friends_ibfk_2")
 
@@ -58,7 +57,7 @@ model upcoming_events {
 
 model users {
   id                               Int       @id @default(autoincrement())
-  studentId                        String    @db.VarChar(11) @unique
+  studentId                        String?   @unique(map: "studentId") @db.VarChar(11)
   nickname                         String?   @db.VarChar(100)
   age                              Int?
   profile_description              String?   @db.Text
@@ -78,6 +77,6 @@ model users {
 
 model rooms {
   id        Int         @id @default(autoincrement())
-  room_name String?     @db.VarChar(30) @unique
+  room_name String?     @db.VarChar(30)
   schedules schedules[]
 }

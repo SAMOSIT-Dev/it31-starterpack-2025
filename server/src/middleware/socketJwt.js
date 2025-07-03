@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
+const AppConfig = require("../config/app.config");
 
 const client = jwksClient({
-  jwksUri: process.env.JWKS_URI,
+  jwksUri: AppConfig.JWKS_URI,
 });
 
 function getKey(header, callback) {
@@ -17,7 +18,7 @@ function getKey(header, callback) {
 
 function socketVerifyAccessToken() {
   return (socket, next) => {
-    const token = socket.handshake.auth?.token;
+    const token = socket.handshake.auth?.token || socket.handshake.headers?.token;
 
     if (!token) {
       return next(new Error("Missing token"));
@@ -28,8 +29,8 @@ function socketVerifyAccessToken() {
       getKey,
       {
         algorithms: ["RS256"],
-        issuer: process.env.JWT_ISSUER,
-        audience: process.env.JWT_AUDIENCE,
+        issuer: AppConfig.JWT_ISSUER,
+        audience: AppConfig.JWT_AUDIENCE,
       },
       (err, decoded) => {
         if (err) {
