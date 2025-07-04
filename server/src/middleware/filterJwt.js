@@ -18,17 +18,20 @@ function getKey(header, callback) {
 }
 
 function verifyAccessToken(req, res, next) {
-  const authHeader = req.headers.authorization;
   const response = new ResponseDTO();
+  let token = null;
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    token = authHeader.substring(7);
+  } else if (req.cookies && req.cookies.accessToken) {
+    token = req.cookies.accessToken;
+  }
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!token) {
     response.setError(true);
     response.setMessage("Missing Authorization Header or Token");
     return res.status(401).json(response.build());
   }
-
-  const token = authHeader.substring(7);
-
   jwt.verify(
     token,
     getKey,
