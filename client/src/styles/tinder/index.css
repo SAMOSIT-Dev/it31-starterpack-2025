@@ -1,0 +1,27 @@
+.page-gradient {
+    background: linear-gradient(178.54deg, #66232C -1.89%, #0D1634 57.75%, #000000 98.75%);
+}
+
+.connected-friend-wrapper-drop-shadow {
+    box-shadow: 0px 4px 18.2px 0px #87878763;
+}
+
+.connected-friend-card-gradient-scifora {
+    background: linear-gradient(89.51deg, #82EC87 4.37%, #466C5D 46.77%, #00BAB1 99.2%);
+}
+
+.connected-friend-card-gradient-fantasiax {
+    background: linear-gradient(89.51deg, #92D2F5 4.37%, #CBA1EB 46.77%, #403382 99.2%);
+}
+
+.connected-friend-card-gradient-horrorin {
+    background: linear-gradient(89.51deg, #8198B7 4.37%, #404F6E 46.77%, #1B2443 99.2%);
+}
+
+.connected-friend-card-gradient-actovex {
+    background: linear-gradient(89.51deg, #FDA237 4.37%, #AB3A12 46.77%, #7E0001 99.2%);
+}
+
+.connected-friend-card-gradient-overlay {
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.69) 100%);
+}

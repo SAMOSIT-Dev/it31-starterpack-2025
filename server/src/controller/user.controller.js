@@ -42,7 +42,7 @@ class UserController {
       res.cookie("authToken", JSON.stringify({ access_token, refresh_token }), {
         httpOnly: true,
         secure: true,
-        sameSite: "Strict",
+        sameSite: "None",
         maxAge: 3600000,
       });
 
