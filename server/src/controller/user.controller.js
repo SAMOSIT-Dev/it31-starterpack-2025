@@ -103,6 +103,16 @@ class UserController {
       const filename = req.file?.filename || null;
       const preferred_username = req.user?.preferred_username;
 
+      if (facebook_url.length > 50) {
+        response.setError(true);
+        response.setMessage("facebook Url must not long than 50 char");
+        return res.status(400).json(response.build());
+      }
+      if (instagram_url.length > 50) {
+        response.setError(true);
+        response.setMessage("Instagram Url must not long than 50 char");
+        return res.status(400).json(response.build());
+      }
       if (!preferred_username) {
         response.setError(true);
         response.setMessage("Missing user identifier");
@@ -162,7 +172,7 @@ class UserController {
       return res.status(404).json(response.build());
     }
 
-    res.clearCookie("authToken", {
+    res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: true,
       sameSite: "Strict",
