@@ -78,14 +78,13 @@ class UserController {
     try {
       const token = await UserService.refreshToken(refreshToken);
       const { access_token, refresh_token } = token;
-      res.cookie("refreshToken", refresh_token, {
+      res.cookie("accessToken", access_token, {
         httpOnly: true,
         secure: true,
         sameSite: "Strict",
         maxAge: 3600000,
       });
 
-      response.setContent({ access_token: access_token });
       response.setMessage("Access token refreshed successfully");
       response.setError(false);
       return res.status(200).json(response.build());
@@ -184,6 +183,7 @@ class UserController {
       secure: true,
       sameSite: "Strict",
     });
+
     await UserService.logout(refreshToken);
     response.setError(false);
     response.setMessage("Logout successful");
