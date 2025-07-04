@@ -32,7 +32,6 @@ function verifyAccessToken(req, res, next) {
     response.setMessage("Missing Authorization Header or Token");
     return res.status(401).json(response.build());
   }
-  console.log(token);
   jwt.verify(
     token,
     getKey,
