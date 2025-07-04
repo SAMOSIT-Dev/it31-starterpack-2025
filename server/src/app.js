@@ -10,6 +10,7 @@ const path = require("path");
 const http = require("http");
 const setupWebSocket = require("./socket/socket");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const server = http.createServer(app);
@@ -24,6 +25,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 app.use("/profile_pics", express.static(path.join(__dirname, "profile_pics")));
 app.use(`${AppConfig.applicationContext}/users`, UserRouter);

@@ -39,14 +39,14 @@ class UserController {
     try {
       const { access_token, refresh_token } = tokenResult.data;
 
-      res.cookie("authToken", JSON.stringify({ access_token, refresh_token }), {
+      res.cookie("refreshToken", refresh_token, {
         httpOnly: true,
         secure: true,
         sameSite: "Strict",
         maxAge: 3600000,
       });
 
-      response.setContent({ access_token, refresh_token });
+      response.setContent({ access_token });
       response.setMessage("User authenticated");
       response.setError(false);
       return res.status(200).json(response.build());
@@ -60,7 +60,7 @@ class UserController {
 
   static async refresh(req, res) {
     const response = new ResponseDTO();
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {
       response.setError(true);
@@ -71,15 +71,14 @@ class UserController {
     try {
       const token = await UserService.refreshToken(refreshToken);
       const { access_token, refresh_token } = token;
-
-      res.cookie("authToken", JSON.stringify({ access_token, refresh_token }), {
+      res.cookie("refreshToken", refresh_token, {
         httpOnly: true,
         secure: true,
         sameSite: "Strict",
         maxAge: 3600000,
       });
 
-      response.setContent(token);
+      response.setContent({ access_token: access_token });
       response.setMessage("Access token refreshed successfully");
       response.setError(false);
       return res.status(200).json(response.build());
