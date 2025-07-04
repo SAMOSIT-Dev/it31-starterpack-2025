@@ -1,64 +1,44 @@
+// src/pages/schedules/page.jsx
 import HouseTicket from "@/components/schedule/HouseTicket";
-// import { useQuery } from "@tanstack/react-query";
-// import houseService from "@/services/houseService";
+import { useQuery } from "@tanstack/react-query";
+import houseService from "@/api/house.service";
 
-const houses = [
-  {
-    id: 'romance',
-    name: 'Romance',
-    number: 'NO.01',
-    mobile: '/house-ticket/mobile/romance.png',
-    desktop: '/house-ticket/desktop/romance.png'
-  },
-  {
-    id: 'action',
-    name: 'Action',
-    number: 'NO.02',
-    mobile: '/house-ticket/mobile/action.png',
-    desktop: '/house-ticket/desktop/action.png'
-  },
-  {
-    id: 'science-fiction',
-    name: 'Science Fiction',
-    number: 'NO.03',
-    mobile: '/house-ticket/mobile/science-fiction.png',
-    desktop: '/house-ticket/desktop/science-fiction.png'
-  },
-  {
-    id: 'horror',
-    name: 'Horror',
-    number: 'NO.04',
-    mobile: '/house-ticket/mobile/horror.png',
-    desktop: '/house-ticket/desktop/horror.png'
-  },
-  {
-    id: 'fantasy',
-    name: 'Fantasy',
-    number: 'NO.05',
-    mobile: '/house-ticket/mobile/fantasy.png',
-    desktop: '/house-ticket/desktop/fantasy.png'
-  }
-];
 
 export default function ScheduleLandingPage() {
+  const { data: houses, isLoading, error } = useQuery({
+    queryKey: ['houses'],
+    queryFn: () => houseService.getHouses(),
+    retry: 3,
+    staleTime: 5 * 60 * 1000,
+  });
 
-  // const {data:houses, isLoading, error} = useQuery({
-  //   queryKey: ['houses'],
-  //   queryFn: () => houseService.getHouses(),
-  // })
+  if (isLoading) {
+    return (
+      <div className="min-h-screen text-white bg-gradient-custom flex items-center justify-center">
+        <div className="animate-pulse">Loading houses...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    console.error('Houses fetch error:', error);
+  }
+
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden bg-gradient-custom">
-      {/* Content Container */}
       <div className="container-responsive pt-20 pb-12">
-        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold font-inter mb-4">
             What's your house
           </h1>
+          {error && (
+            <p className="text-yellow-400 text-sm">
+              Using cached data - API connection issue
+            </p>
+          )}
         </div>
 
-        {/* House Cards */}
         <div className="space-y-2 max-w-2xl mx-auto">
           {houses.map((house) => (
             <HouseTicket house={house} key={house.id} />

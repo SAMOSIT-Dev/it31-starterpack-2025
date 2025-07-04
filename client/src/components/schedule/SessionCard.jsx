@@ -20,16 +20,16 @@ const SessionCard = ({ session, isMobile = false }) => {
       <div className={`${contentMargin}`}>
         <div className="flex items-start justify-between">
           <h3 className="text-black font-bold text-xs md:text-lg">
-            {session.subject}
+            {session.courseName}
           </h3>
-          <button className="p-1 hover:bg-gray-100 rounded-[8px] border border-gray-300 flex items-center justify-center">
+          <button className="p-1 hover:bg-gray-100 rounded-[8px] border border-gray-300 flex items-center justify-center cursor-pointer">
             <Download className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
           </button>
         </div>
         <div className="flex items-center gap-1 md:gap-2 mb-2">
           <MapPin className="w-3 h-3 md:w-4 md:h-4 text-[#969696]" />
           <span className="text-gray-600 text-[10px] leading-2 md:text-xs">
-            {session.code}
+            {session.roomName}
           </span>
         </div>
         <div

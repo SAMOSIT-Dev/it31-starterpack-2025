@@ -8,7 +8,7 @@ const DayScheduleDesktop = ({ daySchedule }) => {
       <div className="day-schedule-desktop">
         {/* Day Column */}
         <div className="day-column">
-          <div className="day-date">{daySchedule.date}</div>
+          <div className="day-date -mb-3">{daySchedule.date}</div>
           <div className="day-name">{daySchedule.day}</div>
         </div>
 

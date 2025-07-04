@@ -1,21 +1,28 @@
-import axiosInstance from "./axiosInstant";
+// src/api/house.service.js
+import axiosInstance from "./axiosInstance";
 
 const houseService = {
   getHouses: async () => {
-    const response = await axiosInstance.get("/houses");
-
-    if (response.status !== 200) {
-      throw new Error(`Error fetching houses: ${response.data.error}`);
+    try {
+      const response = await axiosInstance.get("/houses");
+      console.log('Houses API Response:', response.data);
+      
+      // Extract content array from response
+      return response.data?.content || [];
+    } catch (error) {
+      console.error('getHouses error:', error);
+      throw new Error(`Failed to fetch houses: ${error.message}`);
     }
-    return response.data.content;
   },
+  
   getHouseById: async (houseId) => {
-    const response = await axiosInstance.get(`/houses/${houseId}`);
-
-    if (response.status !== 200) {
-      throw new Error(`Error fetching house id ${houseId}: ${response.data.error}`);
+    try {
+      const response = await axiosInstance.get(`/houses/${houseId}`);
+      return response.data?.content || null;
+    } catch (error) {
+      console.error('getHouseById error:', error);
+      throw new Error(`Failed to fetch house ${houseId}: ${error.message}`);
     }
-    return response.data.content;
   },
 };
 

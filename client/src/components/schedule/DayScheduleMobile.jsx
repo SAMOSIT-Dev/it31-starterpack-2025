@@ -7,9 +7,9 @@ const DayScheduleMobile = ({ daySchedule }) => {
       {/* Day Header */}
       <div className="flex items-center gap-3 mb-4">
         <div className="flex flex-col items-center">
-          <div className="text-4xl md:text-5xl font-bold font-inter">{daySchedule.date}</div>
+          <div className="text-4xl md:text-5xl font-bold font-inter -mb-1">{daySchedule.date}</div>
           <div className="text-lg md:text-xl font-semibold font-inter">
-            JULY
+            {daySchedule.day}
           </div>
         </div>
       </div>

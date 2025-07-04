@@ -7,7 +7,6 @@ import ProfilePage from "@/pages/profile/page";
 import TinderGamePage from "@/pages/tinder/page";
 import ScheduleLandingPage from "@/pages/course/schedules/page";
 import HouseSchedulePage from "@/pages/course/schedules/[house-id]/page";
-import { houseScheduleLoader } from "@/pages/course/schedules/[house-id]/loader";
 
 export const router = createBrowserRouter([
   {
@@ -31,13 +30,12 @@ export const router = createBrowserRouter([
         Component: TinderGamePage,
       },
       {
-        path: "/course/schedules",
+        path: "/course/houses",
         Component: ScheduleLandingPage,
       },
       {
-        path: "/course/schedule/:houseId",
+        path: "/course/houses/:houseId/schedule",
         Component: HouseSchedulePage,
-        loader: houseScheduleLoader,
       },
     ],
   },

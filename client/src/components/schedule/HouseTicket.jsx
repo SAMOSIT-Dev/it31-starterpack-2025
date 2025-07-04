@@ -1,27 +1,37 @@
+// src/components/schedule/HouseTicket.jsx
 import { Link } from "react-router";
 import React from "react";
 
-const HouseTicket = ({house}) => {
+const HouseTicket = ({ house }) => {
+  // Handle different data structures
+  const houseName = house?.house_name
+  const houseId = house?.id
 
+  const houseMobileImage = `/house-ticket/mobile/${houseName}.png`;
+  const houseDesktopImage = `/house-ticket/desktop/${houseName}.png`;
+
+  if (!houseId) {
+    console.warn('House missing ID:', house);
+    return null;
+  }
 
   return (
     <Link
-      key={house.id}
-      to={`/course/schedule/${house.id}`}
+      to={`/course/houses/${houseId}/schedule`}
       state={{
-        mobileImage: house.mobile,
-        desktopImage: house.desktop,
-        houseName: house.name
+        mobileImage: houseMobileImage,
+        desktopImage: houseDesktopImage,
+        houseName: houseName,
       }}
       className="block transform transition-all duration-300 hover:scale-105"
     >
       <div
         className="responsive-house-image"
         style={{
-          "--mobile-image": `url('${house.mobile}')`,
-          "--desktop-image": `url('${house.desktop}')`,
+          "--mobile-image": `url('${houseMobileImage}')`,
+          "--desktop-image": `url('${houseDesktopImage}')`,
         }}
-        aria-label={`${house.name} house - ${house.number}`}
+        aria-label={`${houseName} house ticket`}
         role="img"
       />
     </Link>
