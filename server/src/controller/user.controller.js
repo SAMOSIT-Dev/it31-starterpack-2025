@@ -39,14 +39,14 @@ class UserController {
     try {
       const { access_token, refresh_token } = tokenResult.data;
 
-      res.cookie("authToken", JSON.stringify({ access_token, refresh_token }), {
+      res.cookie("refreshToken", refresh_token, {
         httpOnly: true,
         secure: true,
         sameSite: "None",
         maxAge: 3600000,
       });
 
-      response.setContent({ access_token, refresh_token });
+      response.setContent({ access_token });
       response.setMessage("User authenticated");
       response.setError(false);
       return res.status(200).json(response.build());
@@ -60,7 +60,7 @@ class UserController {
 
   static async refresh(req, res) {
     const response = new ResponseDTO();
-    const { refreshToken } = req.body;
+    const refreshToken = req.cookies.refreshToken;
 
     if (!refreshToken) {
       response.setError(true);
@@ -71,15 +71,14 @@ class UserController {
     try {
       const token = await UserService.refreshToken(refreshToken);
       const { access_token, refresh_token } = token;
-
-      res.cookie("authToken", JSON.stringify({ access_token, refresh_token }), {
+      res.cookie("refreshToken", refresh_token, {
         httpOnly: true,
         secure: true,
         sameSite: "Strict",
         maxAge: 3600000,
       });
 
-      response.setContent(token);
+      response.setContent({ access_token: access_token });
       response.setMessage("Access token refreshed successfully");
       response.setError(false);
       return res.status(200).json(response.build());
@@ -104,6 +103,16 @@ class UserController {
       const filename = req.file?.filename || null;
       const preferred_username = req.user?.preferred_username;
 
+      if (facebook_url.length > 50) {
+        response.setError(true);
+        response.setMessage("facebook Url must not long than 50 char");
+        return res.status(400).json(response.build());
+      }
+      if (instagram_url.length > 50) {
+        response.setError(true);
+        response.setMessage("Instagram Url must not long than 50 char");
+        return res.status(400).json(response.build());
+      }
       if (!preferred_username) {
         response.setError(true);
         response.setMessage("Missing user identifier");
@@ -163,7 +172,7 @@ class UserController {
       return res.status(404).json(response.build());
     }
 
-    res.clearCookie("authToken", {
+    res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: true,
       sameSite: "Strict",

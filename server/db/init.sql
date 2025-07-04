@@ -9,6 +9,7 @@ CREATE TABLE houses (
 
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
+  studentId VARCHAR(11) UNIQUE,
   nickname VARCHAR(100),
   age INT,
   profile_description TEXT,
