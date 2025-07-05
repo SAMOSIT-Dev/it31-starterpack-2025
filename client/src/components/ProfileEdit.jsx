@@ -1,22 +1,62 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Camera, X, Edit3 } from "lucide-react";
+import { updateUser } from "@/api/user.service";
+import { useAuth } from "@/contexts/AuthContext";
 
-export default function ProfileEdit({
-    avatar,
-    setAvatar,
-    avatarInputRef,
-    handleAvatarChange,
-    handleResetAvatar,
-    description,
-    setDescription,
-    instagram,
-    setInstagram,
-    facebook,
-    setFacebook,
-    discord,
-    setDiscord,
-    setIsEditing,
-  }) {
+export default function ProfileEdit({setIsEditing}) {
+  const [description, setDescription] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [avatar, setAvatar] = useState("/common/avatar.png");
+  const [selectedFile, setSelectedFile] = useState(null); 
+
+  const avatarInputRef = useRef(null);
+  const { user , fetchUser } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      setDescription(user.profile_description || "");
+      setInstagram(user.instagram_url || "");
+      setFacebook(user.facebook_url || "");
+      setDiscord(user.discord_url || "");
+      setAvatar(user.image_url || "/common/avatar.png"); 
+    }
+  }, [user]);
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file); // ✅ เก็บไฟล์จริง
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result); // preview
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleResetAvatar = () => {
+    setAvatar("/common/avatar.png");
+    setSelectedFile(null); 
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await updateUser({
+        imageFile: selectedFile, 
+        profile_description: description,
+        facebook_url: facebook,
+        instagram_url: instagram,
+        discord_url: discord,
+      });
+
+      fetchUser();
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Update error", error);
+    }
+  };
+ 
  
   return (
     <div
@@ -43,7 +83,7 @@ export default function ProfileEdit({
                 <img
                   src={avatar}
                   alt="avatar"
-                  className="absolute inset-0 w-full h-full object-cover filter blur-[1px] brightness-40 z-10"
+                  className="absolute bg-white inset-0 w-full h-full object-cover filter blur-[1px] brightness-40 z-10"
                 />
                 <div
                   onClick={() => avatarInputRef.current.click()}
@@ -53,7 +93,6 @@ export default function ProfileEdit({
                 </div>
                 <input
                   type="file"
-                  accept="image/*"
                   onChange={handleAvatarChange}
                   ref={avatarInputRef}
                   className="hidden"
@@ -71,14 +110,13 @@ export default function ProfileEdit({
 
           {/* Content */}
           <div className="pt-5 w-[80%] px-6 md:px-10 pb-10 space-y-6 ml-auto">
-            {/* Header Section */}
             <div className="flex flex-col  md:flex-row justify-between gap-4">
               <div className="flex flex-col md:flex-row md:items-center gap-2">
                 <h2 className=" md:text-xl   lg:text-2xl font-mitr  ">
-                  Name Surname
+                  {user?.nickname || "Name Surname"}
                 </h2>
                 <span className="bg-[#354DA4] text-white text-sm font-bodoni-xt font-semibold px-3 py-1 rounded-full">
-                  Fantasay
+                  {user?.houses.house_name}
                 </span>
               </div>
 
@@ -90,7 +128,7 @@ export default function ProfileEdit({
                   ✕ Cancel
                 </button>
                 <button
-                  onClick={() => setIsEditing(false)}
+                  onClick={() => handleSubmit()}
                   className="bg-[#354DA4] text-white font-inter  md:px-3 md:py-1 lg:px-5 lg:py-2 rounded-full hover:bg-[#2d429e]"
                 >
                   ✓ Submit
@@ -192,9 +230,9 @@ export default function ProfileEdit({
           </div>
 
           <div className="flex justify-center gap-2">
-            <h2 className="text-2xl font-bold font-inter">Name Surname</h2>
+            <h2 className="text-2xl font-bold font-inter">{user?.nickname || "Name Surname"}</h2>
             <div className=" font-bodoni-xt inline-block mt-1 bg-[#354DA4] text-white text-sm font-semibold px-3 py-1 rounded-full">
-              Fantasy
+              {user?.houses.house_name}
             </div>
           </div>
 
@@ -261,7 +299,7 @@ export default function ProfileEdit({
               ✕ Cancel
             </button>
             <button
-              onClick={() => setIsEditing(false)}
+              onClick={handleSubmit}
               className="bg-[#354DA4] text-white px-6 py-2 rounded-full hover:bg-[#2e4092]"
             >
               ✓ Submit

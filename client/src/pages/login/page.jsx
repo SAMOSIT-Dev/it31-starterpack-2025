@@ -2,11 +2,13 @@ import { useState } from "react";
 import "@/styles/login.css";
 import { getUserDetail, loginUser } from "@/api/auth.service";
 import { useNavigate } from "react-router";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginPage() {
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,15 +25,9 @@ export default function LoginPage() {
       });
   
     
-      const user = await getUserDetail();
+      const userData = await getUserDetail();
+      navigate("/profile");
   
-      if (user?.error || !user) {
-        console.error(user?.message || "Invalid or expired token");
-        return;
-      }
-      console.log(user)
-  
-      console.log(`Welcome, ${user.nickname }!`);
     } catch (err) {
       console.error("Login Error:", err);
     }

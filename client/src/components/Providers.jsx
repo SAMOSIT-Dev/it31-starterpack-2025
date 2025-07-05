@@ -12,8 +12,8 @@ export const queryClient = new QueryClient();
  */
 export default function Providers({ children }) {
   return (
-    <RouterProvider router={router}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </RouterProvider>
+      <RouterProvider router={router}>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      </RouterProvider>
   );
 }
