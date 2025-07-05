@@ -1,5 +1,3 @@
-
-
 import { Events } from '@/api/event.api.js';
 import Event from './Event.jsx'
 
@@ -11,7 +9,8 @@ export default function UpcomingEvents() {
     })
 
     if (isLoading) return <></>
-
+    if (data === null) return <></>
+    
     const currentDate = new Date();
 
     const sortedEvents = [...data]
