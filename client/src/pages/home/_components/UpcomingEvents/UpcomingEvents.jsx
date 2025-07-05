@@ -9,8 +9,8 @@ export default function UpcomingEvents() {
     })
 
     if (isLoading) return <></>
-    if (data === null) return <></>
-    
+    if (!data || !Array.isArray(data.content)) return <></>
+
     const currentDate = new Date();
 
     const sortedEvents = [...data.content]
