@@ -13,7 +13,7 @@ export default function UpcomingEvents() {
     
     const currentDate = new Date();
 
-    const sortedEvents = [...data]
+    const sortedEvents = [...data.content]
         .sort((a, b) => new Date(a.event_datetime) - new Date(b.event_datetime)) 
         .sort((a, b) => {
             const aIsPast = new Date(a.event_datetime) < currentDate;
