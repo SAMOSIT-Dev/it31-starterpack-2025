@@ -1,5 +1,3 @@
-
-
 import { Events } from '@/api/event.api.js';
 import Event from './Event.jsx'
 
@@ -11,6 +9,7 @@ export default function UpcomingEvents() {
     })
 
     if (isLoading) return <></>
+    if (!data || !Array.isArray(data.content)) return <></>
 
     const currentDate = new Date();
 
