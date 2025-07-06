@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nearby Match Demo with JWT</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Nearby Users (<span id="count">0</span>)</h1>
+    <ul id="list"></ul>
+
+    <script>
+      // สมมติ user มี JWT token แล้ว (หรือให้พิมพ์เอง)
+      const token = prompt("Enter your JWT token");
+
+      // เชื่อมต่อ socket.io พร้อมส่ง token ใน auth
+      const socket = io("http://localhost:8080", {
+        auth: {
+          token: token,
+        },
+      });
+
+      socket.on("connect", () => console.log("Connected", socket.id));
+
+      socket.on("activeUser", (count) => {
+        document.getElementById("count").textContent = count;
+      });
+
+      socket.on("nearbyUsers", (users) => {
+        const list = document.getElementById("list");
+        list.innerHTML = "";
+        users.forEach((u) => {
+          const li = document.createElement("li");
+          li.textContent = `User ${u.userId}: ${u.distance.toFixed(2)} km`;
+          list.appendChild(li);
+        });
+      });
+
+      function updateLocation() {
+        if (!navigator.geolocation) return;
+        navigator.geolocation.getCurrentPosition((pos) => {
+          // ไม่ต้องส่ง userId เพราะ server รู้จาก token แล้ว
+          socket.emit("updateLocation", {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude,
+          });
+        });
+      } 
+
+    //   ใช้อันนี้ตอน user ออกจาก หน้านั้น ----------------->   socket.on("disconnect", () => {
+    // }); 
+
+      updateLocation();
+      setInterval(updateLocation, 10000);
+    </script>
+  </body>
+</html>

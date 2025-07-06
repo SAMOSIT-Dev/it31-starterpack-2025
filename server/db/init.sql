@@ -62,10 +62,10 @@ CREATE TABLE upcoming_events (
 
 -- Insert into houses
 INSERT INTO houses (house_name) VALUES
-('Gryffindor'),
-('Hufflepuff'),
-('Ravenclaw'),
-('Slytherin');
+('fantasiax'),
+('horrorin'),
+('scifora'),
+('actovex');
 
 -- Insert into users
 INSERT INTO users (nickname, age, profile_description, house_id, isAuthenticated, createdAt, updatedAt) VALUES
