@@ -10,11 +10,6 @@ class UpcomingEventController {
     try {
       const events = await UpcomingEventService.getAllUpcomingEvents();
 
-      if (events.length <= 0) {
-        response.setContent("No Content");
-        res.status(200).json([]);
-      }
-
       const eventDto = events.map((event) => {
         return new GetAllUpcomingEventsResponseDTO()
           .setId(event.id)
