@@ -7,7 +7,7 @@ const publicKey = process.env.JWT_PUBLIC_KEY.replace(/\\n/g, "\n");
 
 function setupWebSocket(server) {
   const io = new Server(server, {
-    cors: { origin: "*" },
+    cors: { origin: "*", credentials: true },
   });
 
   io.use(socketVerifyAccessToken());
@@ -23,7 +23,7 @@ function setupWebSocket(server) {
 
     socket.on("updateLocation", async (data) => {
       const { lat, lng } = data;
-
+      
       if (lat == null || lng == null) {
         return socket.emit("error", "Missing lat/lng");
       }

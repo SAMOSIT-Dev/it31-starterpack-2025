@@ -25,3 +25,14 @@
 .connected-friend-card-gradient-overlay {
     background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.69) 100%);
 }
+
+.new-friend-card-bg-gradient {
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.81) 100%);
+}
+
+.new-friend-card-button-gradient {
+    background: radial-gradient(229.64% 116.67% at 50.36% 8.82%, #66232C 0%, #BB3E42 46.63%, #FE8A4F 100%);
+    border: 2px solid;
+    border-image-source: linear-gradient(180deg, #FFFFFF -7.84%, #BB3E42 8.85%, #FE8A4F 92.1%, #FFFFFF 109.8%);
+    box-shadow: 0px 0px 31.4px 6px #BB3E4217;
+}

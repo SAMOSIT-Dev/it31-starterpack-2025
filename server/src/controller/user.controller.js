@@ -85,6 +85,13 @@ class UserController {
         maxAge: 3600000,
       });
 
+      res.cookie("accessToken", access_token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 3600000,
+      });
+
       response.setContent({ access_token: access_token });
       response.setMessage("Access token refreshed successfully");
       response.setError(false);

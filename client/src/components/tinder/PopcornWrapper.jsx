@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from "motion/react"
 import Popcorn from './Popcorn'
+import { useMatchingSocketStore } from '@/store/matching.store'
 
 const circleStyles = [
   { size: 300, opacity: 0.15, delay: 0 },
@@ -9,6 +10,18 @@ const circleStyles = [
 ]
 
 const PopcornWrapper = () => {
+  const MAX_TOTAL_CLICKS_BEFORE_UPDATE_LOCATION = 5
+  const [totalClicks, setTotalClicks] = useState(0)
+  const updateCurrentLocation = useMatchingSocketStore(state => state.updateCurrentLocation)
+
+  const handleOnClick = () => {
+    setTotalClicks(click => click + 1)
+    if (totalClicks > MAX_TOTAL_CLICKS_BEFORE_UPDATE_LOCATION) {
+      setTotalClicks(0)
+      updateCurrentLocation()
+    }
+  }
+  
   return (
     <div className="relative flex items-center justify-center w-full">
       {circleStyles.map((circle, i) => (
@@ -32,7 +45,7 @@ const PopcornWrapper = () => {
         />
       ))}
 
-      <div className="relative z-10">
+      <div className="relative z-10" onClick={handleOnClick}>
         <Popcorn />
       </div>
     </div>
