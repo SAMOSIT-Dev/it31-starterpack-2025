@@ -1,12 +1,12 @@
 import { Outlet } from "react-router";
-import Navbar from "./_components/Navbar";
+import { AuthProvider } from "@/contexts/AuthContext";
+import Navbar from "@/pages/_components/Navbar";
 import { ToastContainer } from "react-toastify";
 
-
-export default function RootLayout() {
+export default function RootLayoutWithAuth() {
   return (
-    <>
-     <ToastContainer
+    <AuthProvider>
+        <ToastContainer
         position="top-center" 
         autoClose={3000}
         hideProgressBar={false}
@@ -21,6 +21,6 @@ export default function RootLayout() {
       <main>
         <Outlet />
       </main>
-    </>
+    </AuthProvider>
   );
 }
