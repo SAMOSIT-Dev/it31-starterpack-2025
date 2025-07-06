@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { useMatchingSocketStore } from '@/store/matching.store'
 import useAuthStore from '@/store/auth.store'
 import NewFriendModal from '@/components/tinder/NewFriendModal'
+import { env } from '@/config/env'
 
 
 export default function TinderGamePage() {
@@ -22,7 +23,7 @@ export default function TinderGamePage() {
 
     useEffect(() => {
         refresh()
-        connect('http://localhost')
+        connect(env.SOCKET_IO_HOST)
         return () => {
             disconnect()
         }
