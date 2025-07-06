@@ -10,10 +10,14 @@ export const queryClient = new QueryClient();
  * @param {import("react").PropsWithChildren} params
  * @returns
  */
+
+
 export default function Providers({ children }) {
   return (
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        {children}
       </RouterProvider>
+    </QueryClientProvider>
   );
 }
