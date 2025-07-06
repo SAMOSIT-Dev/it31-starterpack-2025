@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Camera, X, Edit3 } from "lucide-react";
-import { updateUser } from "@/api/user.service";
+import { updateUser } from "@/api/auth.service";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function ProfileEdit({setIsEditing}) {
@@ -20,23 +20,23 @@ export default function ProfileEdit({setIsEditing}) {
       setInstagram(user.instagram_url || "");
       setFacebook(user.facebook_url || "");
       setDiscord(user.discord_url || "");
-      setAvatar(user.image_url || "/common/avatar.png"); 
+      setAvatar(user?.avatar|| "/common/default_avartar.png"); 
     }
   }, [user]);
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file); // ✅ เก็บไฟล์จริง
+      setSelectedFile(file); 
       const reader = new FileReader();
       reader.onloadend = () => {
-        setAvatar(reader.result); // preview
+        setAvatar(reader.result); 
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleResetAvatar = () => {
-    setAvatar("/common/avatar.png");
+    setAvatar(user?.avatar);
     setSelectedFile(null); 
   };
 

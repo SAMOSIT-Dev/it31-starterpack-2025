@@ -3,6 +3,7 @@ import "@/styles/login.css";
 import { getUserDetail, loginUser } from "@/api/auth.service";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [studentId, setStudentId] = useState("");
@@ -14,22 +15,19 @@ export default function LoginPage() {
     e.preventDefault();
   
     if (studentId.length !== 11) {
-      console.error("Student ID must be 11 characters long");
+      toast.error("Student ID must be 11 characters long");
       return;
     }
   
     try {
-      const result = await loginUser({
+      await loginUser({
         id: studentId,
         password: password,
       });
-  
-    
-      const userData = await getUserDetail();
       navigate("/profile");
   
     } catch (err) {
-      console.error("Login Error:", err);
+      toast.error("Invalid student ID or password. Please try again.");
     }
   };
   
