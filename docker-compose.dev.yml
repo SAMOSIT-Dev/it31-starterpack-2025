@@ -1,39 +1,79 @@
 version: '3.8'
 
 services:
-  mysql:
-    container_name: mysql-db
+  dev_frontend:
+    container_name: dev_frontend
+    build:
+      context: ./client
+      dockerfile: ./docker/Dockerfile.development
+    restart: unless-stopped
+    ports:
+      - "81:80"
+    depends_on:
+      - dev_backend
+    networks:
+      - dev_it31-network
+
+  dev_mysql:
+    container_name: dev_mysql
     image: mysql:8.0
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DEV_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DEV_MYSQL_DATABASE}
+      MYSQL_USER: ${DEV_MYSQL_USER}
+      MYSQL_PASSWORD: ${DEV_MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - dev_mysql-data:/var/lib/mysql
       - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
-      - it31-network
+      - dev_it31-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DEV_MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-  backend:
-    container_name: backend
+  dev_backend:
+    container_name: dev_backend
     build:
       context: ./server
       dockerfile: Dockerfile
+    tty: true
+    environment:
+      DATABASE_URL: ${DEV_MYSQL_DB_URL}
+      SERVER_PORT: ${DEV_SERVER_PORT}
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
-      - mysql
+      dev_mysql:
+        condition: service_healthy
     networks:
-      - it31-network
+      - dev_it31-network
+
+  dev_redis:
+    image: redis:7.2
+    container_name: dev_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: >
+      redis-server
+      --requirepass it31_starterpack
+      --appendonly yes
+    restart: unless-stopped
+    networks:
+      - dev_it31-network
 
 volumes:
-  mysql-data:
+  dev_mysql-data:
+  redis-data:
 
 networks:
-  it31-network:
+  dev_it31-network:
     driver: bridge
+

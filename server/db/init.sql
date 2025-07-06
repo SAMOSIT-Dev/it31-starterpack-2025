@@ -9,11 +9,15 @@ CREATE TABLE houses (
 
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
+  studentId VARCHAR(11) UNIQUE,
   nickname VARCHAR(100),
   age INT,
   profile_description TEXT,
+  profile_picture_url TEXT,
   house_id INT,
-  isAuthenticated BOOLEAN,
+  facebook_url VARCHAR(50),
+  instagram_url VARCHAR(50),
+  discord_username VARCHAR(50),
   createdAt DATETIME,
   updatedAt DATETIME,
   FOREIGN KEY (house_id) REFERENCES houses(id)
@@ -24,15 +28,22 @@ CREATE TABLE courses (
   course_name VARCHAR(50)
 );
 
+CREATE TABLE rooms (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  room_name VARCHAR(30)
+);
+
 CREATE TABLE schedules (
   id INT PRIMARY KEY AUTO_INCREMENT,
   course_id INT,
+  room_id INT,
   start_time DATETIME,
   end_time DATETIME,
   slide_url TEXT,
   house_id INT,
   FOREIGN KEY (course_id) REFERENCES courses(id),
-  FOREIGN KEY (house_id) REFERENCES houses(id)
+  FOREIGN KEY (house_id) REFERENCES houses(id),
+  FOREIGN KEY (room_id) REFERENCES rooms(id)
 );
 
 CREATE TABLE friends (
@@ -49,42 +60,49 @@ CREATE TABLE upcoming_events (
   event_datetime DATETIME
 );
 
--- Insert sample data into houses
+-- Insert into houses
 INSERT INTO houses (house_name) VALUES
-('Gryffindor'), ('Hufflepuff'), ('Ravenclaw'), ('Slytherin');
+('Gryffindor'),
+('Hufflepuff'),
+('Ravenclaw'),
+('Slytherin');
 
--- Insert sample data into users
+-- Insert into users
 INSERT INTO users (nickname, age, profile_description, house_id, isAuthenticated, createdAt, updatedAt) VALUES
-('Harry', 17, 'The Boy Who Lived', 1, TRUE, NOW(), NOW()),
-('Hermione', 17, 'Brightest witch of her age', 1, TRUE, NOW(), NOW()),
-('Ron', 17, 'Loyal and brave', 1, FALSE, NOW(), NOW()),
-('Luna', 16, 'Quirky and wise', 3, TRUE, NOW(), NOW()),
-('Draco', 17, 'Proud Slytherin', 4, TRUE, NOW(), NOW());
+('Harry', 17, 'Brave and loyal', 1, true, NOW(), NOW()),
+('Hermione', 17, 'Smartest witch', 1, true, NOW(), NOW()),
+('Ron', 17, 'Loyal friend', 1, false, NOW(), NOW()),
+('Luna', 16, 'Dreamy and wise', 3, true, NOW(), NOW()),
+('Draco', 17, 'Proud and cunning', 4, true, NOW(), NOW());
 
--- Insert sample data into friends
+-- Insert into courses
+INSERT INTO courses (course_name) VALUES
+('Defense Against the Dark Arts'),
+('Potions'),
+('Transfiguration');
+
+-- Insert into rooms
+INSERT INTO rooms (room_name) VALUES
+('Room A'),
+('Room B'),
+('Room C');
+
+-- Insert into schedules
+INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, house_id) VALUES
+(1, 1, '2025-06-25 09:00:00', '2025-06-25 10:30:00', 'http://example.com/dada-slides', 1),
+(2, 2, '2025-06-25 11:00:00', '2025-06-25 12:30:00', 'http://example.com/potions-slides', 4),
+(3, 3, '2025-06-25 14:00:00', '2025-06-25 15:30:00', 'http://example.com/transfiguration-slides', 3);
+
+-- Insert into friends
 INSERT INTO friends (user_id, friend_id) VALUES
 (1, 2),
 (1, 3),
 (2, 3),
 (4, 1),
-(5, 1);
+(5, 2);
 
--- Insert sample data into courses
-INSERT INTO courses (course_name) VALUES
-('Defense Against the Dark Arts'),
-('Potions'),
-('Transfiguration'),
-('Charms');
-
--- Insert sample data into schedules
-INSERT INTO schedules (course_id, start_time, end_time, slide_url, house_id) VALUES
-(1, '2025-06-17 09:00:00', '2025-06-17 10:00:00', 'http://slides.com/dada.pdf', 1),
-(2, '2025-06-17 10:30:00', '2025-06-17 11:30:00', 'http://slides.com/potions.pdf', 4),
-(3, '2025-06-18 09:00:00', '2025-06-18 10:00:00', 'http://slides.com/transfig.pdf', 3),
-(4, '2025-06-18 10:30:00', '2025-06-18 11:30:00', 'http://slides.com/charms.pdf', 2);
-
--- Insert sample data into upcoming_events
+-- Insert into upcoming_events
 INSERT INTO upcoming_events (event_name, event_datetime) VALUES
-('Yule Ball', '2025-12-24 20:00:00'),
-('Triwizard Tournament', '2025-11-10 15:00:00'),
-('Hogsmeade Trip', '2025-10-01 09:00:00');
+('Quidditch Match', '2025-06-28 16:00:00'),
+('Yule Ball', '2025-07-01 19:00:00'),
+('Triwizard Tournament', '2025-07-15 10:00:00');

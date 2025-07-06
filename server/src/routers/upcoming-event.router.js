@@ -1,7 +1,8 @@
-const express = require('express')
+const express = require("express");
+const UpcomingEventController = require("../controller/event.controller");
 
-const UpcomingEventRouter = express.Router()
+const UpcomingEventRouter = express.Router();
 
-// implement here
+UpcomingEventRouter.get("/", UpcomingEventController.getAllUpcomingEvents);
 
-module.exports = UpcomingEventRouter
+module.exports = UpcomingEventRouter;

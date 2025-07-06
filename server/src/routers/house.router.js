@@ -1,8 +1,10 @@
-const express = require('express')
-const HouseService = require('../services/house.service')
+const express = require("express");
+const HouseController = require("../controller/house.controller");
 
-const HouseRouter = express.Router()
+const HouseRouter = express.Router();
 
-HouseRouter.get('/', HouseService.getAllHouses)
+HouseRouter.get("/", HouseController.getAllHouses);
+HouseRouter.get("/:id", HouseController.getHouseById);
+HouseRouter.put("/:id", HouseController.updateHouseById);
 
-module.exports = HouseRouter
+module.exports = HouseRouter;
