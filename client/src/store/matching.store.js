@@ -9,6 +9,7 @@ export const useMatchingSocketStore = create((set, get) => ({
     connectedFriends: [],
     connect: (url) => {
         const socket = io(url, {
+            path: '/samosit/it31starterpack/matching',
             withCredentials: true,
             transports: ['websocket']
         })

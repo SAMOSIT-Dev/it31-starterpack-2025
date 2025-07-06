@@ -7,6 +7,7 @@ const publicKey = process.env.JWT_PUBLIC_KEY.replace(/\\n/g, "\n");
 
 function setupWebSocket(server) {
   const io = new Server(server, {
+    path: '/samosit/it31starterpack/matching',
     cors: { origin: "*", credentials: true },
   });
 

@@ -4,7 +4,6 @@ import PopcornGameMenu from '@/components/tinder/PopcornGameMenu'
 import ConnectedFriendsWrapper from '@/components/tinder/ConnectedFriendsWrapper'
 import { useEffect, useState } from 'react'
 import { useMatchingSocketStore } from '@/store/matching.store'
-import { env } from '@/config/env'
 import useAuthStore from '@/store/auth.store'
 import NewFriendModal from '@/components/tinder/NewFriendModal'
 
@@ -18,12 +17,12 @@ export default function TinderGamePage() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     
     const onModalCloseHandler = () => {
-
+        setIsModalOpen(false)
     }
 
     useEffect(() => {
         refresh()
-        connect(env.API_SERVER_URL)
+        connect('http://localhost')
         return () => {
             disconnect()
         }
