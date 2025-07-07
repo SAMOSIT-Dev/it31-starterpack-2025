@@ -6,11 +6,15 @@ const matchingPool = new Set();
 class LocationService {
   static async calculateNearby(userId, lat, lng, userLocations) {
     const nearby = [];
+
     if (!matchingPool.has(userId)) {
       matchingPool.add(userId);
     }
     const id_user = await UserService.findByStudentId(userId.toString());
-    if (!id_user) return [];
+    if (!id_user) {
+      matchingPool.delete(userId);
+      return [];
+    }
 
     for (const [otherId, info] of userLocations.entries()) {
       if (otherId === userId) continue;
@@ -23,26 +27,49 @@ class LocationService {
         const id_friend = await UserService.findByStudentId(otherId.toString());
         if (!id_friend) continue;
 
-        const existing = await prisma.friends.findFirst({
-          where: {
-            user_id: parseInt(id_user.id),
-            friend_id: parseInt(id_friend.id),
-          },
-        });
+        try {
+          await prisma.$transaction(async (tx) => {
+            const existing = await tx.friends.findFirst({
+              where: {
+                OR: [
+                  {
+                    user_id: parseInt(id_user.id),
+                    friend_id: parseInt(id_friend.id),
+                  },
+                  {
+                    user_id: parseInt(id_friend.id),
+                    friend_id: parseInt(id_user.id),
+                  },
+                ],
+              },
+            });
 
-        if (existing) continue;
+            if (existing) {
+              return;
+            }
 
-        nearby.push({
-          userProfile: id_friend,
-          distance,
-        });
+            await tx.friends.createMany({
+              data: [
+                {
+                  user_id: parseInt(id_user.id),
+                  friend_id: parseInt(id_friend.id),
+                },
+                {
+                  user_id: parseInt(id_friend.id),
+                  friend_id: parseInt(id_user.id),
+                },
+              ],
+              skipDuplicates: true,
+            });
 
-        await prisma.friends.create({
-          data: {
-            user_id: parseInt(id_user.id),
-            friend_id: parseInt(id_friend.id),
-          },
-        });
+            nearby.push({
+              userProfile: id_friend,
+              distance,
+            });
+          });
+        } catch (error) {
+          console.error("Error in Matching:", error);
+        }
       }
 
       matchingPool.delete(userId);
@@ -50,7 +77,8 @@ class LocationService {
       break;
     }
 
-    return nearby
+    return nearby;
   }
 }
+
 module.exports = LocationService;
