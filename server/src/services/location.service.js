@@ -21,8 +21,8 @@ class LocationService {
 
         const existing = await prisma.friends.findFirst({
           where: {
-            user_id: parseInt(userId),
-            friend_id: parseInt(otherId),
+            user_id: parseInt(id_user.id),
+            friend_id: parseInt(id_friend.id),
           },
         });
 
@@ -35,8 +35,8 @@ class LocationService {
 
         await prisma.friends.create({
           data: {
-            user_id: parseInt(userId),
-            friend_id: parseInt(otherId),
+            user_id: parseInt(id_user.id),
+            friend_id: parseInt(id_friend.id),
           },
         });
       }
@@ -46,5 +46,3 @@ class LocationService {
     return nearby.slice(0, 3);
   }
 }
-
-module.exports = LocationService;
