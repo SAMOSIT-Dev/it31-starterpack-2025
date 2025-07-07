@@ -96,6 +96,7 @@ class UserService {
     facebook_url,
     instagram_url,
     imagePath,
+    discord_username,
     id
   ) {
     const userInfo = prisma.users.update({
@@ -105,6 +106,7 @@ class UserService {
         facebook_url: facebook_url,
         instagram_url: instagram_url,
         profile_picture_url: imagePath,
+        discord_username: discord_username,
       },
     });
     return userInfo;
