@@ -50,8 +50,7 @@ class LocationService {
       break;
     }
 
-    nearby.sort((a, b) => a.distance - b.distance);
-    return nearby.slice(0, 1);
+    return nearby
   }
 }
 module.exports = LocationService;
