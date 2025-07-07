@@ -19,7 +19,6 @@ class LocationController {
       LocationController.userLocations
     );
     socket.emit("nearbyUsers", nearbyUsers);
-    console.dir(nearbyUsers, { depth: null });
     socket.broadcast.emit("activeUser", LocationController.userLocations.size);
     socket.emit("activeUser", LocationController.userLocations.size);
   }
