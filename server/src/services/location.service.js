@@ -46,3 +46,4 @@ class LocationService {
     return nearby.slice(0, 3);
   }
 }
+module.exports = LocationService;
