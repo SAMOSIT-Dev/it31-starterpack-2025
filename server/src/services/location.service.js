@@ -21,16 +21,8 @@ class LocationService {
 
         const existing = await prisma.friends.findFirst({
           where: {
-            OR: [
-              {
-                user_id: parseInt(id_user.id),
-                friend_id: parseInt(id_friend.id),
-              },
-              {
-                user_id: parseInt(id_friend.id),
-                friend_id: parseInt(id_user.id),
-              },
-            ],
+            user_id: parseInt(userId),
+            friend_id: parseInt(otherId),
           },
         });
 
@@ -41,18 +33,11 @@ class LocationService {
           distance,
         });
 
-        await prisma.friends.createMany({
-          data: [
-            {
-              user_id: parseInt(id_user.id),
-              friend_id: parseInt(id_friend.id),
-            },
-            {
-              user_id: parseInt(id_friend.id),
-              friend_id: parseInt(id_user.id),
-            },
-          ],
-          skipDuplicates: true,
+        await prisma.friends.create({
+          data: {
+            user_id: parseInt(userId),
+            friend_id: parseInt(otherId),
+          },
         });
       }
     }
