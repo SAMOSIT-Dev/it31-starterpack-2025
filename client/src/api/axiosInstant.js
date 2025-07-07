@@ -10,38 +10,58 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-// axiosInstance.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
+// ตัวแปรควบคุมว่า request refresh กำลังทำงานอยู่หรือไม่
+let isRefreshing = false;
+let failedQueue = [];
 
-//     if (
-//       (error.response?.status === 401 || error.response?.status === 403) &&
-//       !originalRequest._retry
-//     ) {
-//       originalRequest._retry = true;
-//       try {
-//         const refreshResponse = await axiosInstance.post("/users/refresh");
+const processQueue = (error, token = null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
 
-//         const newAccessToken = refreshResponse.data.access_token;
+  failedQueue = [];
+};
 
-//         axiosInstance.defaults.headers.common[
-//           "Authorization"
-//         ] = `Bearer ${newAccessToken}`;
-//         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+// Response interceptor
+axiosInstance.interceptors.response.use(
+  response => response,
+  async error => {
+    const originalRequest = error.config;
 
-//         return axiosInstance(originalRequest);
-//       } catch (refreshError) {
-//         document.cookie = "access_token=; Max-Age=0; path=/;";
-//         document.cookie = "refresh_token=; Max-Age=0; path=/;";
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then(() => axiosInstance(originalRequest))
+          .catch(err => Promise.reject(err));
+      }
 
-//         // redirect ไป login
-//         window.location.href = "/login";
-//         return Promise.reject(refreshError);
-//       }
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        await axiosInstance.post("/users/refresh");
+
+        processQueue(null);
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        processQueue(refreshError, null);
+
+        window.location.href = "/login"; 
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 
 export default axiosInstance;
