@@ -3,7 +3,7 @@ const LocationService = require("../services/location.service");
 class LocationController {
   static userLocations = new Map();
 
-  static async handleUpdateLocation(socket, data) {
+  static async handleUpdateLocation(socket, data, io) {
     const { userId, lat, lng } = data;
 
     LocationController.userLocations.set(userId, {
@@ -12,14 +12,16 @@ class LocationController {
       socketId: socket.id,
     });
 
-    const nearbyUsers = await LocationService.calculateNearby(
+    const matchedUsers = await LocationService.calculateMatch(
       userId,
       lat,
       lng,
-      LocationController.userLocations
+      LocationController.userLocations,
+      io
     );
-    socket.emit("nearbyUsers", nearbyUsers);
-    console.dir(nearbyUsers, { depth: null });
+
+    socket.emit("matchedUsers", matchedUsers);
+
     socket.broadcast.emit("activeUser", LocationController.userLocations.size);
     socket.emit("activeUser", LocationController.userLocations.size);
   }
@@ -33,4 +35,5 @@ class LocationController {
     }
   }
 }
+
 module.exports = LocationController;

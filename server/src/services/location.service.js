@@ -4,12 +4,11 @@ const UserService = require("./user.service");
 const matchingPool = new Set();
 
 class LocationService {
-  static async calculateNearby(userId, lat, lng, userLocations) {
-    const nearby = [];
-
+  static async calculateMatch(userId, lat, lng, userLocations, io) {
     if (!matchingPool.has(userId)) {
       matchingPool.add(userId);
     }
+
     const id_user = await UserService.findByStudentId(userId.toString());
     if (!id_user) {
       matchingPool.delete(userId);
@@ -44,9 +43,7 @@ class LocationService {
               },
             });
 
-            if (existing) {
-              return;
-            }
+            if (existing) return;
 
             await tx.friends.createMany({
               data: [
@@ -62,22 +59,42 @@ class LocationService {
               skipDuplicates: true,
             });
 
-            nearby.push({
-              userProfile: id_friend,
-              distance,
-            });
+            if (io) {
+              const socketIdUser = userLocations.get(userId)?.socketId;
+              const socketIdFriend = userLocations.get(otherId)?.socketId;
+
+              if (socketIdUser) {
+                io.to(socketIdUser).emit("matched", {
+                  userProfile: id_friend,
+                  distance,
+                });
+              }
+              if (socketIdFriend) {
+                io.to(socketIdFriend).emit("matched", {
+                  userProfile: id_user,
+                  distance,
+                });
+              }
+            }
           });
         } catch (error) {
           console.error("Error in Matching:", error);
         }
-      }
 
-      matchingPool.delete(userId);
-      matchingPool.delete(otherId);
-      break;
+        matchingPool.delete(userId);
+        matchingPool.delete(otherId);
+
+        return [
+          {
+            userProfile: id_friend,
+            distance,
+          },
+        ];
+      }
     }
 
-    return nearby;
+    matchingPool.delete(userId);
+    return [];
   }
 }
 
