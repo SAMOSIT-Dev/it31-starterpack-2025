@@ -83,18 +83,11 @@ class LocationService {
 
         matchingPool.delete(userId);
         matchingPool.delete(otherId);
-
-        return [
-          {
-            userProfile: id_friend,
-            distance,
-          },
-        ];
+        return;
       }
     }
 
     matchingPool.delete(userId);
-    return [];
   }
 }
 

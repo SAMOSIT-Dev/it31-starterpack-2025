@@ -11,16 +11,13 @@ class LocationController {
       lng,
       socketId: socket.id,
     });
-
-    const matchedUsers = await LocationService.calculateMatch(
+    await LocationService.calculateMatch(
       userId,
       lat,
       lng,
       LocationController.userLocations,
       io
     );
-
-    socket.emit("matchedUsers", matchedUsers);
 
     socket.broadcast.emit("activeUser", LocationController.userLocations.size);
     socket.emit("activeUser", LocationController.userLocations.size);
