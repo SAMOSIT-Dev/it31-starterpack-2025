@@ -35,6 +35,7 @@ export async function updateUser({
   profile_description,
   facebook_url,
   instagram_url,
+  discord_username
 }) {
   try {
     const formData = new FormData();
@@ -45,6 +46,7 @@ export async function updateUser({
     formData.append("profile_description", profile_description);
     formData.append("facebook_url", facebook_url);
     formData.append("instagram_url", instagram_url);
+    formData.append("discord_username", discord_username)
     
 
     const response = await axiosInstance.put("/users/update", formData);

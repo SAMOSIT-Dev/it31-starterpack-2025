@@ -5,27 +5,14 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export default function Profile({ setIsEditing }) {
   const { user } = useAuth();
-  const getBannerImage = (houseName) => {
-    switch (houseName?.toLowerCase()) {
-      case "fantasiax":
-        return "/profileBanner/fantasiax.png";
-      case "horrorin":
-        return "/profileBanner/horrorin.png";
-      case "scifora":
-        return "/profileBanner/scifora.png";
-      case "actovex":
-        return "/profileBanner/actovex.png";
-      default:
-        return "/profileBanner/fantasiax.png";
-    }
-  };
+
   return (
     <div>
       <div className="md:flex min-h-screen bg-gradient-to-br from-[#0d0d1f] to-[#1a1a40] hidden items-center justify-center p-4">
         <div className="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
           <div className="relative">
             <img
-              src={getBannerImage(user?.houses?.house_name)}
+              src={`/profileBanner/${user?.houses?.house_name}`}
               className="w-full h-[200px] object-cover"
               style={{
                 objectPosition: "70% center",
@@ -85,8 +72,8 @@ export default function Profile({ setIsEditing }) {
                 <SocialTrack
                   key="discord-desktop"
                   icon="/svg/discord.svg"
-                  label="DISCORD"
-                  value={user.discord_username}
+                  label={user?.discord_username}
+                  value={'https://discord.com/'}
                 />
               )}
             </div>
@@ -98,7 +85,7 @@ export default function Profile({ setIsEditing }) {
       <div className="min-h-screen md:hidden bg-white relative overflow-hidden">
         <div className="bg-[#10162e] relative">
           <img
-            src={getBannerImage(user?.houses?.house_name)}
+            src={`/profileBanner/${user?.houses?.house_name}`}
             className="h-[160px] w-full object-cover"
             style={{ objectPosition: "80% center" }}
           />
@@ -144,13 +131,13 @@ export default function Profile({ setIsEditing }) {
               />
             )}
             {user?.discord_username && (
-              <SocialTrack
-                key="discord-desktop"
-                icon="/svg/discord.svg"
-                label="DISCORD"
-                value={user.discord_username}
-              />
-            )}
+                <SocialTrack
+                  key="discord-desktop"
+                  icon="/svg/discord.svg"
+                  label={user?.discord_username}
+                  value={'https://discord.com/'}
+                />
+              )}
           </div>
 
           {/* Edit Button */}
