@@ -5,16 +5,15 @@ const LocationController = require("../controller/location.controller");
 
 function setupWebSocket(server) {
   const io = new Server(server, {
-    path: "/samosit/it31starterpack/matching",
     cors: { origin: "*", credentials: true },
   });
 
   io.use(socketVerifyAccessToken());
 
   io.on("connection", (socket) => {
+
     const userId = socket.user?.preferred_username;
     if (!userId) {
-      socket.emit("error", "Missing user info in token");
       return socket.disconnect();
     }
 
@@ -23,7 +22,7 @@ function setupWebSocket(server) {
     socket.on("updateLocation", async (data) => {
       const { lat, lng } = data;
       if (lat == null || lng == null) {
-        return socket.emit("error", "Missing lat/lng");
+        return socket.emit("error", "Missing lat lng");
       }
       await LocationController.handleUpdateLocation(
         socket,

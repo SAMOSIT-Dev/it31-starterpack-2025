@@ -3,25 +3,27 @@ const LocationService = require("../services/location.service");
 class LocationController {
   static userLocations = new Map();
 
-  static async handleUpdateLocation(socket, data, io) {
-    const { userId, lat, lng } = data;
+ static async handleUpdateLocation(socket, data, io) {
+  const { userId, lat, lng } = data;
 
-    LocationController.userLocations.set(userId, {
-      lat,
-      lng,
-      socketId: socket.id,
-    });
-    await LocationService.calculateMatch(
-      userId,
-      lat,
-      lng,
-      LocationController.userLocations,
-      io
-    );
+  LocationController.userLocations.set(userId, {
+    lat,
+    lng,
+    socketId: socket.id,
+  });
 
-    socket.broadcast.emit("activeUser", LocationController.userLocations.size);
-    socket.emit("activeUser", LocationController.userLocations.size);
-  }
+
+  await LocationService.calculateMatch(
+    userId,
+    lat,
+    lng,
+    LocationController.userLocations,
+    io
+  );
+
+  socket.broadcast.emit("activeUser", LocationController.userLocations.size);
+  socket.emit("activeUser", LocationController.userLocations.size);
+}
 
   static handleDisconnect(socketId) {
     for (const [userId, info] of LocationController.userLocations.entries()) {
