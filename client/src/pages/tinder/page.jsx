@@ -13,11 +13,14 @@ export default function TinderGamePage() {
 
     const connect = useMatchingSocketStore((state) => state.connect)
     const disconnect = useMatchingSocketStore((state) => state.disconnect)
-    const nearbyUsers = useMatchingSocketStore(state => state.nearbyUsers)
+    const activeUsers = useMatchingSocketStore(state => state.activeUsers)
+    const resetMatchedUser = useMatchingSocketStore(state => state.resetMatchedUser)
+    const matchedUser = useMatchingSocketStore(state => state.matchedUser)
     const refresh = useAuthStore(state => state.refresh)
     const [isModalOpen, setIsModalOpen] = useState(false)
     
     const onModalCloseHandler = () => {
+        resetMatchedUser()
         setIsModalOpen(false)
     }
 
@@ -30,15 +33,16 @@ export default function TinderGamePage() {
     }, [])
 
     useEffect(() => {
-        if (nearbyUsers[0]) {
+        if (matchedUser) {
             setIsModalOpen(true)
         }
-    }, [nearbyUsers])
+    }, [matchedUser])
 
     return (
         <div className='page-gradient pt-20'>
             <div className='flex flex-col items-center'>
                 <h3 className='text-white text-3xl font-mitr'>กดรัวๆ เพื่อหาเพื่อนใหม่!</h3>
+                <p className='text-white text-xs font-mitr'>ตอนนี้กำลังมีผู้เล่นพร้อมกันทั้งหมด {activeUsers} คน</p>
 
                 <div className='my-24'><PopcornWrapper /></div>
                 <PopcornGameMenu />
@@ -49,9 +53,16 @@ export default function TinderGamePage() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6" /></svg>
             </div>
 
-            <div><ConnectedFriendsWrapper /></div>
+            <ConnectedFriendsWrapper />
 
-            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={nearbyUsers[0]} />
+            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={{
+                nickname: 'Hello',
+                description: 'This is description',
+                instagram_url: 'Instagram',
+                facebook_url: 'Minecraft',
+                discord_username: 'Discord Username'
+
+            }} />
         </div>
     )
 }
