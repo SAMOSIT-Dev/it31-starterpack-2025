@@ -16,8 +16,8 @@ class LocationService {
       return [];
     }
 
-    for (const [otherIdRaw, info] of userLocations.entries()) {
-      const otherId = otherIdRaw.toString();
+    for (const [otherid, info] of userLocations.entries()) {
+      const otherId = otherid.toString();
 
       if (otherId === userId) continue;
       if (!matchingPool.has(otherId)) continue;

@@ -5,6 +5,7 @@ const LocationController = require("../controller/location.controller");
 
 function setupWebSocket(server) {
   const io = new Server(server, {
+    path: "/samosit/it31starterpack/matching",
     cors: { origin: "*", credentials: true },
   });
 
