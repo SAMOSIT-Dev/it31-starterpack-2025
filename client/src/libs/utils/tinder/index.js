@@ -1,18 +1,22 @@
 export const HOUSES = {
-    Fantasiax: {
+    Romantica: {
         id: 1,
+        name: 'Romantica'
+    },
+    Fantasiax: {
+        id: 2,
         name: 'Fantasiax'
     },
     Horrorin: {
-        id: 2,
+        id: 3,
         name: 'Horrorin'
     },
     Scifora: {
-        id: 3,
+        id: 4,
         name: 'Scifora'
     },
     Actovex: {
-        id: 4,
+        id: 5,
         name: 'Actovex'
     }
 }
@@ -20,6 +24,9 @@ export const HOUSES = {
 export const getHouseNameFromId = (house_id) => {
     let houseName = ""
     switch (house_id) {
+        case HOUSES.Romantica.id:
+            houseName = HOUSES.Romantica.name
+            break
         case HOUSES.Fantasiax.id:
             houseName = HOUSES.Fantasiax.name
             break

@@ -62,18 +62,11 @@ CREATE TABLE upcoming_events (
 
 -- Insert into houses
 INSERT INTO houses (house_name) VALUES
+('romantica'),
 ('fantasiax'),
 ('horrorin'),
 ('scifora'),
 ('actovex');
-
--- Insert into users
-INSERT INTO users (nickname, age, profile_description, house_id, isAuthenticated, createdAt, updatedAt) VALUES
-('Harry', 17, 'Brave and loyal', 1, true, NOW(), NOW()),
-('Hermione', 17, 'Smartest witch', 1, true, NOW(), NOW()),
-('Ron', 17, 'Loyal friend', 1, false, NOW(), NOW()),
-('Luna', 16, 'Dreamy and wise', 3, true, NOW(), NOW()),
-('Draco', 17, 'Proud and cunning', 4, true, NOW(), NOW());
 
 -- Insert into courses
 INSERT INTO courses (course_name) VALUES
@@ -92,14 +85,6 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 (1, 1, '2025-06-25 09:00:00', '2025-06-25 10:30:00', 'http://example.com/dada-slides', 1),
 (2, 2, '2025-06-25 11:00:00', '2025-06-25 12:30:00', 'http://example.com/potions-slides', 4),
 (3, 3, '2025-06-25 14:00:00', '2025-06-25 15:30:00', 'http://example.com/transfiguration-slides', 3);
-
--- Insert into friends
-INSERT INTO friends (user_id, friend_id) VALUES
-(1, 2),
-(1, 3),
-(2, 3),
-(4, 1),
-(5, 2);
 
 -- Insert into upcoming_events
 INSERT INTO upcoming_events (event_name, event_datetime) VALUES

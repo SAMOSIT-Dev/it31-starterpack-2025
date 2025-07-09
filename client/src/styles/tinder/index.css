@@ -6,20 +6,24 @@
     box-shadow: 0px 4px 18.2px 0px #87878763;
 }
 
-.connected-friend-card-gradient-scifora {
+.connected-friend-card-gradient-Scifora {
     background: linear-gradient(89.51deg, #82EC87 4.37%, #466C5D 46.77%, #00BAB1 99.2%);
 }
 
-.connected-friend-card-gradient-fantasiax {
+.connected-friend-card-gradient-Fantasiax {
     background: linear-gradient(89.51deg, #92D2F5 4.37%, #CBA1EB 46.77%, #403382 99.2%);
 }
 
-.connected-friend-card-gradient-horrorin {
+.connected-friend-card-gradient-Horrorin {
     background: linear-gradient(89.51deg, #8198B7 4.37%, #404F6E 46.77%, #1B2443 99.2%);
 }
 
-.connected-friend-card-gradient-actovex {
+.connected-friend-card-gradient-Actovex {
     background: linear-gradient(89.51deg, #FDA237 4.37%, #AB3A12 46.77%, #7E0001 99.2%);
+}
+
+.connected-friend-card-gradient-Romantica {
+    background: linear-gradient(89.51deg, #F4A09E 4.37%, #D26D75 52.7%, #AB0F1C 99.2%);
 }
 
 .connected-friend-card-gradient-overlay {
@@ -32,7 +36,7 @@
 
 .new-friend-card-button-gradient {
     background: radial-gradient(229.64% 116.67% at 50.36% 8.82%, #66232C 0%, #BB3E42 46.63%, #FE8A4F 100%);
+    box-shadow: 0px 0px 31.4px 6px #BB3E4217;
     border: 2px solid;
     border-image-source: linear-gradient(180deg, #FFFFFF -7.84%, #BB3E42 8.85%, #FE8A4F 92.1%, #FFFFFF 109.8%);
-    box-shadow: 0px 0px 31.4px 6px #BB3E4217;
 }

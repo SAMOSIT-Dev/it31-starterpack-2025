@@ -1,11 +1,9 @@
+import { env } from "@/config/env";
 import axios from "axios";
 
-const env = import.meta.env.VITE_ENV || "dev";
-const actual =
-  "http://it31-starterpack.sit.kmutt.ac.th/samosit/it31starterpack";
 
 const axiosInstance = axios.create({
-  baseURL: actual,
+  baseURL: env.API_SERVER_URL,
   timeout: 10000,
   withCredentials: true,
 });

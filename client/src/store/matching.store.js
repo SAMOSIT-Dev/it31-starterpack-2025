@@ -5,7 +5,7 @@ import { create } from "zustand";
 export const useMatchingSocketStore = create((set, get) => ({
     socket: null,
     activeUsers: 0,
-    nearbyUsers: [],
+    matchedUser: null,
     connectedFriends: [],
     connect: (url) => {
         const socket = io(url, {
@@ -18,8 +18,9 @@ export const useMatchingSocketStore = create((set, get) => ({
             set({ activeUsers: count })
         })
 
-        socket.on('nearbyUsers', (users) => {
-            set({ nearbyUsers: users })
+        socket.on("matched", (data) => {
+            set({matchedUser: data.userProfile})
+            set(state => ({connectedFriends: state.connectedFriends.push(data.userProfile)}))
         })
 
         set({ socket: socket })
@@ -38,8 +39,10 @@ export const useMatchingSocketStore = create((set, get) => ({
     },
     getConnectedFriends: async () => {
         const response = await request.get('/users/friends', {withCredentials: true})
-        console.log('Connected friends: ', response.data.content)
         set({connectedFriends: response.data.content})
+    },
+    resetMatchedUser: () => {
+        set({matchedUser: null})
     },
     disconnect: () => {
         set((state) => {
