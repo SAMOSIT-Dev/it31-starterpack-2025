@@ -47,7 +47,7 @@ export default function ProfileEdit({setIsEditing}) {
         profile_description: description,
         facebook_url: facebook,
         instagram_url: instagram,
-        discord_url: discord,
+        discord_username: discord,
       });
 
       fetchUser();
@@ -69,7 +69,7 @@ export default function ProfileEdit({setIsEditing}) {
         <div className="w-full  max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
           <div className="relative  h-[200px] md:h-[250px]">
             <img
-              src="/common/group_banner.png"
+              src={`/profileBanner/${user?.houses?.house_name}`}
               className="w-full h-full  object-cover"
               style={{
                 objectPosition: "70% center",
