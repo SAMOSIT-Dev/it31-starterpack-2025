@@ -1,21 +1,24 @@
 const haversine = require("haversine-distance");
 const prisma = require("../utils/prisma.utils");
 const UserService = require("./user.service");
-const matchingPool = new Set();
+
+const matchingPool = new Map();
 
 class LocationService {
   static async calculateMatch(userId, lat, lng, userLocations, io) {
-    if (!matchingPool.has(userId)) {
-      matchingPool.add(userId);
-    }
+    userId = userId.toString();
 
-    const id_user = await UserService.findByStudentId(userId.toString());
+    matchingPool.set(userId, Date.now());
+
+    const id_user = await UserService.findByStudentId(userId);
     if (!id_user) {
       matchingPool.delete(userId);
       return [];
     }
 
-    for (const [otherId, info] of userLocations.entries()) {
+    for (const [otherid, info] of userLocations.entries()) {
+      const otherId = otherid.toString();
+
       if (otherId === userId) continue;
       if (!matchingPool.has(otherId)) continue;
 
@@ -23,7 +26,7 @@ class LocationService {
         haversine({ lat, lon: lng }, { lat: info.lat, lon: info.lng }) / 1000;
 
       if (distance <= 0.1) {
-        const id_friend = await UserService.findByStudentId(otherId.toString());
+        const id_friend = await UserService.findByStudentId(otherId);
         if (!id_friend) continue;
 
         try {
@@ -43,7 +46,9 @@ class LocationService {
               },
             });
 
-            if (existing) return;
+            if (existing) {
+              return;
+            }
 
             await tx.friends.createMany({
               data: [
@@ -81,14 +86,21 @@ class LocationService {
           console.error("Error in Matching:", error);
         }
 
-        matchingPool.delete(userId);
-        matchingPool.delete(otherId);
         return;
       }
     }
-
-    matchingPool.delete(userId);
   }
 }
+
+function cleanupMatchingPool(timeoutMs = 30_000) {
+  const now = Date.now();
+  for (const [userId, lastActive] of matchingPool.entries()) {
+    if (now - lastActive > timeoutMs) {
+      matchingPool.delete(userId);
+    }
+  }
+}
+
+setInterval(() => cleanupMatchingPool(30_000), 30_000);
 
 module.exports = LocationService;
