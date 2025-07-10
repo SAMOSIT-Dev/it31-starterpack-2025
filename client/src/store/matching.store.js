@@ -20,7 +20,7 @@ export const useMatchingSocketStore = create((set, get) => ({
 
         socket.on("matched", (data) => {
             set({matchedUser: data.userProfile})
-            set(state => ({connectedFriends: state.connectedFriends.push(data.userProfile)}))
+            set(state => ({connectedFriends: [...state.connectedFriends, data.userProfile]}))
         })
 
         set({ socket: socket })
@@ -36,6 +36,9 @@ export const useMatchingSocketStore = create((set, get) => ({
                 })
             }
         })
+    },
+    setConnectedFriends: (connectedFriends) => {
+        set({connectedFriends: connectedFriends})
     },
     getConnectedFriends: async () => {
         const response = await request.get('/users/friends', {withCredentials: true})

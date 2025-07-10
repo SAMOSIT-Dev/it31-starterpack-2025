@@ -55,14 +55,7 @@ export default function TinderGamePage() {
 
             <ConnectedFriendsWrapper />
 
-            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={{
-                nickname: 'Hello',
-                description: 'This is description',
-                instagram_url: 'Instagram',
-                facebook_url: 'Minecraft',
-                discord_username: 'Discord Username'
-
-            }} />
+            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={matchedUser}/>
         </div>
     )
 }
