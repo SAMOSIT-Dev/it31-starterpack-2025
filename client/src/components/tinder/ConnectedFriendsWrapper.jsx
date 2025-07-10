@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ConnectedFriendCard from './ConnectedFriendCard'
 import { request } from '@/libs/utils/request'
+import { useMatchingSocketStore } from '@/store/matching.store'
 
 const ConnectedFriendsWrapper = () => {
     
-    const [connectedFriends, setConnectedFriends] = useState([])
+    const connectedFriends = useMatchingSocketStore(state => state.connectedFriends)
+    const setConnectedFriends = useMatchingSocketStore(state => state.setConnectedFriends)
     
     const fetchConnectedFriends = async () => {
         const response = await request.get('/users/friends', {withCredentials: true})
         if (!response.error) {
-            console.log('Friends: ', response.data.content)
             setConnectedFriends(response.data.content)
         }
      }
@@ -25,7 +26,7 @@ const ConnectedFriendsWrapper = () => {
 
             <div className='flex flex-col items-center w-full px-4 gap-2'>
                 {
-                    connectedFriends.map(user => <ConnectedFriendCard user={user}/>)
+                    connectedFriends.map(user => <ConnectedFriendCard key={user.id} user={user}/>)
                 }
             </div>
 
