@@ -42,7 +42,7 @@ class UserController {
       res.cookie("refreshToken", refresh_token, {
         httpOnly: true,
         secure: true,
-        sameSite: "Strict",
+        sameSite: "None",
         maxAge: 3600000,
       });
 
@@ -104,6 +104,7 @@ class UserController {
         profile_description = null,
         facebook_url = null,
         instagram_url = null,
+        discord_username = null,
       } = req.body || {};
 
       const filename = req.file?.filename || null;
@@ -119,6 +120,13 @@ class UserController {
         response.setMessage("Instagram Url must not long than 50 char");
         return res.status(400).json(response.build());
       }
+
+      if (discord_username.length > 50) {
+        response.setError(true);
+        response.setMessage("discordName Url must not long than 50 char");
+        return res.status(400).json(response.build());
+      }
+
       if (!preferred_username) {
         response.setError(true);
         response.setMessage("Missing user identifier");
@@ -156,6 +164,7 @@ class UserController {
         facebook_url || user.facebook_url,
         instagram_url || user.instagram_url,
         imageUrl,
+        discord_username || user.discord_username,
         preferred_username
       );
 

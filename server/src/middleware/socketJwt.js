@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
 const AppConfig = require("../config/app.config");
+const cookie = require('cookie')
 
 const client = jwksClient({
   jwksUri: AppConfig.JWKS_URI,
@@ -18,8 +19,9 @@ function getKey(header, callback) {
 
 function socketVerifyAccessToken() {
   return (socket, next) => {
-    const token = socket.handshake.auth?.token || socket.handshake.headers?.token;
-
+    const cookies = cookie.parse(socket.handshake.headers.cookie || '');
+    const token = cookies.accessToken || socket.handshake.auth?.token || socket.handshake.headers?.token;
+    
     if (!token) {
       return next(new Error("Missing token"));
     }
