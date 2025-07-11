@@ -25,18 +25,18 @@ export const router = createBrowserRouter([
   },
   // 🟢 Routes  AuthProvider
 
-  {
-    path: "/",
-    Component: RootLayoutWithAuth,
-    children: [
-      { path: "profile", Component: ProfilePage },
-      { path: "tinder", Component: TinderGamePage },
-      { path: "course/schedules", Component: ScheduleLandingPage },
-      {
-        path: "course/schedule/:houseId",
-        Component: HouseSchedulePage,
-        loader: houseScheduleLoader,
-      },
-    ],
-  },
+  // {
+  //   path: "/",
+  //   Component: RootLayoutWithAuth,
+  //   children: [
+  //     { path: "profile", Component: ProfilePage },
+  //     { path: "tinder", Component: TinderGamePage },
+  //     { path: "course/schedules", Component: ScheduleLandingPage },
+  //     {
+  //       path: "course/schedule/:houseId",
+  //       Component: HouseSchedulePage,
+  //       loader: houseScheduleLoader,
+  //     },
+  //   ],
+  // },
 ]);

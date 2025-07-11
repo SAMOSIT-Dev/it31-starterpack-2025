@@ -40,7 +40,7 @@ export default function Event({ data, status }) {
           {months[month]}
         </p>
       </div>
-      <p className="text-[54px] mx-[4px] w-[54px] font-passion-one text-center lg:text-[110px] lg:w-[120px] lg:mx-[8px] lg:pt-[4px]">
+      <p className="text-[54px] mx-[3px] w-[54px] font-passion-one text-center lg:text-[110px] lg:w-[120px] lg:pt-[4px]">
         {day}
       </p>
       <div
