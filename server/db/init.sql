@@ -56,7 +56,7 @@ CREATE TABLE friends (
 
 CREATE TABLE upcoming_events (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  event_name VARCHAR(50),
+  event_name VARCHAR(100),
   event_datetime DATETIME
 );
 
