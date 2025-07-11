@@ -1,6 +1,8 @@
 import { Events } from "@/api/event.api.js";
 import Event from "./Event.jsx";
 import { useMemo } from "react";
+import ViewSchedule from "../ViewSchedule.jsx";
+import {motion} from 'framer-motion'
 
 export default function UpcomingEvents() {
   const { data = [], isLoading } = Events.getEvents({
@@ -27,26 +29,50 @@ export default function UpcomingEvents() {
       });
   }, [data]);
 
-  if (isLoading || !data.success) return null;
+  if (isLoading || data.error) return null;
+
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+  };
 
   return (
-    <div id="upcoming" className="lg:flex lg:justify-center">
-      <div className="text-white font-inter w-full lg:mt-[135px] lg:w-[860px] ">
-        <p className="text-[24px] font-bold text-center lg:text-[40px] lg:text-start">
-          UPCOMING EVENTS
-        </p>
-        <div className="mt-[30px] flex flex-col gap-[16px]">
-          {sortedEvents.map((event) => {
-            return (
-              <Event
-                key={event.id}
-                data={event}
-                status={new Date(event.event_datetime) > currentDate}
-              />
-            );
-          })}
+    <>
+      <ViewSchedule />
+      <div id="upcoming" className="lg:flex lg:justify-center">
+        <div className="text-white font-inter w-full lg:mt-[135px] lg:w-[860px] ">
+          <p className="text-[24px] font-bold text-center lg:text-[40px] lg:text-start">
+            UPCOMING EVENTS
+          </p>
+          <motion.div
+            className="mt-[30px] flex flex-col gap-[16px]"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+          >
+            {sortedEvents.map((event) => {
+              console.log(event)
+              return (
+                <motion.div key={event.id} variants={itemVariants}>
+                  <Event
+                    data={event}
+                    status={new Date(event.event_datetime) > currentDate}
+                  />
+                </motion.div>
+              )
+            })}
+          </motion.div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

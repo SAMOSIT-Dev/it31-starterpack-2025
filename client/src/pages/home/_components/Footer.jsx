@@ -15,13 +15,13 @@ export default function Footer() {
                 <div className='lg:hidden'><DisplaySponsor head /></div>
                 <div className='hidden lg:block'><DisplaySponsor /></div>
             </div>
-            <div className='h-px w-[330px] bg-white/66 mb-[14px] lg:w-[90%] lg:mb-[40px] lg:mx-[90px]'></div>
-            <div className='font-mitr font-medium text-white text-[10px] flex flex-col gap-[10px] justify-start lg:flex-row-reverse lg:justify-between lg:text-[20px] lg:w-full lg:px-[30px] xl:px-[10%]'>
+            <div className='h-px w-[90%] bg-white/66 mb-[14px] lg:mb-[40px] lg:mx-[90px]'></div>
+            <div className='font-mitr font-medium text-white text-[10px] flex flex-col md:flex-row gap-[10px] justify-start lg:flex-row-reverse lg:justify-between lg:text-[20px] lg:w-full lg:px-[30px] xl:px-[10%]'>
                 <div className='flex gap-[10px] justify-start items-center ml-[5px]'>
                     <img className='w-[15px] lg:w-[25px]' src={kmuttLogo} alt="KMUTT logo" />
                     <div className='bg-[#B3B3B3] w-[2px] h-full'></div>
                     <p>King Mongkut’s University of Technology Thonburi.</p>
-                </div>
+                </div>  
                 <div className='flex gap-[10px] justify-start items-center'>
                     <img className='w-[15px] ml-[5px] lg:w-[29px]' src={sitLogo} alt="SIT logo" />
                     <div className='bg-[#B3B3B3] w-[2px] h-full'></div>

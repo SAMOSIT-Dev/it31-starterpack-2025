@@ -10,6 +10,7 @@ import {
   houseScheduleLoader,
   HouseSchedulePage,
 } from "@/pages/course/schedules/[house-id]/page";
+import NotFoundPage from "@/pages/notfound/page";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +41,11 @@ export const router = createBrowserRouter([
         path: "/course/schedule/:houseId",
         Component: HouseSchedulePage,
         loader: houseScheduleLoader,
-      },
+      }
     ],
   },
+  {
+    path: '*',
+    Component: NotFoundPage
+  }
 ]);
