@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS friends, users, schedules, courses, houses, upcoming_events
 CREATE TABLE houses (
   id INT PRIMARY KEY AUTO_INCREMENT,
   house_name VARCHAR(30)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,17 +21,17 @@ CREATE TABLE users (
   createdAt DATETIME,
   updatedAt DATETIME,
   FOREIGN KEY (house_id) REFERENCES houses(id)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE courses (
   id INT PRIMARY KEY AUTO_INCREMENT,
   course_name VARCHAR(50)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE rooms (
   id INT PRIMARY KEY AUTO_INCREMENT,
   room_name VARCHAR(30)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE schedules (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -44,7 +44,7 @@ CREATE TABLE schedules (
   FOREIGN KEY (course_id) REFERENCES courses(id),
   FOREIGN KEY (house_id) REFERENCES houses(id),
   FOREIGN KEY (room_id) REFERENCES rooms(id)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE friends (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -52,13 +52,15 @@ CREATE TABLE friends (
   friend_id INT,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (friend_id) REFERENCES users(id)
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE upcoming_events (
   id INT PRIMARY KEY AUTO_INCREMENT,
   event_name VARCHAR(100),
   event_datetime DATETIME
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+SET NAMES 'utf8mb4';
 
 -- Insert into houses
 INSERT INTO houses (house_name) VALUES
