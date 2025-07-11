@@ -1,6 +1,6 @@
-import logoBanner from '../../../../public/common/logo_banner.png'
-import kmuttLogo from '../../../../public/common/kmutt_logo.png'
-import sitLogo from '../../../../public/common/sit_logo.png'
+import logoBanner from '/common/logo_banner.png'
+import kmuttLogo from '/common/kmutt_logo.png'
+import sitLogo from '/common/sit_logo.png'
 
 
 import DisplaySponsor from './DisplaySponsor.jsx'

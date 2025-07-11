@@ -47,7 +47,7 @@ export default function Event({ data, status }) {
         className={`${
           status === false ? "text-[#8D8D8D] bg-[#313131]" : " bg-brown"
         } 
-            flex justify-start gap-[10px] h-full flex items-center w-[225px] sm:w-[270px] md:w-[350px] lg:w-[535px] lg:gap-0
+            flex justify-start gap-[10px] h-full items-center w-[225px] sm:w-[270px] md:w-[350px] lg:w-[535px] lg:gap-0
             `}
       >
         <p className="rotate-270 text-[12px] text-center w-[30px] h-[20px] ml-[4px] lg:text-[22px] lg:h-[40px] lg:w-[50px] lg:ml-[10px]">

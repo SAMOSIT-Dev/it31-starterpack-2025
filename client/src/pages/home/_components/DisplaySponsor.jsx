@@ -1,8 +1,8 @@
-import spon1 from '../../../../public/sponsor/spon_1.png'
-import spon2 from '../../../../public/sponsor/spon_2.png'
-import spon3 from '../../../../public/sponsor/spon_3.png'
-import spon4 from '../../../../public/sponsor/spon_4.png'
-import spon5 from '../../../../public/sponsor/spon_5.png'
+import spon1 from '/sponsor/spon_1.png'
+import spon2 from '/sponsor/spon_2.png'
+import spon3 from '/sponsor/spon_3.png'
+import spon4 from '/sponsor/spon_4.png'
+import spon5 from '/sponsor/spon_5.png'
 
 export default function DisplayLogo({line, head}) {
     return (

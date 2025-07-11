@@ -12,6 +12,7 @@ import {
 } from "@/pages/course/schedules/[house-id]/page";
 import { AuthProvider } from "@/contexts/AuthContext";
 import RootLayoutWithAuth from "@/layout/RootLayoutWithAuth";
+import NotFoundPage from "@/pages/notfound/page";
 
 export const router = createBrowserRouter([
   // 🟢 Routes No AuthProvider
@@ -39,4 +40,8 @@ export const router = createBrowserRouter([
   //     },
   //   ],
   // },
+  {
+    path: "*",
+    Component: NotFoundPage
+  }
 ]);
