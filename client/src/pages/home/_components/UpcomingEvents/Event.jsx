@@ -56,7 +56,7 @@ export default function Event({ data, status }) {
         <p className="text-sm lg:text-2xl text-center w-[60px] lg:w-[100px]">
           {hours} : {minutes}
         </p>
-        <p className="text-sm lg:text-2xl leading-[1.2] w-[150px] truncate sm:w-max lg:w-[395px]">
+        <p className="text-sm font-mitr font-normal lg:text-2xl leading-[1.2] w-[150px] truncate sm:w-max lg:w-[395px]">
           {data.event_name}
         </p>
       </div>
