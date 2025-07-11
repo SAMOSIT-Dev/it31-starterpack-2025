@@ -2,7 +2,7 @@ import { Events } from "@/api/event.api.js";
 import Event from "./Event.jsx";
 import { useMemo } from "react";
 import ViewSchedule from "../ViewSchedule.jsx";
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export default function UpcomingEvents() {
   const { data = [], isLoading } = Events.getEvents({
@@ -57,10 +57,10 @@ export default function UpcomingEvents() {
             className="mt-[30px] flex flex-col gap-[16px]"
             variants={containerVariants}
             initial="hidden"
-            animate="show"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }} // amount: 0.2 = trigger when 20% is in view
           >
             {sortedEvents.map((event) => {
-              console.log(event)
               return (
                 <motion.div key={event.id} variants={itemVariants}>
                   <Event
@@ -71,6 +71,7 @@ export default function UpcomingEvents() {
               )
             })}
           </motion.div>
+
         </div>
       </div>
     </>

@@ -19,6 +19,10 @@
     --breakpoint-sm: 30rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .bg-button-gradient {
   background: linear-gradient(180deg, #FFFFFF -7.84%, #BB3E42 8.85%, #FE8A4F 92.1%, #FFFFFF 109.8%);
 }

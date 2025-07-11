@@ -21,27 +21,27 @@ export const router = createBrowserRouter([
         index: true,
         Component: HomePage,
       },
-      {
-        path: "/login",
-        Component: LoginPage,
-      },
-      {
-        path: "/profile",
-        Component: ProfilePage,
-      },
-      {
-        path: "/tinder",
-        Component: TinderGamePage,
-      },
-      {
-        path: "/course/schedules",
-        Component: ScheduleLandingPage,
-      },
-      {
-        path: "/course/schedule/:houseId",
-        Component: HouseSchedulePage,
-        loader: houseScheduleLoader,
-      }
+      // {
+      //   path: "/login",
+      //   Component: LoginPage,
+      // },
+      // {
+      //   path: "/profile",
+      //   Component: ProfilePage,
+      // },
+      // {
+      //   path: "/tinder",
+      //   Component: TinderGamePage,
+      // },
+      // {
+      //   path: "/course/schedules",
+      //   Component: ScheduleLandingPage,
+      // },
+      // {
+      //   path: "/course/schedule/:houseId",
+      //   Component: HouseSchedulePage,
+      //   loader: houseScheduleLoader,
+      // }
     ],
   },
   {

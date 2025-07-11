@@ -1,4 +1,4 @@
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
 import GlowButton from '../../_components/GlowButton.jsx'
 
@@ -23,7 +23,12 @@ export default function Header() {
                         เป็นการให้น้องๆ ได้ลองปรับตัวก่อนได้เจอจริงในห้องเรียน !
                     </p>
                     <div className='lg:hidden'>
-                        <Link to={"/tinder"}><GlowButton width={'w-[220px] h-[44px]'} /></Link>
+                        <GlowButton options={{isDisabled: true}} width={'w-[144px]'} height={'h-[44px]'}>
+                            <img className='size-[20px]' src={'/icon/add-friend.png'} alt="Add friend" />
+                            <p className="text-16px tracking-[-1.1%] text-white self-center font-mitr">
+                                หาเพื่อน
+                            </p>
+                        </GlowButton>
                     </div>
                 </div>
             </div>

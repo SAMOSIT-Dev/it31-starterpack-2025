@@ -25,12 +25,17 @@ export default function Navbar() {
         <HamburgerMenu />
         <div className='hidden lg:flex justify-between gap-[25px]'>
           <Link to={"/course/schedules"}>
-            <button className='px-[20px] py-[10px] border border-white rounded-[20px] cursor-pointer'>
+            <button disabled={true} className='px-[20px] opacity-75 py-[10px] border border-white rounded-[20px] cursor-pointer'>
               <p className='text-white font-light text-[20px] font-mitr'>ตารางเรียน</p>
             </button>
           </Link>
           <Link to={"/tinder"}>
-            <GlowButton width={'w-[140px]'} height={'h-[51px]'} />
+            <GlowButton options={{isDisabled: true}} width={'w-[144px]'} height={'h-full'}>
+              <img className='size-[20px]' src={'/icon/add-friend.png'} alt="Add friend" />
+              <p className="text-16px tracking-[-1.1%] text-white self-center font-mitr">
+                หาเพื่อน
+              </p>
+            </GlowButton>
           </Link>
         </div>
       </div>
