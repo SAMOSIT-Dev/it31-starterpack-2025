@@ -1,79 +1,62 @@
-version: '3.8'
+  version: '3.8'
 
-services:
-  dev_frontend:
-    container_name: dev_frontend
-    build:
-      context: ./client
-      dockerfile: ./docker/Dockerfile.development
-    restart: unless-stopped
-    ports:
-      - "81:80"
-    depends_on:
-      - dev_backend
-    networks:
-      - dev_it31-network
+  services:
+    dev_frontend:
+      container_name: dev_frontend
+      env_file:
+        - ./client/.env
+        - .env
+      build:
+        context: ./client
+        dockerfile: ./docker/Dockerfile.development
+      restart: unless-stopped
+      ports:
+        - "81:80"
+      depends_on:
+        - dev_backend
+      networks:
+        - dev_it31-network
 
-  dev_mysql:
-    container_name: dev_mysql
-    image: mysql:8.0
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DEV_MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DEV_MYSQL_DATABASE}
-      MYSQL_USER: ${DEV_MYSQL_USER}
-      MYSQL_PASSWORD: ${DEV_MYSQL_PASSWORD}
-    ports:
-      - "3307:3306"
-    volumes:
-      - dev_mysql-data:/var/lib/mysql
-      - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    networks:
-      - dev_it31-network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DEV_MYSQL_ROOT_PASSWORD}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    dev_mysql:
+      container_name: dev_mysql
+      image: mysql:8.0
+      restart: unless-stopped
+      environment:
+        MYSQL_ROOT_PASSWORD: ${DEV_MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${DEV_MYSQL_DATABASE}
+        MYSQL_USER: ${DEV_MYSQL_USER}
+        MYSQL_PASSWORD: ${DEV_MYSQL_PASSWORD}
+      ports:
+        - "3307:3306"
+      volumes:
+        - dev_mysql-data:/var/lib/mysql
+        - ./server/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      networks:
+        - dev_it31-network
 
-  dev_backend:
-    container_name: dev_backend
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    tty: true
-    environment:
-      DATABASE_URL: ${DEV_MYSQL_DB_URL}
-      SERVER_PORT: ${DEV_SERVER_PORT}
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-    depends_on:
-      dev_mysql:
-        condition: service_healthy
-    networks:
-      - dev_it31-network
+    dev_backend:
+      container_name: dev_backend
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+      env_file:
+        - ./server/.env
+        - .env
+      environment:
+        DATABASE_URL: ${DEV_MYSQL_DB_URL}
+        SERVER_PORT: ${DEV_SERVER_PORT}
+      restart: unless-stopped
+      depends_on:
+        - dev_mysql
+      ports:
+        - "8081:8080"
+      networks:
+        - dev_it31-network
 
-  dev_redis:
-    image: redis:7.2
-    container_name: dev_redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-    command: >
-      redis-server
-      --requirepass it31_starterpack
-      --appendonly yes
-    restart: unless-stopped
-    networks:
-      - dev_it31-network
+  volumes:
+    dev_mysql-data:
 
-volumes:
-  dev_mysql-data:
-  redis-data:
-
-networks:
-  dev_it31-network:
-    driver: bridge
+  networks:
+    dev_it31-network:
+      driver: bridge
 
