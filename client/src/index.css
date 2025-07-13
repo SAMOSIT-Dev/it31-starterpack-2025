@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mitr:wght@200;300;400;500;600;700&family=Passion+One:wght@400;700;900&display=swap');
-@import "./styles/schedule.css";
 @import "tailwindcss";
+@import "./styles/schedule.css";
 
 @font-face {
     font-family: "BodoniXT";
@@ -12,17 +12,18 @@
     --font-mitr: "Mitr", "sans-serif";
     --font-abeezee: "Abeezee", "sans-serif";
     --font-inria-serif: "Inria Serif", "sans-serif";
+    --font-passion-one: "Passion One", "sans-serif";
     --font-bodoni-xt: "BodoniXT", "serif";
-    
-    /* Define gradient as background-image variable */
-    --background-image-gradient-custom: linear-gradient(238.45deg, #66232C 2.71%, #3C181C 12.02%, #000000 50.67%, #110C0C 89.31%, #0D1634 96.3%);
-    
+
+        /* Define gradient as background-image variable */
+        --background-image-gradient-custom: linear-gradient(238.45deg, #66232C 2.71%, #3C181C 12.02%, #000000 50.67%, #110C0C 89.31%, #0D1634 96.3%);
+
     /* Custom container sizes */
     --container-mobile-padding: 1rem;
     --container-desktop-padding: 2rem;
     --container-desktop-max: 1280px;
     --container-mobile-max: 100%;
-    
+
     /* Responsive breakpoints */
     --mobile-breakpoint: 767px;
     --tablet-breakpoint: 768px;
@@ -30,18 +31,26 @@
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 .bg-button-gradient {
-  background: linear-gradient(180deg, #FFFFFF -7.84%, #BB3E42 8.85%, #FE8A4F 92.1%, #FFFFFF 109.8%);
+    background: linear-gradient(180deg, #FFFFFF -7.84%, #BB3E42 8.85%, #FE8A4F 92.1%, #FFFFFF 109.8%);
 }
 
 .default-bg-gradient {
-  background: linear-gradient(345.26deg, #000000 10.41%, #0D1634 52.53%, #66232C 101.96%);
+    background: linear-gradient(345.26deg, #000000 10.41%, #0D1634 52.53%, #66232C 101.96%);
 }
 
+.homepage-bg-gradient {
+    background: linear-gradient(345deg, #000 30.41%, #0D1634 80.53%, #66232C 101.96%);
+}
 
+@media (min-width: 1024px) {
+    .my-background {
+        background-size: auto 2120px;
+    }
+}
 
 /* Mobile container */
 .container-mobile {
@@ -163,7 +172,7 @@ html {
         height: 120px;
         max-width: 28rem;
     }
-    
+
     .house-image-romance {
         background-image: url('/house-ticket/desktop/romance.png');
     }
@@ -243,12 +252,10 @@ html {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
     animation: shimmer 1.5s infinite;
 }
 
@@ -256,6 +263,7 @@ html {
     0% {
         left: -100%;
     }
+
     100% {
         left: 100%;
     }
@@ -279,69 +287,67 @@ html {
 
 /* Accessibility - Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+
     .house-image,
     .responsive-house-image,
     .responsive-picture img {
         transition: none;
     }
-    
+
     .house-image:hover,
     .responsive-house-image:hover,
     .responsive-picture:hover img {
         transform: none;
     }
-    
+
     .house-image-loading::before {
         animation: none;
     }
 }
 
 /* High DPI Support */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
     .house-image-romance {
         background-image: url('/house-ticket/mobile/romance@2x.png');
     }
-    
+
     .house-image-action {
         background-image: url('/house-ticket/mobile/action@2x.png');
     }
-    
+
     .house-image-science-fiction {
         background-image: url('/house-ticket/mobile/science-fiction@2x.png');
     }
-    
+
     .house-image-horror {
         background-image: url('/house-ticket/mobile/horror@2x.png');
     }
-    
+
     .house-image-fantasy {
         background-image: url('/house-ticket/mobile/fantasy@2x.png');
     }
 }
 
-@media (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px), 
-       (min-resolution: 192dpi) and (min-width: 768px) {
+@media (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px),
+(min-resolution: 192dpi) and (min-width: 768px) {
     .house-image-romance {
         background-image: url('/house-ticket/desktop/romance@2x.png');
     }
-    
+
     .house-image-action {
         background-image: url('/house-ticket/desktop/action@2x.png');
     }
-    
+
     .house-image-science-fiction {
         background-image: url('/house-ticket/desktop/science-fiction@2x.png');
     }
-    
+
     .house-image-horror {
         background-image: url('/house-ticket/desktop/horror@2x.png');
     }
-    
+
     .house-image-fantasy {
         background-image: url('/house-ticket/desktop/fantasy@2x.png');
     }
 }
-
-
-
-

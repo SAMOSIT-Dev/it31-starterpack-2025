@@ -3,13 +3,14 @@ import DisplaySponsor from './_components/DisplaySponsor.jsx'
 import Upcoming from './_components/UpcomingEvents/UpcomingEvents.jsx'
 import WhyApply from './_components/WhyApply/WhyApply.jsx'
 import Footer from './_components/Footer.jsx'
+import '../../../src/index.css'
 
 export default function HomePage() {
   return (
     <>
-      <div className='bg-size-[auto_1650px] bg-no-repeat bg-linear-345 from-black from-10% via-darkblue via-52% to-brown to-102% bg-black lg:bg-size-[auto_2120px]'>
+      <div className='homepage-bg-gradient'>
         <Header />
-        <DisplaySponsor line head/>
+        <DisplaySponsor line head />
         <Upcoming />
         <WhyApply />
         <Footer />
