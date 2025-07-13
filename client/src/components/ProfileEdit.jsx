@@ -69,7 +69,7 @@ export default function ProfileEdit({setIsEditing}) {
         <div className="w-full  max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
           <div className="relative  h-[200px] md:h-[250px]">
             <img
-              src={`/profileBanner/${user?.houses?.house_name}`}
+              src={`/profileBanner/${user?.houses?.house_name}.png`}
               className="w-full h-full  object-cover"
               style={{
                 objectPosition: "70% center",
