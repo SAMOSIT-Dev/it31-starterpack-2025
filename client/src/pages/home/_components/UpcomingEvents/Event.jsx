@@ -27,7 +27,7 @@ export default function Event({ data, status }) {
     <div className="w-full h-[40px] flex justify-center items-center font-inter font-bold lg:h-[75px] lg:justify-between">
       <div
         className={`${
-          status === false ? "text-[#8D8D8D] bg-[#313131]" : " bg-brown"
+          status === false ? "text-[#8D8D8D] bg-[#313131]" : " bg-[#66232C]"
         }  flex justify-end items-center  
             h-full  w-[95px] gap-[10px]  lg:w-[195px] lg:gap-[25px]`}
       >
@@ -40,12 +40,12 @@ export default function Event({ data, status }) {
           {months[month]}
         </p>
       </div>
-      <p className="text-[54px] mx-[3px] w-[54px] font-passion-one text-center lg:text-[110px] lg:w-[120px] lg:pt-[4px]">
+      <p className="text-[54px] mx-[3px] w-[54px] font-passion-one font-bold text-center lg:text-[110px] lg:w-[120px] lg:pt-[4px]">
         {day}
       </p>
       <div
         className={`${
-          status === false ? "text-[#8D8D8D] bg-[#313131]" : " bg-brown"
+          status === false ? "text-[#8D8D8D] bg-[#313131]" : " bg-[#66232C]"
         } 
             flex justify-start gap-[10px] h-full items-center w-[225px] sm:w-[270px] md:w-[350px] lg:w-[535px] lg:gap-0
             `}
