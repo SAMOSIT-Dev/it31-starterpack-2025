@@ -7,7 +7,7 @@ const ScheduleHeader = ({ finalMobileImage, finalDesktopImage, displayName }) =>
   return (
     <>
       {/* Desktop & Tablet Header */}
-      <div className="hidden md:flex items-center justify-between mb-8">
+      <div className="hidden md:flex items-center justify-between mb-8 mt-14">
         <div className="flex items-center gap-4">
           <Link
             to="/course/houses"
@@ -32,7 +32,7 @@ const ScheduleHeader = ({ finalMobileImage, finalDesktopImage, displayName }) =>
 
       {/* Mobile Header */}
       <div className="md:hidden text-center mb-6">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 md:mt-14 lg:mt-16">
           <Link
             to="/course/houses"
             className="p-2 hover:bg-white/10 rounded-lg transition-colors"
