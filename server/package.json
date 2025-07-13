@@ -7,21 +7,35 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "db:pull": "npx prisma db pull",
-    "db:generate": "npx prisma generate"
+    "db:generate": "npx prisma generate",
+    "db:deploy": "npx prisma db pull && npx prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@prisma/client": "^6.9.0",
+    "@prisma/client": "^6.10.1",
+    "axios": "^1.10.0",
+    "cookie": "^1.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
-    "morgan": "^1.10.0"
+    "haversine-distance": "^1.2.4",
+    "jsonwebtoken": "^9.0.2",
+    "jwks-rsa": "^3.2.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.1",
+    "sharp": "^0.34.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10",
-    "prisma": "^6.9.0"
+    "prisma": "^6.10.1"
   }
 }

@@ -1,3 +1,8 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma_client"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -30,15 +35,18 @@ model houses {
 model schedules {
   id         Int       @id @default(autoincrement())
   course_id  Int?
+  room_id    Int?
   start_time DateTime? @db.DateTime(0)
   end_time   DateTime? @db.DateTime(0)
   slide_url  String?   @db.Text
   house_id   Int?
   courses    courses?  @relation(fields: [course_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "schedules_ibfk_1")
   houses     houses?   @relation(fields: [house_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "schedules_ibfk_2")
+  rooms      rooms?    @relation(fields: [room_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "schedules_ibfk_3")
 
   @@index([course_id], map: "course_id")
   @@index([house_id], map: "house_id")
+  @@index([room_id], map: "room_id")
 }
 
 model upcoming_events {
@@ -49,11 +57,15 @@ model upcoming_events {
 
 model users {
   id                               Int       @id @default(autoincrement())
+  studentId                        String?   @unique(map: "studentId") @db.VarChar(11)
   nickname                         String?   @db.VarChar(100)
   age                              Int?
   profile_description              String?   @db.Text
+  profile_picture_url              String?   @db.Text
   house_id                         Int?
-  isAuthenticated                  Boolean?
+  facebook_url                     String?   @db.VarChar(50)
+  instagram_url                    String?   @db.VarChar(50)
+  discord_username                 String?   @db.VarChar(50)
   createdAt                        DateTime? @db.DateTime(0)
   updatedAt                        DateTime? @db.DateTime(0)
   friends_friends_user_idTousers   friends[] @relation("friends_user_idTousers")
@@ -61,4 +73,10 @@ model users {
   houses                           houses?   @relation(fields: [house_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_ibfk_1")
 
   @@index([house_id], map: "house_id")
+}
+
+model rooms {
+  id        Int         @id @default(autoincrement())
+  room_name String?     @db.VarChar(30)
+  schedules schedules[]
 }
