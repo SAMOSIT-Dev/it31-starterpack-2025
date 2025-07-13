@@ -59,4 +59,5 @@
   networks:
     dev_it31-network:
       driver: bridge
+      external: true
 
