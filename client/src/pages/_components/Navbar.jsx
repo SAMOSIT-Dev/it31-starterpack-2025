@@ -30,7 +30,7 @@ export default function Navbar() {
             </button>
           </Link>
           <Link to={"/tinder"}>
-            <GlowButton options={{isDisabled: true}} width={'w-[144px]'} height={'h-full'}>
+            <GlowButton width={'w-[144px]'} height={'h-full'}>
               <img className='size-[20px]' src={'/icon/add-friend.png'} alt="Add friend" />
               <p className="text-16px tracking-[-1.1%] text-white self-center font-mitr">
                 หาเพื่อน

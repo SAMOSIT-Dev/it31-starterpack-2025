@@ -39,7 +39,7 @@ export default function TinderGamePage() {
     }, [matchedUser])
 
     return (
-        <div className='page-gradient pt-20'>
+        <div className='page-gradient pt-30'>
             <div className='flex flex-col items-center'>
                 <h3 className='text-white text-3xl font-mitr'>กดรัวๆ เพื่อหาเพื่อนใหม่!</h3>
                 <p className='text-white text-xs font-mitr'>ตอนนี้กำลังมีผู้เล่นพร้อมกันทั้งหมด {activeUsers} คน</p>

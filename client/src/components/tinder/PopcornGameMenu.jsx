@@ -17,7 +17,7 @@ const PopcornGameMenu = () => {
   return (
     <>
       <div className='flex gap-4 h-[40px]'>
-        <button onClick={() => { navigate('/profile') }} className='border-white border font-mitr rounded-3xl text-white px-10'>Profiles</button>
+        <button onClick={() => { navigate('/profile') }} className='border-white border cursor-pointer hover:bg-[#ffffff10] transition-all delay-100 font-mitr rounded-3xl text-white px-10'>Profiles</button>
         {/* <button onClick={openModal} className='border-white border font-inter text-white text-2xl w-[48px] h-[48px] rounded-full'>?</button> */}
       </div>
       {/* <GlobalModal isOpen={isModalOpen} onClose={closeModal}>

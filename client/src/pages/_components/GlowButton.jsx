@@ -1,7 +1,7 @@
 export default function GlowButton({ children, width, height, options }) {
 
     const btnStyle = () => {
-        return options.isDisabled ? 'grayscale-100 opacity-75' : ''
+        return options?.isDisabled ? 'grayscale-100 opacity-75' : ''
     }    
     
     return (
