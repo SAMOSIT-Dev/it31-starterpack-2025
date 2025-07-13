@@ -10,7 +10,6 @@ import {
   houseScheduleLoader,
   HouseSchedulePage,
 } from "@/pages/course/schedules/[house-id]/page";
-import { AuthProvider } from "@/contexts/AuthContext";
 import RootLayoutWithAuth from "@/layout/RootLayoutWithAuth";
 import NotFoundPage from "@/pages/notfound/page";
 
@@ -26,20 +25,20 @@ export const router = createBrowserRouter([
   },
   // 🟢 Routes  AuthProvider
 
-  // {
-  //   path: "/",
-  //   Component: RootLayoutWithAuth,
-  //   children: [
-  //     { path: "profile", Component: ProfilePage },
-  //     { path: "tinder", Component: TinderGamePage },
-  //     { path: "course/schedules", Component: ScheduleLandingPage },
-  //     {
-  //       path: "course/schedule/:houseId",
-  //       Component: HouseSchedulePage,
-  //       loader: houseScheduleLoader,
-  //     },
-  //   ],
-  // },
+  {
+    path: "/",
+    Component: RootLayoutWithAuth,
+    children: [
+      { path: "profile", Component: ProfilePage },
+      { path: "tinder", Component: TinderGamePage },
+      { path: "course/schedules", Component: ScheduleLandingPage },
+      {
+        path: "course/schedule/:houseId",
+        Component: HouseSchedulePage,
+        loader: houseScheduleLoader,
+      },
+    ],
+  },
   {
     path: "*",
     Component: NotFoundPage

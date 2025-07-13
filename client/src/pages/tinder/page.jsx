@@ -34,7 +34,7 @@ export default function TinderGamePage() {
 
     useEffect(() => {
         if (matchedUser) {
-            setIsModalOpen(true)
+            setInterval(() => setIsModalOpen(true), 1000)
         }
     }, [matchedUser])
 

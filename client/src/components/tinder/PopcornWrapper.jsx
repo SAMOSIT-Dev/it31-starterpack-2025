@@ -12,16 +12,21 @@ const circleStyles = [
 const PopcornWrapper = () => {
   const MAX_TOTAL_CLICKS_BEFORE_UPDATE_LOCATION = 5
   const [totalClicks, setTotalClicks] = useState(0)
+  const [isClicked, setIsClicked] = useState(false)
   const updateCurrentLocation = useMatchingSocketStore(state => state.updateCurrentLocation)
+  const matchedUser = useMatchingSocketStore(state => state.matchedUser)
 
   const handleOnClick = () => {
     setTotalClicks(click => click + 1)
+    setIsClicked(true)
+    setTimeout(() => setIsClicked(false), 200)
+
     if (totalClicks > MAX_TOTAL_CLICKS_BEFORE_UPDATE_LOCATION) {
       setTotalClicks(0)
       updateCurrentLocation()
     }
   }
-  
+
   return (
     <div className="relative flex items-center justify-center w-full">
       {circleStyles.map((circle, i) => (
@@ -46,7 +51,7 @@ const PopcornWrapper = () => {
       ))}
 
       <div className="relative z-10" onClick={handleOnClick}>
-        <Popcorn />
+        <Popcorn isClicked={isClicked} isMatched={matchedUser} />
       </div>
     </div>
   )
