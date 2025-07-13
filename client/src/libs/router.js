@@ -15,16 +15,10 @@ export const router = createBrowserRouter([
   // 🟢 Routes No AuthProvider
   {
     path: "/",
-    Component: RootLayout,
+    Component: RootLayoutWithAuth,
     children: [
       { index: true, Component: HomePage },
       { path: "login", Component: LoginPage },
-      { path: "course/houses", Component: ScheduleLandingPage },
-      {
-        path: "course/houses/:houseId/schedule",
-        Component: HouseSchedulePage,
-        // loader: houseScheduleLoader,
-      }
     ],
   },
   // 🟢 Routes  AuthProvider
@@ -35,6 +29,12 @@ export const router = createBrowserRouter([
     children: [
       { path: "profile", Component: ProfilePage },
       { path: "tinder", Component: TinderGamePage },
+      { path: "course/houses", Component: ScheduleLandingPage },
+      {
+        path: "course/houses/:houseId/schedule",
+        Component: HouseSchedulePage,
+        // loader: houseScheduleLoader,
+      },
     ],
   },
   {
