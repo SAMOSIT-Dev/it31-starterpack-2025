@@ -6,8 +6,10 @@ import LoginPage from "@/pages/login/page";
 import ProfilePage from "@/pages/profile/page";
 import TinderGamePage from "@/pages/tinder/page";
 import ScheduleLandingPage from "@/pages/course/schedules/page";
-import HouseSchedulePage from "@/pages/course/schedules/[house-id]/page";
-import { AuthProvider } from "@/contexts/AuthContext";
+import {
+  houseScheduleLoader,
+  HouseSchedulePage,
+} from "@/pages/course/schedules/[house-id]/page";
 import RootLayoutWithAuth from "@/layout/RootLayoutWithAuth";
 import NotFoundPage from "@/pages/notfound/page";
 
@@ -15,7 +17,7 @@ export const router = createBrowserRouter([
   // 🟢 Routes No AuthProvider
   {
     path: "/",
-    Component: RootLayoutWithAuth,
+    Component: RootLayout,
     children: [
       { index: true, Component: HomePage },
       { path: "login", Component: LoginPage },
@@ -29,11 +31,11 @@ export const router = createBrowserRouter([
     children: [
       { path: "profile", Component: ProfilePage },
       { path: "tinder", Component: TinderGamePage },
-      { path: "course/houses", Component: ScheduleLandingPage },
+      { path: "course/schedules", Component: ScheduleLandingPage },
       {
-        path: "course/houses/:houseId/schedule",
+        path: "course/schedule/:houseId",
         Component: HouseSchedulePage,
-        // loader: houseScheduleLoader,
+        loader: houseScheduleLoader,
       },
     ],
   },
