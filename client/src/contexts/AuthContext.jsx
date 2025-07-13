@@ -1,11 +1,9 @@
 import { fetchProfileImage, getUserDetail } from "@/api/auth.service";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); 
-  const navigate = useNavigate();
 
   const fetchUser = async () => {
     try {

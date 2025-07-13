@@ -1,9 +1,9 @@
 import React from 'react'
 import '../../styles/tinder/index.css'
-import { env } from '@/config/env'
 import { getHouseNameFromId } from '@/libs/utils/tinder'
 import HouseTag from './HouseTag'
 import SmallSocialTrack from './SmallSocialTrack'
+import { fetchProfileImage } from '@/api/auth.service'
 
 const ConnectedFriendCard = ({ user }) => {
     return (
@@ -14,7 +14,7 @@ const ConnectedFriendCard = ({ user }) => {
                     user.profile_picture_url ?
                         <img />
                         : <div className='min-w-[74px] min-h-[74px] bg-gray-400 rounded-full'>
-                            <img src={`${env.API_SERVER_URL}/profile_pics/${user.profile_picture_url}`} alt="" />
+                            <img src={`${fetchProfileImage(user.profile_picture_url)}`} alt="" />
                         </div>
                 }
 

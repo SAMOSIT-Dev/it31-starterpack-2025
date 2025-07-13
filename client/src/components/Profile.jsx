@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import { Camera, X, Edit3 } from "lucide-react";
+import { Edit3 } from "lucide-react";
 import SocialTrack from "./SocialTrack";
 import { useAuth } from "@/contexts/AuthContext";
 
