@@ -29,7 +29,7 @@ export default function UpcomingEvents() {
       });
   }, [data]);
 
-  if (isLoading || !data?.content || data.error) return null;
+  if (isLoading || !data?.content.length) return null;
 
   const containerVariants = {
     hidden: {},
