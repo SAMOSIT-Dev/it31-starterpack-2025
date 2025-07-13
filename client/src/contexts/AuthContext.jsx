@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
 
       setUser({ ...data, avatar });
     } catch (err) {
-      // navigate("/login"); 
+      navigate("/login"); 
     }
   };
   useEffect(() => {

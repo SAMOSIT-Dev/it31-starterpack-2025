@@ -1,15 +1,36 @@
 import { useState, useRef, useEffect } from "react";
 import { Camera, X, Edit3 } from "lucide-react";
 import SocialTrack from "./SocialTrack";
-import { useAuth } from "@/contexts/AuthContext";
+import { motion } from "framer-motion";
+export default function Profile({ setIsEditing, user }) {
+  function getHouseStyles(houseName) {
+    if (!houseName) return {};
 
-export default function Profile({ setIsEditing }) {
-  const { user } = useAuth();
+    const backgroundColors = {
+      fantasiax: "rgba(53, 77, 164, 1)",
+      horrorin: "rgba(37, 45, 61, 1)",
+      scifora: "rgba(69, 143, 136, 1)",
+      romantica: "rgba(142, 13, 20, 1)",
+      actovex: "rgba(255, 48, 33, 1)",
+    };
+
+    const bg = backgroundColors[houseName] || "#354DA4";
+
+    return {
+      backgroundColor: bg,
+    };
+  }
 
   return (
     <div>
       <div className="md:flex min-h-screen bg-gradient-to-br from-[#0d0d1f] to-[#1a1a40] hidden items-center justify-center p-4">
-        <div className="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative"
+        >
+          {" "}
           <div className="relative">
             <img
               src={`/profileBanner/${user?.houses?.house_name}.png`}
@@ -28,7 +49,6 @@ export default function Profile({ setIsEditing }) {
               />
             </div>
           </div>
-
           <div className="pt-10 w-[80%] ml-auto pb-10 px-6 md:px-10 space-y-6 relative">
             <button
               onClick={() => setIsEditing(true)}
@@ -41,8 +61,14 @@ export default function Profile({ setIsEditing }) {
               <h2 className="text-2xl font-bold font-inter">
                 {user?.nickname || "Name Surname"}
               </h2>
-              <div className="font-bodoni-xt bg-[#354DA4] text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200">
-                {user?.houses.house_name}
+              <div
+                style={getHouseStyles(user?.houses?.house_name)}
+                className="font-bodoni-xt  text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200"
+              >
+                {user?.houses.house_name
+                  ? user.houses.house_name.charAt(0).toUpperCase() +
+                    user.houses.house_name.slice(1)
+                  : ""}
               </div>
             </div>
 
@@ -73,12 +99,12 @@ export default function Profile({ setIsEditing }) {
                   key="discord-desktop"
                   icon="/svg/discord.svg"
                   label={user?.discord_username}
-                  value={'https://discord.com/'}
+                  value={"https://discord.com/"}
                 />
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Mobile */}
@@ -103,8 +129,14 @@ export default function Profile({ setIsEditing }) {
             <h2 className="text-2xl font-bold font-inter">
               {user?.nickname || "Name Surname"}
             </h2>
-            <div className="font-bodoni-xt inline-block mt-1 bg-[#354DA4] text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200">
-              {user?.houses.house_name}
+            <div
+              style={getHouseStyles(user?.houses?.house_name)}
+              className="font-bodoni-xt inline-block mt-1  text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200"
+            >
+              {user?.houses.house_name
+                ? user.houses.house_name.charAt(0).toUpperCase() +
+                  user.houses.house_name.slice(1)
+                : ""}
             </div>
           </div>
 
@@ -131,13 +163,13 @@ export default function Profile({ setIsEditing }) {
               />
             )}
             {user?.discord_username && (
-                <SocialTrack
-                  key="discord-desktop"
-                  icon="/svg/discord.svg"
-                  label={user?.discord_username}
-                  value={'https://discord.com/'}
-                />
-              )}
+              <SocialTrack
+                key="discord-desktop"
+                icon="/svg/discord.svg"
+                label={user?.discord_username}
+                value={"https://discord.com/"}
+              />
+            )}
           </div>
 
           {/* Edit Button */}
