@@ -11,7 +11,7 @@ export default function Profile({ setIsEditing }) {
         <div className="w-full max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
           <div className="relative">
             <img
-              src={`/profileBanner/${user?.houses?.house_name}`}
+              src={`/profileBanner/${user?.houses?.house_name}.png`}
               className="w-full h-[200px] object-cover"
               style={{
                 objectPosition: "70% center",
@@ -84,7 +84,7 @@ export default function Profile({ setIsEditing }) {
       <div className="min-h-screen md:hidden bg-white relative overflow-hidden">
         <div className="bg-[#10162e] relative">
           <img
-            src={`/profileBanner/${user?.houses?.house_name}`}
+            src={`/profileBanner/${user?.houses?.house_name}.png`}
             className="h-[160px] w-full object-cover"
             style={{ objectPosition: "80% center" }}
           />
