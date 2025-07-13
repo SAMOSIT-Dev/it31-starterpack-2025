@@ -1,4 +1,3 @@
-// src/api/house.service.js
 import axiosInstance from "./axiosInstance";
 
 const houseService = {

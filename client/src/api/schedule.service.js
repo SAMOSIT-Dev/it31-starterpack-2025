@@ -1,4 +1,3 @@
-// src/api/schedule.service.js
 import axiosInstance from "./axiosInstance";
 
 export const scheduleService = {
