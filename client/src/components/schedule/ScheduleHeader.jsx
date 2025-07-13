@@ -10,7 +10,7 @@ const ScheduleHeader = ({ finalMobileImage, finalDesktopImage, displayName }) =>
       <div className="hidden md:flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
           <Link
-            to="/course/schedules"
+            to="/course/houses"
             className="p-2 hover:bg-white/10 rounded-lg transition-colors"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -34,7 +34,7 @@ const ScheduleHeader = ({ finalMobileImage, finalDesktopImage, displayName }) =>
       <div className="md:hidden text-center mb-6">
         <div className="flex items-center justify-between mb-4">
           <Link
-            to="/course/schedules"
+            to="/course/houses"
             className="p-2 hover:bg-white/10 rounded-lg transition-colors"
           >
             <ChevronLeft className="w-6 h-6" />
