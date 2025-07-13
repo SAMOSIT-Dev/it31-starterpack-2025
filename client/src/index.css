@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mitr:wght@200;300;400;500;600;700&family=Passion+One:wght@400;700;900&display=swap');
+@import "./styles/schedule.css";
 @import "tailwindcss";
 
 @font-face {
@@ -11,13 +12,21 @@
     --font-mitr: "Mitr", "sans-serif";
     --font-abeezee: "Abeezee", "sans-serif";
     --font-inria-serif: "Inria Serif", "sans-serif";
-    --font-passion-one: "Passion One", "sans-serif";
-    --font-bodonixt: "BodoniXT", "sans-serif";
-
-    --color-darkblue: #0D1634;
-    --color-brown: #66232C;
-
-    --breakpoint-sm: 30rem;
+    --font-bodoni-xt: "BodoniXT", "serif";
+    
+    /* Define gradient as background-image variable */
+    --background-image-gradient-custom: linear-gradient(238.45deg, #66232C 2.71%, #3C181C 12.02%, #000000 50.67%, #110C0C 89.31%, #0D1634 96.3%);
+    
+    /* Custom container sizes */
+    --container-mobile-padding: 1rem;
+    --container-desktop-padding: 2rem;
+    --container-desktop-max: 1280px;
+    --container-mobile-max: 100%;
+    
+    /* Responsive breakpoints */
+    --mobile-breakpoint: 767px;
+    --tablet-breakpoint: 768px;
+    --desktop-breakpoint: 1024px;
 }
 
 html {
@@ -30,6 +39,307 @@ html {
 
 .default-bg-gradient {
   background: linear-gradient(345.26deg, #000000 10.41%, #0D1634 52.53%, #66232C 101.96%);
+}
+
+
+
+/* Mobile container */
+.container-mobile {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-mobile-padding);
+    padding-right: var(--container-mobile-padding);
+    max-width: var(--container-mobile-max);
+}
+
+/* Desktop container */
+.container-desktop {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-mobile-padding);
+    padding-right: var(--container-mobile-padding);
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .container-desktop {
+        max-width: var(--container-desktop-max);
+        padding-left: var(--container-desktop-padding);
+        padding-right: var(--container-desktop-padding);
+    }
+}
+
+/* Combined responsive container */
+.container-responsive {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-mobile-padding);
+    padding-right: var(--container-mobile-padding);
+    max-width: var(--container-mobile-max);
+}
+
+@media (min-width: 768px) {
+    .container-responsive {
+        max-width: var(--container-desktop-max);
+        padding-left: var(--container-desktop-padding);
+        padding-right: var(--container-desktop-padding);
+    }
+}
+
+/* Background Gradient Utility */
+.bg-gradient-custom {
+    background-image: var(--background-image-gradient-custom);
+}
+
+/* Responsive House Images - Method 1: CSS Custom Properties (Recommended) */
+.responsive-house-image {
+    width: 100%;
+    max-width: 20rem;
+    height: 80px;
+    margin: 0 auto;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: var(--mobile-image);
+    transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .responsive-house-image {
+        height: 120px;
+        max-width: 28rem;
+        background-image: var(--desktop-image);
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-house-image {
+        height: 140px;
+        max-width: 32rem;
+    }
+}
+
+/* Responsive House Images - Method 2: Individual Classes */
+.house-image {
+    width: 100%;
+    max-width: 20rem;
+    height: 80px;
+    margin: 0 auto;
+    display: block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Mobile images (default) */
+.house-image-romance {
+    background-image: url('/house-ticket/mobile/romance.png');
+}
+
+.house-image-action {
+    background-image: url('/house-ticket/mobile/action.png');
+}
+
+.house-image-science-fiction {
+    background-image: url('/house-ticket/mobile/science-fiction.png');
+}
+
+.house-image-horror {
+    background-image: url('/house-ticket/mobile/horror.png');
+}
+
+.house-image-fantasy {
+    background-image: url('/house-ticket/mobile/fantasy.png');
+}
+
+/* Tablet and Desktop images */
+@media (min-width: 768px) {
+    .house-image {
+        height: 120px;
+        max-width: 28rem;
+    }
+    
+    .house-image-romance {
+        background-image: url('/house-ticket/desktop/romance.png');
+    }
+
+    .house-image-action {
+        background-image: url('/house-ticket/desktop/action.png');
+    }
+
+    .house-image-science-fiction {
+        background-image: url('/house-ticket/desktop/science-fiction.png');
+    }
+
+    .house-image-horror {
+        background-image: url('/house-ticket/desktop/horror.png');
+    }
+
+    .house-image-fantasy {
+        background-image: url('/house-ticket/desktop/fantasy.png');
+    }
+}
+
+@media (min-width: 1024px) {
+    .house-image {
+        height: 140px;
+        max-width: 32rem;
+    }
+}
+
+/* Hover Effects */
+.house-image:hover,
+.responsive-house-image:hover {
+    transform: scale(1.05);
+}
+
+/* Picture Element Support */
+.responsive-picture {
+    display: block;
+    width: 100%;
+    max-width: 24rem;
+    margin: 0 auto;
+}
+
+.responsive-picture img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.responsive-picture:hover img {
+    transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+    .responsive-picture {
+        max-width: 32rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .responsive-picture {
+        max-width: 40rem;
+    }
+}
+
+/* Loading States */
+.house-image-loading {
+    background-color: rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.house-image-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Error States */
+.house-image-error {
+    background-color: rgba(255, 255, 255, 0.03);
+    background-image: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+    font-family: var(--font-inter);
+}
+
+.house-image-error::before {
+    content: '🖼️ Image not found';
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .house-image,
+    .responsive-house-image,
+    .responsive-picture img {
+        transition: none;
+    }
+    
+    .house-image:hover,
+    .responsive-house-image:hover,
+    .responsive-picture:hover img {
+        transform: none;
+    }
+    
+    .house-image-loading::before {
+        animation: none;
+    }
+}
+
+/* High DPI Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .house-image-romance {
+        background-image: url('/house-ticket/mobile/romance@2x.png');
+    }
+    
+    .house-image-action {
+        background-image: url('/house-ticket/mobile/action@2x.png');
+    }
+    
+    .house-image-science-fiction {
+        background-image: url('/house-ticket/mobile/science-fiction@2x.png');
+    }
+    
+    .house-image-horror {
+        background-image: url('/house-ticket/mobile/horror@2x.png');
+    }
+    
+    .house-image-fantasy {
+        background-image: url('/house-ticket/mobile/fantasy@2x.png');
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px), 
+       (min-resolution: 192dpi) and (min-width: 768px) {
+    .house-image-romance {
+        background-image: url('/house-ticket/desktop/romance@2x.png');
+    }
+    
+    .house-image-action {
+        background-image: url('/house-ticket/desktop/action@2x.png');
+    }
+    
+    .house-image-science-fiction {
+        background-image: url('/house-ticket/desktop/science-fiction@2x.png');
+    }
+    
+    .house-image-horror {
+        background-image: url('/house-ticket/desktop/horror@2x.png');
+    }
+    
+    .house-image-fantasy {
+        background-image: url('/house-ticket/desktop/fantasy@2x.png');
+    }
 }
 
 
