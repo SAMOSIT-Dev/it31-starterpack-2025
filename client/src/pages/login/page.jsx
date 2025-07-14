@@ -1,8 +1,7 @@
 import { useState } from "react";
 import "@/styles/login.css";
-import { getUserDetail, loginUser } from "@/api/auth.service";
+import { loginUser } from "@/api/auth.service";
 import { useNavigate } from "react-router";
-import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
