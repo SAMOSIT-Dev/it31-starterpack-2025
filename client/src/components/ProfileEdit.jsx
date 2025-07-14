@@ -3,16 +3,34 @@ import { Camera, X, Edit3 } from "lucide-react";
 import { updateUser } from "@/api/auth.service";
 import { useAuth } from "@/contexts/AuthContext";
 
-export default function ProfileEdit({setIsEditing}) {
+export default function ProfileEdit({ setIsEditing }) {
   const [description, setDescription] = useState("");
   const [instagram, setInstagram] = useState("");
   const [facebook, setFacebook] = useState("");
   const [discord, setDiscord] = useState("");
   const [avatar, setAvatar] = useState("/common/avatar.png");
-  const [selectedFile, setSelectedFile] = useState(null); 
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const avatarInputRef = useRef(null);
-  const { user , fetchUser } = useAuth();
+  const { user, fetchUser } = useAuth();
+
+  function getHouseStyles(houseName) {
+    if (!houseName) return {};
+
+    const backgroundColors = {
+      fantasiax: "rgba(53, 77, 164, 1)",
+      horrorin: "rgba(37, 45, 61, 1)",
+      scifora: "rgba(69, 143, 136, 1)",
+      romantica: "rgba(142, 13, 20, 1)",
+      actovex: "rgba(255, 48, 33, 1)",
+    };
+
+    const bg = backgroundColors[houseName] || "#354DA4";
+
+    return {
+      backgroundColor: bg,
+    };
+  }
 
   useEffect(() => {
     if (user) {
@@ -20,16 +38,16 @@ export default function ProfileEdit({setIsEditing}) {
       setInstagram(user.instagram_url || "");
       setFacebook(user.facebook_url || "");
       setDiscord(user.discord_url || "");
-      setAvatar(user?.avatar|| "/common/default_avartar.png"); 
+      setAvatar(user?.avatar || "/common/default_avartar.png");
     }
   }, [user]);
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file); 
+      setSelectedFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setAvatar(reader.result); 
+        setAvatar(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -37,13 +55,13 @@ export default function ProfileEdit({setIsEditing}) {
 
   const handleResetAvatar = () => {
     setAvatar(user?.avatar);
-    setSelectedFile(null); 
+    setSelectedFile(null);
   };
 
   const handleSubmit = async () => {
     try {
       await updateUser({
-        imageFile: selectedFile, 
+        imageFile: selectedFile,
         profile_description: description,
         facebook_url: facebook,
         instagram_url: instagram,
@@ -56,8 +74,7 @@ export default function ProfileEdit({setIsEditing}) {
       console.error("Update error", error);
     }
   };
- 
- 
+
   return (
     <div
       style={{
@@ -65,7 +82,7 @@ export default function ProfileEdit({setIsEditing}) {
           "linear-gradient(241.52deg, #101C2A -13.7%, #1D1F5A 6.6%, #000000 60.98%, #403382 124.07%, rgba(112, 155, 219, 0.694118) 137.12%)",
       }}
     >
-    <div className="min-h-screen hidden md:flex bg-gradient-to-br from-[#0d0d1f] to-[#1a1a40]  items-center justify-center px-4 py-10">
+      <div className="min-h-screen hidden md:flex bg-gradient-to-br from-[#0d0d1f] to-[#1a1a40]  items-center justify-center px-4 py-10">
         <div className="w-full  max-w-5xl bg-white rounded-2xl shadow-xl overflow-hidden relative">
           <div className="relative  h-[200px] md:h-[250px]">
             <img
@@ -115,9 +132,15 @@ export default function ProfileEdit({setIsEditing}) {
                 <h2 className=" md:text-xl   lg:text-2xl font-mitr  ">
                   {user?.nickname || "Name Surname"}
                 </h2>
-                <span className="bg-[#354DA4] text-white text-sm font-bodoni-xt font-semibold px-3 py-1 rounded-full">
-                  {user?.houses.house_name}
-                </span>
+                <div
+                  style={getHouseStyles(user?.houses?.house_name)}
+                  className="font-bodoni-xt  text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200"
+                >
+                  {user?.houses.house_name
+                    ? user.houses.house_name.charAt(0).toUpperCase() +
+                      user.houses.house_name.slice(1)
+                    : ""}
+                </div>
               </div>
 
               <div className="flex gap-2">
@@ -230,9 +253,17 @@ export default function ProfileEdit({setIsEditing}) {
           </div>
 
           <div className="flex justify-center gap-2">
-            <h2 className="text-2xl font-bold font-inter">{user?.nickname || "Name Surname"}</h2>
-            <div className=" font-bodoni-xt inline-block mt-1 bg-[#354DA4] text-white text-sm font-semibold px-3 py-1 rounded-full">
-              {user?.houses.house_name}
+            <h2 className="text-2xl font-bold font-inter">
+              {user?.nickname || "Name Surname"}
+            </h2>
+            <div
+              style={getHouseStyles(user?.houses?.house_name)}
+              className=" font-bodoni-xt inline-block mt-1  text-white text-sm font-semibold px-3 py-1 rounded-full"
+            >
+              {user?.houses.house_name
+                ? user.houses.house_name.charAt(0).toUpperCase() +
+                  user.houses.house_name.slice(1)
+                : ""}
             </div>
           </div>
 
@@ -307,7 +338,6 @@ export default function ProfileEdit({setIsEditing}) {
           </div>
         </div>
       </div>
-      
     </div>
   );
 }
