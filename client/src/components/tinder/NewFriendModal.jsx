@@ -1,19 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import GlobalModal from '../common/GlobalModal'
 import '../../styles/tinder/index.css'
-import { env } from '@/config/env'
-import HouseTag from './HouseTag'
 import { getHouseNameFromId } from '@/libs/utils/tinder'
+import HouseTag from './HouseTag'
 import SocialTrack from '../SocialTrack'
+import { fetchProfileImage } from '@/api/auth.service'
 
 const NewFriendModal = ({ isOpen, onClose, user }) => {
-    
+    const [profileImage, setProfileImage] = useState('/common/default_avartar.jpg')
+
+    useEffect(() => {
+        let isMounted = true
+        const loadImage = async () => {
+            if (user?.profile_picture_url) {
+                const imgUrl = await fetchProfileImage(user.profile_picture_url)
+                if (isMounted) setProfileImage(imgUrl)
+            }
+        }
+        loadImage()
+
+        return () => {
+            isMounted = false
+        }
+    }, [user?.profile_picture_url])
+
     return (
         <GlobalModal isOpen={isOpen} onClose={onClose}>
             <div className='rounded-3xl w-[300px] sm:w-[400px] md:[700px] new-friend-card-bg-gradient font-inter flex flex-col gap-2 sm:gap-3 md:gap-4 items-center px-[26px] py-[42px]'>
                 <h3 className='font-bold text-3xl text-center text-white'>พบเพื่อนใหม่</h3>
-                <div className='w-[168px] h-[168px] bg-gray-500 rounded-full mt-2'>
-                    <img src={`${env.API_SERVER_URL}/profile_pics/${user?.profile_picture_url}`} alt="" />
+                <div className='w-[168px] h-[168px] bg-gray-500 rounded-full mt-2 overflow-hidden'>
+                    <img
+                        src={profileImage}
+                        alt="New friend's profile"
+                        className='w-full h-full object-cover rounded-full'
+                    />
                 </div>
                 <div className='flex items-center'>
                     <div className='text-white text-base font-inter font-bold mr-2'>{user?.nickname ?? "Name Surname"}</div>
@@ -55,7 +75,6 @@ const NewFriendModal = ({ isOpen, onClose, user }) => {
                         เข้าใจแล้ว!
                     </button>
                 </div>
-
             </div>
         </GlobalModal>
     )

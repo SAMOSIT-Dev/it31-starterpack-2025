@@ -1,9 +1,11 @@
 import { fetchProfileImage, getUserDetail } from "@/api/auth.service";
 import { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext(null);
+import { useNavigate } from "react-router";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); 
+  const navigate = useNavigate()
 
   const fetchUser = async () => {
     try {
@@ -20,10 +22,11 @@ export function AuthProvider({ children }) {
       navigate("/login"); 
     }
   };
+  
   useEffect(() => {
-
     fetchUser();
   }, []);
+  
   return (
     <AuthContext.Provider value={{ user , fetchUser}}>
       {children}

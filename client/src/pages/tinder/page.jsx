@@ -18,7 +18,7 @@ export default function TinderGamePage() {
     const matchedUser = useMatchingSocketStore(state => state.matchedUser)
     const refresh = useAuthStore(state => state.refresh)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    
+
     const onModalCloseHandler = () => {
         resetMatchedUser()
         setIsModalOpen(false)
@@ -34,7 +34,11 @@ export default function TinderGamePage() {
 
     useEffect(() => {
         if (matchedUser) {
-            setInterval(() => setIsModalOpen(true), 1000)
+            const timer = setTimeout(() => {
+                setIsModalOpen(true)
+            }, 1000)
+
+            return () => clearTimeout(timer)
         }
     }, [matchedUser])
 
@@ -55,7 +59,7 @@ export default function TinderGamePage() {
 
             <ConnectedFriendsWrapper />
 
-            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={matchedUser}/>
+            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={matchedUser} />
         </div>
     )
 }
