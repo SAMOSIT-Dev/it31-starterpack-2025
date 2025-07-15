@@ -3,7 +3,7 @@ import axiosInstance from "./axiosInstance";
 const pdfService = {
     downloadPdfWithProgress: async (scheduleId, onProgress) => {
         try {
-            const response = await axiosInstance.get(`/schedule/${scheduleId}/pdf`, {
+            const response = await axiosInstance.get(`/documents/*`, {
                 responseType: 'blob',
                 onDownloadProgress: (progressEvent) => {
                     if (onProgress && progressEvent.total) {

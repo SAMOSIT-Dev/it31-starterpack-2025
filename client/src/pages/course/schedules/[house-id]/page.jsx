@@ -15,7 +15,7 @@ const HouseSchedulePage = () => {
     queryFn: () => scheduleService.getScheduleByHouseId(houseId),
     retry: 3,
     staleTime: 2 * 60 * 1000,
-    enabled: !!houseId, // Only run query if houseId exists
+    enabled: !!houseId,
   });
 
   const { mobileImage, desktopImage, houseName } = location.state || {};
@@ -39,7 +39,7 @@ const HouseSchedulePage = () => {
     );
   }
 
-  if (!schedules || !schedules.sessions || schedules.sessions.length === 0) {
+  if (!schedules || schedules.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-custom text-white flex items-center justify-center">
         <div className="text-center">
@@ -68,14 +68,18 @@ const HouseSchedulePage = () => {
               </h2>
             </div>
             <div className="space-y-6">
-              <DayScheduleDesktop daySchedule={schedules} />
+              {schedules.map((daySchedule, index) => (
+                <DayScheduleDesktop key={index} daySchedule={daySchedule} />
+              ))}
             </div>
           </div>
         </div>
 
         {/* Mobile Schedule */}
         <div className="sm:hidden space-y-6">
-          <DayScheduleMobile daySchedule={schedules} />
+          {schedules.map((daySchedule, index) => (
+            <DayScheduleMobile key={index} daySchedule={daySchedule} />
+          ))}
         </div>
       </div>
     </div>

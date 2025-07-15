@@ -31,7 +31,7 @@ const ScheduleHeader = ({ finalMobileImage, finalDesktopImage, displayName }) =>
       </div>
 
       {/* Mobile Header */}
-      <div className="md:hidden text-center mb-6">
+      <div className="md:hidden text-center mb-6 mt-12">
         <div className="flex items-center justify-between mb-4 md:mt-14 lg:mt-16">
           <Link
             to="/course/houses"
