@@ -249,7 +249,7 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
 (1, 5, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '', 4),
-(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 4),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 4);
 
 
 
