@@ -40,6 +40,9 @@ services:
     restart: unless-stopped
     depends_on:
       - prod_mysql
+    volumes:
+      - ./server/static/slideStarter:/app/slideStarter
+      - ./server/static/profile_pics:/app/profile_pics
     networks:
       - prod_it31-network
 
