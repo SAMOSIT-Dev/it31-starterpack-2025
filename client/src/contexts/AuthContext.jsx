@@ -5,7 +5,7 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchUser = async () => {
     try {
@@ -23,7 +23,6 @@ export function AuthProvider({ children }) {
     }
   };
   useEffect(() => {
-
     fetchUser();
   }, []);
   return (

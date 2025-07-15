@@ -24,8 +24,8 @@ export default function Navbar() {
       <div className='flex'>
         <HamburgerMenu />
         <div className='hidden lg:flex justify-between gap-[25px]'>
-          <Link to={"/course/schedules"}>
-            <button className='px-[20px] py-[10px] border border-white rounded-[20px] cursor-pointer'>
+          <Link to={"/course/houses"}>
+            <button disabled={true} className='px-[20px] opacity-75 py-[10px] border border-white rounded-[20px] cursor-pointer'>
               <p className='text-white font-light text-[20px] font-mitr'>ตารางเรียน</p>
             </button>
           </Link>

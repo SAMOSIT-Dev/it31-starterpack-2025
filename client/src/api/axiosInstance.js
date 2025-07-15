@@ -1,6 +1,7 @@
 import { env } from "@/config/env";
 import axios from "axios";
 
+
 const axiosInstance = axios.create({
   baseURL: env.API_SERVER_URL,
   timeout: 10000,
