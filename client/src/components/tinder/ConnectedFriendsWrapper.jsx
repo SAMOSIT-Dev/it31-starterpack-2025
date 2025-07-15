@@ -29,7 +29,7 @@ const ConnectedFriendsWrapper = () => {
 
             <div className='flex flex-col items-center w-full px-4 gap-2'>
                 {
-                    connectedFriends.map(user => <ConnectedFriendCard key={user.id} user={user} />)
+                    connectedFriends?.map(user => <ConnectedFriendCard key={user.id} user={user} />)
                 }
             </div>
 

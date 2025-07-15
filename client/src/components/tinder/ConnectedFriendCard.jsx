@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/tinder/index.css'
 import { getHouseNameFromId } from '@/libs/utils/tinder'
 import HouseTag from './HouseTag'
@@ -6,17 +6,37 @@ import SmallSocialTrack from './SmallSocialTrack'
 import { fetchProfileImage } from '@/api/auth.service'
 
 const ConnectedFriendCard = ({ user }) => {
+
+    const [profileImageUrl, setProfileImageUrl] = useState('/common/default_avartar.jpg')
+
+    useEffect(() => {
+        let isMounted = true
+        const loadImage = async () => {
+            if (user?.profile_picture_url) {
+                const imageUrl = await fetchProfileImage(user.profile_picture_url)
+                if (isMounted) {
+                    setProfileImageUrl(imageUrl)
+                }
+            }
+        }
+        loadImage()
+
+        return () => {
+            isMounted = false
+        }
+    }, [user])
+
+    if (!user) return null
+
     return (
         <div className={`connected-friend-card-gradient-${getHouseNameFromId(user.house_id)} border-[#636363] border rounded-2xl w-full`}>
             <div className='flex gap-6 rounded-2xl connected-friend-card-gradient-overlay w-full pl-6 py-3 mb-[2px]'>
 
-                {
-                    user.profile_picture_url ?
-                        <img />
-                        : <div className='min-w-[74px] min-h-[74px] bg-gray-400 rounded-full'>
-                            <img src={`${fetchProfileImage(user.profile_picture_url)}`} alt="" />
-                        </div>
-                }
+                <img
+                    src={profileImageUrl}
+                    alt={`${user.nickname}'s profile`}
+                    className='w-[74px] h-[74px] object-cover rounded-full'
+                />
 
                 <div className='flex flex-col'>
 
@@ -58,7 +78,7 @@ const ConnectedFriendCard = ({ user }) => {
                     </div>
 
                 </div>
-                
+
             </div>
         </div>
     )

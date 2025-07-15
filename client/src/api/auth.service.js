@@ -11,7 +11,7 @@ export async function loginUser({ id, password }) {
 
 export async function getUserDetail() {
   try {
-    const response = await axiosInstance.get("/users");
+    const response = await axiosInstance.get("/users/");
     return response.data;
   } catch (error) {
     throw error;
@@ -56,10 +56,3 @@ export async function updateUser({
     throw error;
   }
 }
-
-// function getCookie(name) {
-//   const value = `; ${document.cookie}`;
-//   const parts = value.split(`; ${name}=`);
-//   if (parts.length === 2) return parts.pop().split(";").shift();
-//   return null;
-// }

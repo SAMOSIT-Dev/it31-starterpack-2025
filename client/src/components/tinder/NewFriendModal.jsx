@@ -1,20 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import GlobalModal from '../common/GlobalModal'
 import '../../styles/tinder/index.css'
-import { env } from '@/config/env'
 import HouseTag from './HouseTag'
 import { getHouseNameFromId } from '@/libs/utils/tinder'
 import SocialTrack from '../SocialTrack'
+import { fetchProfileImage } from '@/api/auth.service'
 
 const NewFriendModal = ({ isOpen, onClose, user }) => {
-    
+
+
+    const [profileImageUrl, setProfileImageUrl] = useState('/common/default_avartar.jpg')
+
+    useEffect(() => {
+        let isMounted = true
+        const loadImage = async () => {
+            if (user?.profile_picture_url) {
+                const imageUrl = await fetchProfileImage(user.profile_picture_url)
+                if (isMounted) {
+                    setProfileImageUrl(imageUrl)
+                }
+            }
+        }
+        loadImage()
+
+        return () => {
+            isMounted = false
+        }
+    }, [user])
+
     return (
         <GlobalModal isOpen={isOpen} onClose={onClose}>
             <div className='rounded-3xl w-[300px] sm:w-[400px] md:[700px] new-friend-card-bg-gradient font-inter flex flex-col gap-2 sm:gap-3 md:gap-4 items-center px-[26px] py-[42px]'>
                 <h3 className='font-bold text-3xl text-center text-white'>พบเพื่อนใหม่</h3>
-                <div className='w-[168px] h-[168px] bg-gray-500 rounded-full mt-2'>
-                    <img src={`${env.API_SERVER_URL}/profile_pics/${user?.profile_picture_url}`} alt="" />
-                </div>
+
+                <img
+                    src={profileImageUrl}
+                    alt={`${user?.nickname}'s profile`}
+                    className='w-[180px] h-[180px] object-cover rounded-full'
+                />
+
                 <div className='flex items-center'>
                     <div className='text-white text-base font-inter font-bold mr-2'>{user?.nickname ?? "Name Surname"}</div>
                     <div><HouseTag house_name={getHouseNameFromId(user?.house_id ?? 1)} /></div>

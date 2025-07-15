@@ -72,21 +72,186 @@ INSERT INTO houses (house_name) VALUES
 
 -- Insert into courses
 INSERT INTO courses (course_name) VALUES
-('Defense Against the Dark Arts'),
-('Potions'),
-('Transfiguration');
+('Basic Programming'),
+('Software Development Tools'),
+('IT Fundamental'),
+('Ending Ceremony');
 
 -- Insert into rooms
 INSERT INTO rooms (room_name) VALUES
-('Room A'),
-('Room B'),
-('Room C');
+('LX11/01'),
+('LX11/02'),
+('LX11/03'),
+('LX11/04'),
+('LX11/05'),
+('LX12/01-02');
 
 -- Insert into schedules
 INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, house_id) VALUES
-(1, 1, '2025-06-25 09:00:00', '2025-06-25 10:30:00', 'http://example.com/dada-slides', 1),
-(2, 2, '2025-06-25 11:00:00', '2025-06-25 12:30:00', 'http://example.com/potions-slides', 4),
-(3, 3, '2025-06-25 14:00:00', '2025-06-25 15:30:00', 'http://example.com/transfiguration-slides', 3);
+-- 18 July: Actovex (LX11/01)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 1, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '', 5),
+(2, 1, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 5),
+-- 18 July: Fantasiax (LX11/02)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 2, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '', 2),
+(2, 2, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 2),
+-- 18 July: Horrorin (LX11/03)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 3, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '', 3),
+(2, 3, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 3),
+-- 18 July: Romantica (LX11/04)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 4, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '', 1),
+(2, 4, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 1),
+-- 18 July: Scifora (LX11/05)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(2, 5, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '', 4),
+(2, 5, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 4),
+
+
+-- 21 July: Actovex (LX11/01)
+-- Morning: IT Fundamental
+-- Evening: Software Development Tools
+(3, 1, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 5),
+(2, 1, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 5),
+-- 21 July: Fantasiax (LX11/02)
+-- Morning: IT Fundamental
+-- Evening: Software Development Tools
+(3, 2, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 2),
+(2, 2, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 2),
+-- 21 July: Horrorin (LX11/03)
+-- Morning: IT Fundamental
+-- Evening: Software Development Tools
+(3, 3, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 3),
+(2, 3, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 3),
+-- 21 July: Romantica (LX11/04)
+-- Morning: IT Fundamental
+-- Evening: Software Development Tools
+(3, 4, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 1),
+(2, 4, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 1),
+-- 21 July: Scifora (LX11/05)
+-- Morning: IT Fundamental
+-- Evening: Software Development Tools
+(3, 5, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 4),
+(2, 5, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 4),
+
+-- 22 July: Actovex (LX11/01)
+-- Morning: Software Development Tools
+-- Evening: Basic Programming
+(2, 1, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '', 5),
+(1, 1, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '', 5),
+-- 22 July: Fantansiax (LX11/02)
+-- Morning: Software Development Tools
+-- Evening: Basic Programming
+(2, 2, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '', 2),
+(1, 2, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '', 2),
+-- 22 July: Horrorin (LX11/03)
+-- Morning: Software Development Tools
+-- Evening: Basic Programming
+(2, 3, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '', 3),
+(1, 3, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '', 3),
+-- 22 July: Romantica (LX11/04)
+-- Morning: Software Development Tools
+-- Evening: Basic Programming
+(2, 4, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '', 1),
+(1, 4, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '', 1),
+-- 22 July: Romantica (LX11/05)
+-- Morning: Software Development Tools
+-- Evening: Basic Programming
+(2, 5, '2025-07-22 09:30:00', '2025-07-23 12:30:00', '', 4),
+(1, 5, '2025-07-22 13:30:00', '2025-07-23 16:30:00', '', 4),
+
+
+-- 23 July: Actovex (LX11/01)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 1, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '', 5),
+(2, 1, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 5),
+-- 23 July: Fantasiax (LX11/02)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 2, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '', 2),
+(2, 2, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 2),
+
+-- 23 July: Horrorin (LX11/03)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 3, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '', 3),
+(2, 3, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 3),
+
+-- 23 July: Romantica (LX11/04)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 4, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '', 1),
+(2, 4, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 1),
+
+-- 23 July: Scifora (LX11/05)
+-- Morning: Basic Programming
+-- Evening: Software Development Tools
+(1, 5, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '', 4),
+(2, 5, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 4),
+
+
+-- 24 July: Actovex (LX11/01)
+-- Morning: Basic Programming
+-- Evening: IT Fundamental
+(1, 1, '2025-07-24 09:30:00', '2025-07-24 12:30:00', '', 5),
+(3, 1, '2025-07-24 13:30:00', '2025-07-24 16:30:00', '', 5),
+-- 24 July: Fantasiax (LX11/02)
+-- Morning: Basic Programming
+-- Evening: IT Fundamental
+(1, 2, '2025-07-24 09:30:00', '2025-07-24 12:30:00', '', 2),
+(3, 2, '2025-07-24 13:30:00', '2025-07-24 16:30:00', '', 2),
+-- 24 July: Horrorin (LX11/03)
+-- Morning: Basic Programming
+-- Evening: IT Fundamental
+(1, 3, '2025-07-24 09:30:00', '2025-07-24 12:30:00', '', 3),
+(3, 3, '2025-07-24 13:30:00', '2025-07-24 16:30:00', '', 3),
+-- 24 July: Romantica (LX11/04)
+-- Morning: Basic Programming
+-- Evening: IT Fundamental
+(1, 4, '2025-07-24 09:30:00', '2025-07-24 12:30:00', '', 1),
+(3, 4, '2025-07-24 13:30:00', '2025-07-24 16:30:00', '', 1),
+-- 24 July: Scifora (LX11/05)
+-- Morning: Basic Programming
+-- Evening: IT Fundamental
+(1, 5, '2025-07-24 09:30:00', '2025-07-24 12:30:00', '', 4),
+(3, 5, '2025-07-24 13:30:00', '2025-07-24 16:30:00', '', 4),
+
+
+-- 25 July: Actovex (LX11/01)
+-- Morning: Basic Programming
+-- Evening: Ending Ceremony
+(1, 1, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '', 5),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 5),
+-- 25 July: Fantasiax (LX11/02)
+-- Morning: Basic Programming
+-- Evening: Ending Ceremony
+(1, 2, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '', 2),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 2),
+-- 25 July: Horrorin (LX11/03)
+-- Morning: Basic Programming
+-- Evening: Ending Ceremony
+(1, 3, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '', 3),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 3),
+-- 25 July: Romantica (LX11/04)
+-- Morning: Basic Programming
+-- Evening: Ending Ceremony
+(1, 4, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '', 1),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 1),
+-- 25 July: Scifora (LX11/05)
+-- Morning: Basic Programming
+-- Evening: Ending Ceremony
+(1, 5, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '', 4),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 4);
+
+
 
 -- Insert into upcoming_events
 INSERT INTO upcoming_events (event_name, event_datetime) VALUES

@@ -26,7 +26,7 @@ app.use(
   })
 );
 app.use(cookieParser());
-app.use("/documents   ", express.static(path.join(__dirname, "slideStarter")));
+app.use("/documents", express.static(path.join(__dirname, "slideStarter")));
 app.use("/profile_pics", express.static(path.join(__dirname, "profile_pics")));
 app.use(`${AppConfig.applicationContext}/users`, UserRouter);
 app.use(`${AppConfig.applicationContext}/houses`, HouseRouter);

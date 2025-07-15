@@ -14,7 +14,6 @@ const PopcornWrapper = () => {
   const [totalClicks, setTotalClicks] = useState(0)
   const [isClicked, setIsClicked] = useState(false)
   const updateCurrentLocation = useMatchingSocketStore(state => state.updateCurrentLocation)
-  const matchedUser = useMatchingSocketStore(state => state.matchedUser)
 
   const handleOnClick = () => {
     setTotalClicks(click => click + 1)
@@ -32,7 +31,7 @@ const PopcornWrapper = () => {
       {circleStyles.map((circle, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-[#FFD7A1] drop-shadow-2xl"
+          className="absolute rounded-full bg-[#FFD7A1] drop-shadow-2xl scale-75 sm:scale-100"
           style={{
             width: circle.size,
             height: circle.size,
@@ -51,7 +50,7 @@ const PopcornWrapper = () => {
       ))}
 
       <div className="relative z-10" onClick={handleOnClick}>
-        <Popcorn isClicked={isClicked} isMatched={matchedUser} />
+        <Popcorn isClicked={isClicked} />
       </div>
     </div>
   )

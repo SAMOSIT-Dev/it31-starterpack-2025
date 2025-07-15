@@ -16,16 +16,14 @@ export default function TinderGamePage() {
     const activeUsers = useMatchingSocketStore(state => state.activeUsers)
     const resetMatchedUser = useMatchingSocketStore(state => state.resetMatchedUser)
     const matchedUser = useMatchingSocketStore(state => state.matchedUser)
-    const refresh = useAuthStore(state => state.refresh)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    
+
     const onModalCloseHandler = () => {
         resetMatchedUser()
         setIsModalOpen(false)
     }
 
     useEffect(() => {
-        refresh()
         connect(env.SOCKET_IO_HOST)
         return () => {
             disconnect()
@@ -34,13 +32,17 @@ export default function TinderGamePage() {
 
     useEffect(() => {
         if (matchedUser) {
-            setInterval(() => setIsModalOpen(true), 1000)
+            const timer = setTimeout(() => {
+                setIsModalOpen(true)
+            }, 1000)
+
+            return () => clearTimeout(timer)
         }
     }, [matchedUser])
 
     return (
         <div className='page-gradient pt-30'>
-            <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center'>
                 <h3 className='text-white text-3xl font-mitr'>กดรัวๆ เพื่อหาเพื่อนใหม่!</h3>
                 <p className='text-white text-xs font-mitr'>ตอนนี้กำลังมีผู้เล่นพร้อมกันทั้งหมด {activeUsers} คน</p>
 
@@ -55,7 +57,7 @@ export default function TinderGamePage() {
 
             <ConnectedFriendsWrapper />
 
-            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={matchedUser}/>
+            <NewFriendModal isOpen={isModalOpen} onClose={onModalCloseHandler} user={matchedUser} />
         </div>
     )
 }

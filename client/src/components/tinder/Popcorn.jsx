@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
+import { useMatchingSocketStore } from '@/store/matching.store'
 
 const PopcornParticleClicked = ({ isHidden }) => {
   return (
@@ -21,18 +22,22 @@ const PopcornParticleMatched = ({ isHidden }) => {
   )
 }
 
-const Popcorn = ({ isClicked, isMatched }) => {
+const Popcorn = ({ isClicked }) => {
   const [state, setState] = useState('default')
 
+  const matchedUser = useMatchingSocketStore(state => state.matchedUser)
+
   useEffect(() => {
-    if (isMatched) {
+    if (matchedUser) {
       setState('matched')
+    } else {
+      setState('default')
     }
-  }, [isMatched])
+  }, [matchedUser])
 
   return (
     <motion.div
-      className='drop-shadow-2xl w-[300px] h-[300px]'
+      className='drop-shadow-2xl scale-75 sm:scale-100 w-[300px] h-[300px]'
       whileTap={{ scale: 1.5 }}
       transition={{ type: 'spring', stiffness: 300, damping: 10 }}
     >
