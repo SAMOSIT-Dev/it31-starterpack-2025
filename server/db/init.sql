@@ -75,7 +75,8 @@ INSERT INTO courses (course_name) VALUES
 ('Basic Programming'),
 ('Software Development Tools'),
 ('IT Fundamental'),
-('Ending Ceremony');
+('Ending Ceremony'),
+('Introduction');
 
 -- Insert into rooms
 INSERT INTO rooms (room_name) VALUES
@@ -84,10 +85,40 @@ INSERT INTO rooms (room_name) VALUES
 ('LX11/03'),
 ('LX11/04'),
 ('LX11/05'),
-('LX12/01-02');
+('LX12/01-02'),
+('Auditorium');
 
 -- Insert into schedules
 INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, house_id) VALUES
+
+
+-- 17 July: Actovex (LX11/01)
+-- Morning: Introduction
+-- Evening: IT Fundamental
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 5),
+(3, 1, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '', 5),
+-- 17 July: Fantasiax (LX11/02)
+-- Morning: Introduction
+-- Evening: IT Fundamental
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 2),
+(3, 2, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '', 2),
+-- 17 July: Horrorin (LX11/03)
+-- Morning: Introduction
+-- Evening: IT Fundamental
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 3),
+(3, 3, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '', 3),
+-- 17 July: Romantica (LX11/04)
+-- Morning: Introduction
+-- Evening: IT Fundamental
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 1),
+(3, 4, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '', 1),
+-- 17 July: Scifora (LX11/05)
+-- Morning: Introduction
+-- Evening: IT Fundamental
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 4),
+(3, 5, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '', 4),
+
+
 -- 18 July: Actovex (LX11/01)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
