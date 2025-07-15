@@ -123,17 +123,17 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- 21 July: Fantasiax (LX11/02)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
-(3, 2 '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 2),
+(3, 2, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 2),
 (2, 2, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 2),
 -- 21 July: Horrorin (LX11/03)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
-(3, 3 '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 3),
+(3, 3, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 3),
 (2, 3, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 3),
 -- 21 July: Romantica (LX11/04)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
-(3, 4 '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 1),
+(3, 4, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '', 1),
 (2, 4, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 1),
 -- 21 July: Scifora (LX11/05)
 -- Morning: IT Fundamental
@@ -164,8 +164,8 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- 22 July: Romantica (LX11/05)
 -- Morning: Software Development Tools
 -- Evening: Basic Programming
-(2, 5, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '', 4),
-(1, 5, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 4),
+(2, 5, '2025-07-22 09:30:00', '2025-07-23 12:30:00', '', 4),
+(1, 5, '2025-07-22 13:30:00', '2025-07-23 16:30:00', '', 4),
 
 
 -- 23 July: Actovex (LX11/01)
