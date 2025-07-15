@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Camera, X, Edit3 } from "lucide-react";
 import { updateUser } from "@/api/auth.service";
 import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "react-toastify";
 
 export default function ProfileEdit({ setIsEditing }) {
   const [description, setDescription] = useState("");
@@ -59,6 +60,21 @@ export default function ProfileEdit({ setIsEditing }) {
   };
 
   const handleSubmit = async () => {
+    const isValidInstagram =
+      instagram.trim() === "" || instagram.includes("instagram.com")
+    const isValidFacebook =
+      facebook.trim() === "" || facebook.includes("facebook.com")
+
+    if (!isValidInstagram) {
+      toast.error("Please enter a valid Instagram URL (must contain instagram.com)")
+      return
+    }
+
+    if (!isValidFacebook) {
+      toast.error("Please enter a valid Facebook URL (must contain facebook.com)")
+      return
+    }
+
     try {
       await updateUser({
         imageFile: selectedFile,
@@ -66,14 +82,15 @@ export default function ProfileEdit({ setIsEditing }) {
         facebook_url: facebook,
         instagram_url: instagram,
         discord_username: discord,
-      });
+      })
 
-      fetchUser();
-      setIsEditing(false);
+      fetchUser()
+      setIsEditing(false)
     } catch (error) {
-      console.error("Update error", error);
+      console.error("Update error", error)
+      toast.error("Failed to update profile. Please try again.")
     }
-  };
+  }
 
   return (
     <div
@@ -138,7 +155,7 @@ export default function ProfileEdit({ setIsEditing }) {
                 >
                   {user?.houses.house_name
                     ? user.houses.house_name.charAt(0).toUpperCase() +
-                      user.houses.house_name.slice(1)
+                    user.houses.house_name.slice(1)
                     : ""}
                 </div>
               </div>
@@ -262,7 +279,7 @@ export default function ProfileEdit({ setIsEditing }) {
             >
               {user?.houses.house_name
                 ? user.houses.house_name.charAt(0).toUpperCase() +
-                  user.houses.house_name.slice(1)
+                user.houses.house_name.slice(1)
                 : ""}
             </div>
           </div>

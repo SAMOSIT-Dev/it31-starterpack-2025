@@ -45,9 +45,9 @@ export default function LoginPage() {
 
         <div className="w-full md:w-1/2 max-w-sm text-center">
           <img
-            src="/common/fox_mascot.png"
+            src="/common/fox_mascot2.png"
             alt="Fox Mascot"
-            className="w-[176px] h-[246px] md:hidden mb-4 mx-auto"
+            className="scale-75 md:hidden mb-4 mx-auto"
           />
           <p className="font-inter text-lg mb-2">Hello IT#31 !</p>
           <h1 className="font-inria-serif text-4xl font-semibold mb-6">Sign In</h1>
