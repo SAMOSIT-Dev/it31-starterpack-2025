@@ -1,7 +1,6 @@
 // components/schedule/SessionCard.jsx
 import React from "react";
 import { Download, MapPin } from "lucide-react";
-import { request } from "@/libs/utils/request";
 import { useNavigate } from "react-router";
 
 const SessionCard = ({ session, isMobile = false }) => {
@@ -11,7 +10,7 @@ const SessionCard = ({ session, isMobile = false }) => {
   const navigate = useNavigate()
   
   const getPdfFile = () => {
-    navigate(`${session.slideUrl}`)
+    navigate(`/samosit/it31starterpack/${session.slideUrl}`)
   }
   
   return (
