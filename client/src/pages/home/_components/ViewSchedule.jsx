@@ -1,4 +1,4 @@
-import arrowDown from '../../../../public/icon/arrow-down.png'
+import arrowDown from '/icon/arrow-down.png'
 
 export default function ViewSchedule() {
     return (

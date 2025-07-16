@@ -1,14 +1,8 @@
 import { useMemo } from "react";
 
-import spon1 from "/sponsor/spon_1.png";
-import spon2 from "/sponsor/spon_2.png";
-import spon3 from "/sponsor/spon_3.png";
-import spon4 from "/sponsor/spon_4.png";
-import spon5 from "/sponsor/spon_5.png";
-
 export default function DisplayLogo({ line, head = false }) {
   const sponsors = useMemo(() => {
-    return [spon1, spon2, spon3, spon4, spon5];
+    return Array.from({ length: 6 });
   }, [head]);
 
   return (
@@ -20,9 +14,14 @@ export default function DisplayLogo({ line, head = false }) {
         Sponsored by
       </p>
       <div className="flex flex-wrap gap-[20px] justify-center items-center lg:gap-[50px]">
-        {sponsors.map((src, i) => (
+        {sponsors.map((_, i) => (
           <>
-            <img data-footer={!head} className="h-[65px] lg:h-[87px] data-[footer=true]:h-12 lg:data-[footer=true]:h-17" src={src} alt="" />
+            <img
+              data-footer={head}
+              className="h-[65px] lg:h-[87px] data-[footer=true]:h-12 lg:data-[footer=true]:h-17"
+              src={`/sponsor/spon_${i + 1}.png`}
+              alt=""
+            />
             {i < sponsors.length - 1 && (
               <div
                 className={`${

@@ -2,8 +2,8 @@ import React from 'react'
 import Modal from 'react-modal';
 import {Link} from 'react-router'
 
-import close from '../../../../public/icon/close.png'
-import stpLogo from '../../../../public/common/it31starterpack_logo.png'
+import close from '/icon/close.png'
+import stpLogo from '/common/it31starterpack_logo.png'
 
 
 const modalStyles = {
@@ -52,10 +52,8 @@ export default function ModalContent({ isOpen, onClose }) {
                         <p className='font-mitr text-[24px]'>เพิ่มเพื่อน</p>
                         <div className='flex flex-col gap-[10px] text-[#D5D5D5] font-mitr font-light text-[16px]'>
                             <Link to={"/tinder"} onClick={onClose}>หาเพื่อน</Link>
-                            <Link to={"/tinder"} onClick={onClose}>วิธีการเล่น</Link>
                             <Link to={"/profile"} onClick={onClose}>โปรไฟล์</Link>
                             <Link to={"/profile"} onClick={onClose}>แก้ไขโปรไฟล์</Link>
-                            <Link to={"/tinder"} onClick={onClose}>เพื่อน</Link>
                         </div>
                     </div>
                 </div>
