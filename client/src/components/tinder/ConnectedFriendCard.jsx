@@ -75,7 +75,6 @@ const ConnectedFriendCard = ({ user }) => {
             )}
             {user?.discord_username && (
               <div
-              
                 onClick={() => {
                   copyToClipboard(user.discord_username)
                 }}
@@ -84,7 +83,7 @@ const ConnectedFriendCard = ({ user }) => {
                   key="discord-desktop"
                   icon="/svg/discord.svg"
                   label={user.discord_username}
-                  url="#"
+                  url="/tinder"
                 />
               </div>
             )}
