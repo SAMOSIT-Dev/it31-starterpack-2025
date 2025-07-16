@@ -4,6 +4,7 @@ import { getHouseNameFromId } from "@/libs/utils/tinder";
 import HouseTag from "./HouseTag";
 import SmallSocialTrack from "./SmallSocialTrack";
 import { fetchProfileImage } from "@/api/auth.service";
+import { copyToClipboard } from "@/libs/utils/clipboard";
 
 const ConnectedFriendCard = ({ user }) => {
   const [profileImageUrl, setProfileImageUrl] = useState(
@@ -73,12 +74,19 @@ const ConnectedFriendCard = ({ user }) => {
               />
             )}
             {user?.discord_username && (
-              <SmallSocialTrack
-                key="discord-desktop"
-                icon="/svg/discord.svg"
-                label="DISCORD"
-                url={user.discord_username}
-              />
+              <div
+              
+                onClick={() => {
+                  copyToClipboard(user.discord_username)
+                }}
+              >
+                <SmallSocialTrack
+                  key="discord-desktop"
+                  icon="/svg/discord.svg"
+                  label={user.discord_username}
+                  url=""
+                />
+              </div>
             )}
           </div>
         </div>
