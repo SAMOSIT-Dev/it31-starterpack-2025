@@ -2,13 +2,16 @@
 import React from "react";
 import { Download, MapPin } from "lucide-react";
 import { request } from "@/libs/utils/request";
+import { useNavigate } from "react-router";
 
 const SessionCard = ({ session, isMobile = false }) => {
   const badgeWidth = isMobile ? "w-6 md:w-10" : "w-10";
   const contentMargin = isMobile ? "ml-4 md:ml-10" : "ml-10";
 
-  const getPdfFile = async () => {
-    await request.get(`${session.slide_url}`)
+  const navigate = useNavigate()
+  
+  const getPdfFile = () => {
+    navigate(`${session.slideUrl}`)
   }
   
   return (
