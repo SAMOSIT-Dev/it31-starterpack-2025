@@ -1,11 +1,16 @@
 // components/schedule/SessionCard.jsx
 import React from "react";
 import { Download, MapPin } from "lucide-react";
+import { request } from "@/libs/utils/request";
 
 const SessionCard = ({ session, isMobile = false }) => {
   const badgeWidth = isMobile ? "w-6 md:w-10" : "w-10";
   const contentMargin = isMobile ? "ml-4 md:ml-10" : "ml-10";
 
+  const getPdfFile = async () => {
+    await request.get(`${session.slide_url}`)
+  }
+  
   return (
     <div className="p-3 relative overflow-hidden font-inter bg-white rounded-[12px]">
       <div
@@ -22,7 +27,7 @@ const SessionCard = ({ session, isMobile = false }) => {
           <h3 className="text-black font-bold text-xs md:text-lg">
             {session.courseName}
           </h3>
-          <button className="p-1 hover:bg-gray-100 rounded-[8px] border border-gray-300 flex items-center justify-center cursor-pointer">
+          <button onClick={() => { getPdfFile() }} className="p-1 hover:bg-gray-100 rounded-[8px] border border-gray-300 flex items-center justify-center cursor-pointer">
             <Download className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
           </button>
         </div>
