@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
 
-const SmallSocialTrack = ({url, icon, label}) => {
+const SmallSocialTrack = ({url, icon, label, preventNavigate = false}) => {
     return (
         <div>
             <Link
                 href={url}
-                target="_blank"
+                target={`${preventNavigate ? '_self' : '_blank'}`}
                 rel="noopener noreferrer"
                 className="bg-white w-full flex font-inter items-center gap-[2px] px-1 py-[1px] border border-gray-200 rounded-xs shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-200"
             >

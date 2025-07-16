@@ -83,6 +83,7 @@ const ConnectedFriendCard = ({ user }) => {
                   key="discord-desktop"
                   icon="/svg/discord.svg"
                   label={user.discord_username}
+                  preventNavigate={true}
                   url="/tinder"
                 />
               </div>
