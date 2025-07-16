@@ -1,6 +1,6 @@
-import ticketA from '/icon/ticketA.png'
-import ticketB from '/icon/ticketB.png'
-import ticketC from '/icon/ticketC.png'
+import ticketA from '/icon/ticketA.svg'
+import ticketB from '/icon/ticketB.svg'
+import ticketC from '/icon/ticketC.svg'
 
 
 

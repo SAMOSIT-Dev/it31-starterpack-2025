@@ -1,4 +1,4 @@
-import logoBanner from '/common/logo_banner.png'
+import logoBanner from '/common/logo_banner.svg'
 import kmuttLogo from '/common/kmutt_logo.png'
 import sitLogo from '/common/sit_logo.png'
 
