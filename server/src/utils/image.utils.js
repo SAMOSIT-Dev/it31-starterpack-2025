@@ -4,7 +4,7 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
 async function resizeProfilePic(inputPath) {
-  const PROFILE_PIC_FOLDER = path.join(".", "src", "profile_pics");
+const PROFILE_PIC_FOLDER = path.join(__dirname, "static", "profile_pics");
 
   await fs.mkdir(PROFILE_PIC_FOLDER, { recursive: true });
 
