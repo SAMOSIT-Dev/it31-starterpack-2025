@@ -1,8 +1,20 @@
-// src/pages/schedules/page.jsx
 import HouseTicket from "@/components/schedule/HouseTicket";
 import { useQuery } from "@tanstack/react-query";
 import houseService from "@/api/house.service";
+import { motion } from "framer-motion";
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      delay: i * 0.1,
+      ease: "easeOut",
+    },
+  }),
+};
 
 export default function ScheduleLandingPage() {
   const { data: houses, isLoading, error } = useQuery({
@@ -35,8 +47,16 @@ export default function ScheduleLandingPage() {
         </div>
 
         <div className="space-y-2 max-w-2xl mx-auto">
-          {houses.map((house) => (
-            <HouseTicket house={house} key={house.id} />
+          {houses.map((house, index) => (
+            <motion.div
+              key={house.id}
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              custom={index}
+            >
+              <HouseTicket house={house} />
+            </motion.div>
           ))}
         </div>
       </div>

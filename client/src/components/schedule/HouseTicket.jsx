@@ -7,8 +7,8 @@ const HouseTicket = ({ house }) => {
   const houseName = house?.house_name
   const houseId = house?.id
 
-  const houseMobileImage = `/house-ticket/mobile/${houseName}.png`;
-  const houseDesktopImage = `/house-ticket/desktop/${houseName}.png`;
+  const houseMobileImage = `/house-ticket/mobile/${houseName}.svg`;
+  const houseDesktopImage = `/house-ticket/desktop/${houseName}.svg`;
 
   if (!houseId) {
     return null;

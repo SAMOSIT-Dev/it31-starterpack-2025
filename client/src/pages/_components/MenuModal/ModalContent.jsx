@@ -41,11 +41,11 @@ export default function ModalContent({ isOpen, onClose }) {
                     <div className='text-white flex flex-col gap-[10px]'>
                         <p className='font-mitr text-[24px]'>ตารางเรียน</p>
                         <div className='flex flex-col gap-[10px] text-[#D5D5D5] font-mitr font-light text-[16px]'>
-                            <Link to={"/course/houses/1/schedule"} onClick={onClose}>Romance</Link>
-                            <Link to={"/course/houses/2/schedule"} onClick={onClose}>Action</Link>
-                            <Link to={"/course/houses/3/schedule"} onClick={onClose}>Science Fiction</Link>
-                            <Link to={"/course/houses/4/schedule"} onClick={onClose}>Horror</Link>
-                            <Link to={"/course/houses/5/schedule"} onClick={onClose}>Fantasy</Link>
+                            <Link to={"/course/houses/1/schedule"} onClick={onClose}>Romantica</Link>
+                            <Link to={"/course/houses/2/schedule"} onClick={onClose}>Actovex</Link>
+                            <Link to={"/course/houses/3/schedule"} onClick={onClose}>Scifora</Link>
+                            <Link to={"/course/houses/4/schedule"} onClick={onClose}>Horrorin</Link>
+                            <Link to={"/course/houses/5/schedule"} onClick={onClose}>Fantasiax</Link>
                         </div>
                     </div>
                     <div className='text-white flex flex-col gap-[10px]'>
