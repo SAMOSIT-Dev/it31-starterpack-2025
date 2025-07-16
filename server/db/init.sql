@@ -95,27 +95,27 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- 17 July: Actovex (LX11/01)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/', 5),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/secret_file.pdf', 5),
 (3, 1, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Actovex/ITFUNActovexD1.pdf', 5),
 -- 17 July: Fantasiax (LX11/02)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 2),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/secret_file.pdf', 2),
 (3, 2, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Fantasiax/ITFUNFantasiaxD1.pdf', 2),
 -- 17 July: Horrorin (LX11/03)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 3),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/secret_file.pdf', 3),
 (3, 3, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Horrorin/ITFUNHorrorinD1.pdf', 3),
 -- 17 July: Romantica (LX11/04)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 1),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/secret_file.pdf', 1),
 (3, 4, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Romantica/ITFUNRomanticaD1.pdf', 1),
 -- 17 July: Scifora (LX11/05)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 4),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/secret_file.pdf', 4),
 (3, 5, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Scifora/ITFUNSciforaD1.pdf', 4),
 
 
@@ -123,79 +123,79 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 1, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '/documents/Actovex/BSActovexD1.pdf', 5),
-(2, 1, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 5),
+(2, 1, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '/documents/secret_file.pdf', 5),
 -- 18 July: Fantasiax (LX11/02)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 2, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '/documents/Fantasiax/BSFantasiaxD1.pdf', 2),
-(2, 2, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 2),
+(2, 2, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '/documents/secret_file.pdf', 2),
 -- 18 July: Horrorin (LX11/03)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 3, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '/documents/Horrorin/BSHorrorinD1.pdf', 3),
-(2, 3, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 3),
+(2, 3, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '/documents/secret_file.pdf', 3),
 -- 18 July: Romantica (LX11/04)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 4, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '/documents/Romantica/BSRomanticaD1.pdf', 1),
-(2, 4, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 1),
+(2, 4, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '/documents/secret_file.pdf', 1),
 -- 18 July: Scifora (LX11/05)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (2, 5, '2025-07-18 09:30:00', '2025-07-18 12:30:00', '/documents/Scifora/BSSciforaD1.pdf', 4),
-(2, 5, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '', 4),
+(2, 5, '2025-07-18 13:30:00', '2025-07-18 16:30:00', '/documents/secret_file.pdf', 4),
 
 
 -- 21 July: Actovex (LX11/01)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
 (3, 1, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '/documents/Actovex/ITFUNActovexD2.pdf', 5),
-(2, 1, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 5),
+(2, 1, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '/documents/secret_file.pdf', 5),
 -- 21 July: Fantasiax (LX11/02)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
 (3, 2, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '/documents/Fantasiax/ITFUNFantasiaxD2.pdf', 2),
-(2, 2, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 2),
+(2, 2, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '/documents/secret_file.pdf', 2),
 -- 21 July: Horrorin (LX11/03)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
 (3, 3, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '/documents/Horrorin/ITFUNHorrorinD2.pdf', 3),
-(2, 3, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 3),
+(2, 3, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '/documents/secret_file.pdf', 3),
 -- 21 July: Romantica (LX11/04)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
 (3, 4, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '/documents/Romantica/ITFUNRomanticaD2.pdf', 1),
-(2, 4, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 1),
+(2, 4, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '/documents/secret_file.pdf', 1),
 -- 21 July: Scifora (LX11/05)
 -- Morning: IT Fundamental
 -- Evening: Software Development Tools
 (3, 5, '2025-07-21 09:30:00', '2025-07-21 12:30:00', '/documents/Scifora/ITFUNSciforaD2.pdf', 4),
-(2, 5, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '', 4),
+(2, 5, '2025-07-21 13:30:00', '2025-07-21 16:30:00', '/documents/secret_file.pdf', 4),
 
 -- 22 July: Actovex (LX11/01)
 -- Morning: Software Development Tools
 -- Evening: Basic Programming
-(2, 1, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '', 5),
+(2, 1, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '/documents/secret_file.pdf', 5),
 (1, 1, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '/documents/Actovex/BSActovexD2.pdf', 5),
 -- 22 July: Fantansiax (LX11/02)
 -- Morning: Software Development Tools
 -- Evening: Basic Programming
-(2, 2, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '', 2),
+(2, 2, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '/documents/secret_file.pdf', 2),
 (1, 2, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '/documents/Fantasiax/BSFantasiaxD2.pdf', 2),
 -- 22 July: Horrorin (LX11/03)
 -- Morning: Software Development Tools
 -- Evening: Basic Programming
 (2, 3, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '/documents/Horrorin/BSHorrorinD2.pdf', 3),
-(1, 3, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '', 3),
+(1, 3, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '/documents/secret_file.pdf', 3),
 -- 22 July: Romantica (LX11/04)
 -- Morning: Software Development Tools
 -- Evening: Basic Programming
 (2, 4, '2025-07-22 09:30:00', '2025-07-22 12:30:00', '/documents/Romantica/BSRomanticaD2.pdf', 1),
-(1, 4, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '', 1),
+(1, 4, '2025-07-22 13:30:00', '2025-07-22 16:30:00', '/documents/secret_file.pdf', 1),
 -- 22 July: Romantica (LX11/05)
 -- Morning: Software Development Tools
 -- Evening: Basic Programming
-(2, 5, '2025-07-22 09:30:00', '2025-07-23 12:30:00', '', 4),
+(2, 5, '2025-07-22 09:30:00', '2025-07-23 12:30:00', '/documents/secret_file.pdf', 4),
 (1, 5, '2025-07-22 13:30:00', '2025-07-23 16:30:00', '/documents/Scifora/BSSciforaD2.pdf', 4),
 
 
@@ -203,30 +203,30 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 1, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '/documents/Actovex/BSActovexD3.pdf', 5),
-(2, 1, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 5),
+(2, 1, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '/documents/secret_file.pdf', 5),
 -- 23 July: Fantasiax (LX11/02)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 2, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '/documents/Fantasiax/BSFantasiaxD3.pdf', 2),
-(2, 2, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 2),
+(2, 2, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '/documents/secret_file.pdf', 2),
 
 -- 23 July: Horrorin (LX11/03)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 3, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '/documents/Horrorin/BSHorrorinD3.pdf', 3),
-(2, 3, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 3),
+(2, 3, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '/documents/secret_file.pdf', 3),
 
 -- 23 July: Romantica (LX11/04)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 4, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '/documents/Romantica/BSRomanticaD3.pdf', 1),
-(2, 4, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 1),
+(2, 4, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '/documents/secret_file.pdf', 1),
 
 -- 23 July: Scifora (LX11/05)
 -- Morning: Basic Programming
 -- Evening: Software Development Tools
 (1, 5, '2025-07-23 09:30:00', '2025-07-23 12:30:00', '/documents/Scifora/BSSciforaD3.pdf', 4),
-(2, 5, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '', 4),
+(2, 5, '2025-07-23 13:30:00', '2025-07-23 16:30:00', '/documents/secret_file.pdf', 4),
 
 
 -- 24 July: Actovex (LX11/01)
@@ -260,22 +260,22 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
 (1, 1, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '/documents/Actovex/BSActovexD5.pdf', 5),
-(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 5),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '/documents/secret_file.pdf', 5),
 -- 25 July: Fantasiax (LX11/02)
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
 (1, 2, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '/documents/Fantasiax/BSFantasiaxD5.pdf', 2),
-(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 2),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '/documents/secret_file.pdf', 2),
 -- 25 July: Horrorin (LX11/03)
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
 (1, 3, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '/documents/Horrorin/BSHorrorinD5.pdf', 3),
-(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 3),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '/documents/secret_file.pdf', 3),
 -- 25 July: Romantica (LX11/04)
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
 (1, 4, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '/documents/Romantica/BSRomanticaD5.pdf', 1),
-(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 1),
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '/documents/secret_file.pdf', 1),
 -- 25 July: Scifora (LX11/05)
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
