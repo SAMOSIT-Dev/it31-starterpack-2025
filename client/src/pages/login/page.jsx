@@ -29,8 +29,6 @@ export default function LoginPage() {
       toast.error("Invalid student ID or password. Please try again.");
     }
   };
-  
-  
 
   return (
     <div>

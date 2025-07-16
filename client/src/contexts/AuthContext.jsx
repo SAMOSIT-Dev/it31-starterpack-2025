@@ -4,13 +4,13 @@ import { useNavigate } from "react-router";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const fetchUser = async () => {
     try {
       const response = await getUserDetail();
-      
+
       const data = response.content;
 
       const avatar = data.profile_picture_url
@@ -19,14 +19,17 @@ export function AuthProvider({ children }) {
 
       setUser({ ...data, avatar });
     } catch (err) {
-      navigate("/login"); 
+      navigate("/login");
     }
   };
+
   useEffect(() => {
+
     fetchUser();
   }, []);
+
   return (
-    <AuthContext.Provider value={{ user}}>
+    <AuthContext.Provider value={{ user, fetchUser }}>
       {children}
     </AuthContext.Provider>
   );
