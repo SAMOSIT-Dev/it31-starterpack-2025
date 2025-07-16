@@ -38,7 +38,7 @@ export default function ProfileEdit({ setIsEditing }) {
       setDescription(user.profile_description || "");
       setInstagram(user.instagram_url || "");
       setFacebook(user.facebook_url || "");
-      setDiscord(user.discord_url || "");
+      setDiscord(user.discord_username || "");
       setAvatar(user?.avatar || "/common/default_avartar.png");
     }
   }, [user]);

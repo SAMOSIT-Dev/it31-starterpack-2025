@@ -56,13 +56,13 @@ export default function Profile({ setIsEditing, user }) {
               <Edit3 className="w-4 h-4" /> EDIT
             </button>
 
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               <h2 className="text-2xl font-bold font-inter">
                 {user?.nickname || "Name Surname"}
               </h2>
               <div
                 style={getHouseStyles(user?.houses?.house_name)}
-                className="font-bodoni-xt  text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200"
+                className="font-bodoni-xt  text-white text-sm font-semibold px-3 py-1 rounded-full hover:brightness-110 hover:shadow-md transition-all duration-200 leading-5 h-7.25"
               >
                 {user?.houses.house_name
                   ? user.houses.house_name.charAt(0).toUpperCase() +
