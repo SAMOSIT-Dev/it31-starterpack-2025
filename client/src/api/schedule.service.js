@@ -4,7 +4,6 @@ export const scheduleService = {
   getScheduleByHouseId: async (houseId) => {
     try {
       const response = await axiosInstance.get(`/schedules/${houseId}`);
-      console.log('Schedule API Response:', response.data);
       
       const scheduleData = response.data?.content || [];
       

@@ -4,7 +4,7 @@ const houseService = {
   getHouses: async () => {
     try {
       const response = await axiosInstance.get("/houses");
-      console.log('Houses API Response:', response.data);
+
       const houses = response.data?.content || [];
       const housesShallow = []
       housesShallow.push(houses[0])
@@ -12,7 +12,6 @@ const houseService = {
       housesShallow.push(houses[3])
       housesShallow.push(houses[2])
       housesShallow.push(houses[1])
-      console.log("Shallow", housesShallow)
       return housesShallow
     } catch (error) {
       console.error('getHouses error:', error);
