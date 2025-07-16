@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ModalContent from './ModalContent.jsx'
 
-import burgerMenu from '../../../../public/icon/hamburgerMenu.png'
+import burgerMenu from '/icon/hamburgerMenu.png'
 
 export default function MenuModal() {
     const [isModalOpen, setIsModalOpen] = useState(false);

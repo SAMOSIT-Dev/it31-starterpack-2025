@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import GlowButton from "../_components/GlowButton";
 import HamburgerMenu from "./MenuModal/MenuModal";
 
-import logo from "../../../public/common/it31starterpack_logo.png";
+import logo from "/common/it31starterpack_logo.png";
 
 export default function Navbar() {
   return (
