@@ -95,7 +95,7 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- 17 July: Actovex (LX11/01)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 5),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', 'https://www.instagram.com/ememyers/', 5),
 (3, 1, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Actovex/ITFUNActovexD1.pdf', 5),
 -- 17 July: Fantasiax (LX11/02)
 -- Morning: Introduction
@@ -280,7 +280,7 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- Morning: Basic Programming
 -- Evening: Ending Ceremony
 (1, 5, '2025-07-25 09:30:00', '2025-07-25 12:30:00', '/documents/Scifora/BSSciforaD5.pdf', 4),
-(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', '', 4);
+(4, 6, '2025-07-25 13:30:00', '2025-07-25 16:30:00', 'https://www.instagram.com/ememyers/', 4);
 
 
 
