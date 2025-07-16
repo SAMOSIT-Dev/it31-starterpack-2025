@@ -10,7 +10,7 @@ const SessionCard = ({ session, isMobile = false }) => {
   const navigate = useNavigate()
   
   const getPdfFile = () => {
-    navigate(`/samosit/it31starterpack/${session.slideUrl}`)
+    navigate(`/samosit/it31starterpack${session.slideUrl}`)
   }
   
   return (
