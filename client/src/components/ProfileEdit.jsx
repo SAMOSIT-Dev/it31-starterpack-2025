@@ -87,7 +87,6 @@ export default function ProfileEdit({ setIsEditing }) {
       fetchUser()
       setIsEditing(false)
     } catch (error) {
-      console.error("Update error", error)
       toast.error("Failed to update profile. Please try again.")
     }
   }

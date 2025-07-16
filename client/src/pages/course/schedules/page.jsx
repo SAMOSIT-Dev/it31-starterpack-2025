@@ -20,11 +20,6 @@ export default function ScheduleLandingPage() {
     );
   }
 
-  if (error) {
-    console.error('Houses fetch error:', error);
-  }
-
-
   return (
     <div className="min-h-screen text-white relative overflow-hidden bg-gradient-custom">
       <div className="container-responsive pt-20 pb-12">

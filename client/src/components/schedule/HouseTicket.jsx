@@ -11,7 +11,6 @@ const HouseTicket = ({ house }) => {
   const houseDesktopImage = `/house-ticket/desktop/${houseName}.png`;
 
   if (!houseId) {
-    console.warn('House missing ID:', house);
     return null;
   }
 

@@ -5,9 +5,15 @@ const houseService = {
     try {
       const response = await axiosInstance.get("/houses");
       console.log('Houses API Response:', response.data);
-      
-      // Extract content array from response
-      return response.data?.content || [];
+      const houses = response.data?.content || [];
+      const housesShallow = []
+      housesShallow.push(houses[0])
+      housesShallow.push(houses[4])
+      housesShallow.push(houses[3])
+      housesShallow.push(houses[2])
+      housesShallow.push(houses[1])
+      console.log("Shallow", housesShallow)
+      return housesShallow
     } catch (error) {
       console.error('getHouses error:', error);
       throw new Error(`Failed to fetch houses: ${error.message}`);

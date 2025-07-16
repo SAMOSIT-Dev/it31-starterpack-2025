@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const axiosInstance = axios.create({
-  baseURL: env.API_SERVER_URL,
+  baseURL: env.API_SERVER_URL || "https://it31-starterpack.sit.kmutt.ac.th/samosit/it31starterpack",
   timeout: 10000,
   withCredentials: true,
 });
