@@ -45,7 +45,7 @@ const NewFriendModal = ({ isOpen, onClose, user }) => {
                 </div>
                 <div className='text-[#BFBFBF] text-left w-full'>
                     <div className='text-sm md:text-base font-bold font-inter'>Description</div>
-                    <div className='mt-1 text-xs md:text-base'>{user?.description ?? "No Description"}</div>
+                    <div className='mt-1 text-xs md:text-base'>{user?.profile_description ?? "No Description"}</div>
                 </div>
                 <div className='w-full flex flex-col gap-1 sm:gap-2 md:gap-3'>
                     {user?.instagram_url && (
