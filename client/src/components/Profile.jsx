@@ -1,6 +1,7 @@
 import { Edit3 } from "lucide-react";
 import SocialTrack from "./SocialTrack";
 import { motion } from "framer-motion";
+import DiscordSocialTrack from "./DiscordSocialTrack";
 export default function Profile({ setIsEditing, user }) {
   function getHouseStyles(houseName) {
     if (!houseName) return {};
@@ -94,11 +95,10 @@ export default function Profile({ setIsEditing, user }) {
                 />
               )}
               {user?.discord_username && (
-                <SocialTrack
+                <DiscordSocialTrack
                   key="discord-desktop"
                   icon="/svg/discord.svg"
                   label={user?.discord_username}
-                  value={"https://discord.com/"}
                 />
               )}
             </div>

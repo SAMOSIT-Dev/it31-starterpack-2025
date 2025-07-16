@@ -5,6 +5,7 @@ import HouseTag from "./HouseTag";
 import SmallSocialTrack from "./SmallSocialTrack";
 import { fetchProfileImage } from "@/api/auth.service";
 import { copyToClipboard } from "@/libs/utils/clipboard";
+import DiscordSmallSocialTrack from "./DiscordSmallSocialTrack";
 
 const ConnectedFriendCard = ({ user }) => {
   const [profileImageUrl, setProfileImageUrl] = useState(
@@ -79,12 +80,10 @@ const ConnectedFriendCard = ({ user }) => {
                   copyToClipboard(user.discord_username)
                 }}
               >
-                <SmallSocialTrack
+                <DiscordSmallSocialTrack
                   key="discord-desktop"
                   icon="/svg/discord.svg"
                   label={user.discord_username}
-                  preventNavigate={true}
-                  url="/tinder"
                 />
               </div>
             )}
