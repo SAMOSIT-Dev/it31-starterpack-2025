@@ -95,27 +95,27 @@ INSERT INTO schedules (course_id, room_id, start_time, end_time, slide_url, hous
 -- 17 July: Actovex (LX11/01)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/Actovex/ITFUNActovexD1.pdf', 5),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/', 5),
 (3, 1, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Actovex/ITFUNActovexD1.pdf', 5),
 -- 17 July: Fantasiax (LX11/02)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/Fantasiax/ITFUNFantasiaxD1.pdf', 2),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 2),
 (3, 2, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Fantasiax/ITFUNFantasiaxD1.pdf', 2),
 -- 17 July: Horrorin (LX11/03)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/Horrorin/ITFUNHorrorinD1.pdf', 3),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 3),
 (3, 3, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Horrorin/ITFUNHorrorinD1.pdf', 3),
 -- 17 July: Romantica (LX11/04)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/Romantica/ITFUNRomanticaD1.pdf', 1),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 1),
 (3, 4, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Romantica/ITFUNRomanticaD1.pdf', 1),
 -- 17 July: Scifora (LX11/05)
 -- Morning: Introduction
 -- Evening: IT Fundamental
-(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '/documents/Scifora/ITFUNSciforaD1.pdf', 4),
+(5, 7, '2025-07-17 09:30:00', '2025-07-17 12:30:00', '', 4),
 (3, 5, '2025-07-17 13:30:00', '2025-07-17 16:30:00', '/documents/Scifora/ITFUNSciforaD1.pdf', 4),
 
 
