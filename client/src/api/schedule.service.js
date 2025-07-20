@@ -22,6 +22,7 @@ export const scheduleService = {
             id: item.id,
             courseName: item.course_name,
             roomName: item.room_name,
+            hasPassed: isPastTime(item.start_time),
             time: `${formatTime(item.start_time)} - ${formatTime(item.end_time)}`,
             type: isCurrentTime(item.start_time, item.end_time) ? "NOW SHOWING" : "UPCOMING",
             slideUrl: item.slide_url
@@ -66,3 +67,9 @@ const isCurrentTime = (startTime, endTime) => {
   const end = new Date(endTime);
   return now >= start && now <= end;
 };
+
+const isPastTime = (time) => {
+  const now = new Date()
+  const sessionTime = new Date(time)
+  return now >= sessionTime
+}

@@ -1,6 +1,7 @@
 // components/schedule/SessionCard.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { Download, MapPin } from "lucide-react";
+import { toast } from "react-toastify";
 
 const SessionCard = ({ session, isMobile = false }) => {
   const badgeWidth = isMobile ? "w-6 md:w-10" : "w-10";
@@ -8,7 +9,13 @@ const SessionCard = ({ session, isMobile = false }) => {
 
   const getPdfFile = () => {
     const url = `/samosit/it31starterpack${session.slideUrl}`
-    window.open(url, '_blank')
+    if (session.hasPassed) {
+      window.open(url, '_blank')
+    } else {
+      toast('ยังไม่ถึงเวลาดาวน์โหลด', {
+        type: 'error'
+      })
+    }
   }
 
   return (
